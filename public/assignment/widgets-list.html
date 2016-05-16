@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Widgets</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/styles.css" type="text/css" rel="stylesheet"/>
+</head>
+<body class="topBottomPadding">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                    <span class="navbar-brand glyphicon glyphicon-chevron-left">
+                        <a href="#" class="navbar-link"></a>
+                    </span>
+                <a class="navbar-brand" href="#">Widgets</a>
+                    <span class="navbar-brand pull-right glyphicon glyphicon-plus">
+                        <a href="#" class="navbar-link"></a>
+                    </span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <p>
+            <!--{{widget.title}}-->
+            Blogging App
+            <span ng-click="editWidget(widget._id)" class="glyphicon glyphicon-cog pull-right"></span>
+            <span ng-click="alignWidget(widget._id)" class="glyphicon glyphicon-align-justify pull-right"></span>
+        </p>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="navbar-header">
+                <span class="navbar-brand glyphicon glyphicon-play">
+                    <a href="#" class="navbar-link"></a>
+                </span>
+                <span class="navbar-brand glyphicon glyphicon-eye-open">
+                    <a href="#" class="navbar-link"></a>
+                </span>
+                <span class="navbar-brand pull-right glyphicon glyphicon-user">
+                    <a href="#" class="navbar-link"></a>
+                </span>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>
