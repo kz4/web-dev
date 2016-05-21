@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New Website</title>
+    <title>Widget Edit</title>
     <meta name="viewport" content="initial-scale=1.25, user-scalable=no">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/assignment/css/styles.css" type="text/css" rel="stylesheet"/>
@@ -12,13 +12,13 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <p class="navbar-text pull-left">
-                    <a class="navbar-link" href="website-list.html">
+                    <a class="navbar-link" href="widget-list.html">
                         <span class="glyphicon glyphicon-chevron-left"></span>
                     </a>
                 </p>
-                <a class="navbar-brand" href="#">New Website</a>
+                <a class="navbar-brand" href="#">Widget Edit</a>
                 <p class="navbar-text pull-right">
-                    <a class="navbar-link pull-right" href="website-list.html">
+                    <a class="navbar-link" href="widget-list.html">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
                 </p>
@@ -27,14 +27,22 @@
     </nav>
 
     <div class="container">
-        <div class="form-group">
-            <Label>Name</Label>
-            <input class="form-control" type="text" placeholder="alice">
-        </div>
-        <div class="form-group">
-            <Label>Description</Label>
-            <textarea rows="5" class="form-control" type="text" placeholder="This is a description"></textarea>
-        </div>
+        <form>
+            <div class="form-group">
+                <Label>Name</Label>
+                <input class="form-control" type="text" placeholder="">
+            </div>
+            <div class="form-group">
+                <Label>Text</Label>
+                <input class="form-control" type="text"
+                       placeholder="Two Problems With the New York Times Facebook Live Pitch Meeting">
+            </div>
+            <div class="form-group">
+                <Label>Size</Label>
+                <input class="form-control" type="number" placeholder="4">
+            </div>
+            <a class="btn btn-danger btn-block">Delete</a>
+        </form>
     </div>
 
     <nav class="navbar navbar-default navbar-fixed-bottom">

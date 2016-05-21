@@ -3,52 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Pages</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.25, maximum-scale=1.25, user-scalable=no">
+    <meta name="viewport" content="initial-scale=1.25, user-scalable=no">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/assignment/css/styles.css" type="text/css" rel="stylesheet"/>
 </head>
-<body class="topBottomPadding">
+<body>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <!--<span class="navbar-brand glyphicon glyphicon-chevron-left">-->
-                    <!--<a href="/assignment/website/website-list.html" class="navbar-link"></a>-->
-                <!--</span>-->
-                <a href="/assignment/website/website-list.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <!--<a class="navbar-brand" href="#">Pages</a>-->
+                <p class="navbar-text pull-left">
+                    <a class="navbar-link" href="/assignment/website/website-list.html">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                </p>
                 <a class="navbar-brand" href="#">Pages</a>
-                <!--<span class="navbar-brand pull-right glyphicon glyphicon-plus">-->
-                    <!--<a href="#" class="navbar-link"></a>-->
-                <!--</span>-->
-                <a href="page-new.html" class="pull-right">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </a>
+                <p class="navbar-text pull-right">
+                    <a class="navbar-link" href="page-new.html">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </p>
             </div>
         </div>
     </nav>
 
     <div class="container">
-        <!--<div ng-repeat="page in pages">-->
-            <!--<p>-->
-                <!--&lt;!&ndash;{{page.title}}&ndash;&gt;-->
-                <!--Blogging Post-->
-                <!--<span ng-click="editWebsite(page._id)" class="glyphicon glyphicon-cog pull-right"></span>-->
-            <!--</p>-->
-        <!--</div>-->
         <ul class="list-group">
             <li class="list-group-item">
-                <a href="#">
-                    Blogger App
+                <a href="/assignment/widget/widget-list.html">
+                    Some Blog Post
                 </a>
                 <a href="page-edit.html" class="pull-right">
-                    <span class="glyphicon glyphicon-cog pull-right"></span>
+                    <span class="glyphicon glyphicon-cog"></span>
                 </a>
             </li>
             <li class="list-group-item">
                 <a href="#">
-                    Address Book App
+                    Home
                 </a>
                 <a href="#" class="pull-right">
                     <span class="glyphicon glyphicon-cog"></span>
@@ -56,18 +46,18 @@
             </li>
             <li class="list-group-item">
                 <a href="#">
-                    Script Testing App
+                    About
                 </a>
                 <a href="#" class="pull-right">
-                    <span class="glyphicon glyphicon-cog pull-right"></span>
+                    <span class="glyphicon glyphicon-cog"></span>
                 </a>
             </li>
             <li class="list-group-item">
                 <a href="#">
-                    Blogger
+                    Product List
                 </a>
                 <a href="#" class="pull-right">
-                    <span class="glyphicon glyphicon-cog pull-right"></span>
+                    <span class="glyphicon glyphicon-cog"></span>
                 </a>
             </li>
         </ul>
@@ -75,13 +65,18 @@
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">
-            <div class="navbar-header">
-                <!--<span class="navbar-brand pull-right glyphicon glyphicon-user">-->
-                    <!--<a href="#" class="navbar-link"></a>-->
-                <!--</span>-->
-                <a href="/assignment/user/profile.html" class="pull-right">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
+            <div class="row navbar-text">
+                <div class="col-xs-3 text-center">
+                </div>
+                <div class="col-xs-3 text-center">
+                </div>
+                <div class="col-xs-3 text-center">
+                </div>
+                <div class="col-xs-3 text-center">
+                    <a href="/assignment/user/profile.html">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>

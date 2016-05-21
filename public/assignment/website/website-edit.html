@@ -3,59 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Website</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.25, maximum-scale=1.25, user-scalable=no">
+    <meta name="viewport" content="initial-scale=1.25, user-scalable=no">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="/assignment/css/styles.css" type="text/css" rel="stylesheet"/>
 </head>
-<body class="topBottomPadding">
+<body>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <!--<span class="navbar-brand glyphicon glyphicon-chevron-left">-->
-                    <!--<a href="website-list.html" class="navbar-link"></a>-->
-                <!--</span>-->
-                <a href="website-list.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a class="navbar-brand" href="website-list.html">Edit Website</a>
-                <!--<span class="navbar-brand pull-right glyphicon glyphicon-ok">-->
-                    <!--<a href="website-list.html" class="navbar-link"></a>-->
-                <!--</span>-->
-                <a href="website-list.html" class="pull-right">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </a>
+                <p class="navbar-text pull-left">
+                    <a href="website-list.html" class="navbar-link">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                </p>
+                <a class="navbar-brand" href="#">Edit Website</a>
+                <p class="navbar-text pull-right">
+                    <a href="website-list.html" class="navbar-link">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                </p>
             </div>
         </div>
     </nav>
 
     <div class="container">
-        <div class="form-group">
-            <Label>Website Name</Label>
-            <input class="form-control" type="text" placeholder="Google">
-        </div>
-        <div class="form-group">
-            <Label>Website Description</Label>
-            <textarea rows="5" class="form-control" type="text" placeholder="Description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</textarea>
-        </div>
-        <button class="btn btn-danger btn-block" type="submit">Delete</button>
+        <form>
+            <div class="form-group">
+                <Label>Website Name</Label>
+                <input class="form-control" type="text" placeholder="Google">
+            </div>
+            <div class="form-group">
+                <Label>Website Description</Label>
+                <textarea rows="5" class="form-control" type="text"
+                          placeholder="Description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</textarea>
+            </div>
+            <a class="btn btn-danger btn-block" href="website-list.html">Delete</a>
+        </form>
     </div>
 
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">
-            <div class="navbar-header">
-                <!--<span class="navbar-brand glyphicon glyphicon-share-alt">-->
-                    <!--<a href="#" class="navbar-link"></a>-->
-                <!--</span>-->
-                <a href="#" class="navbar-link">
-                    <span class="glyphicon glyphicon-share-alt"></span>
-                </a>
-                <!--<span class="navbar-brand pull-right glyphicon glyphicon-user">-->
-                    <!--<a href="#" class="navbar-link"></a>-->
-                <!--</span>-->
-                <a href="/assignment/user/profile.html" class="pull-right">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
+            <div class="row navbar-text">
+                <div class="col-xs-3 text-center">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-share-alt"></span>
+                    </a>
+                </div>
+                <div class="col-xs-3 text-center">
+                </div>
+                <div class="col-xs-3 text-center">
+                </div>
+                <div class="col-xs-3 text-center">
+                    <a href="/assignment/user/profile.html">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>

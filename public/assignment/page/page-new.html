@@ -3,20 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>New Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.25, maximum-scale=1.25, user-scalable=no">
+    <meta name="viewport" content="initial-scale=1.25, user-scalable=no">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/assignment/css/styles.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                    <span class="navbar-brand glyphicon glyphicon-chevron-left">
-                        <a href="#" class="navbar-link"></a>
-                    </span>
+                <p class="navbar-text pull-left">
+                    <a class="navbar-link" href="page-list.html">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                </p>
                 <a class="navbar-brand" href="#">New Page</a>
-                    <span class="navbar-brand pull-right glyphicon glyphicon-ok">
-                        <a href="#" class="navbar-link"></a>
-                    </span>
+                <p class="navbar-text pull-right">
+                    <a class="navbar-link" href="page-list.html">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                </p>
             </div>
         </div>
     </nav>
@@ -24,20 +29,28 @@
     <div class="container">
         <div class="form-group">
             <Label>Name</Label>
-            <input class="form-control" type="text" placeholder="Name">
+            <input class="form-control" type="text" placeholder="Alice Wonderland">
         </div>
         <div class="form-group">
-            <Label>Description</Label>
-            <input class="form-control" type="email" placeholder="Description">
+            <Label>Title</Label>
+            <input class="form-control" type="text" placeholder="Party Time">
         </div>
     </div>
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">
-            <div class="navbar-header">
-                <span class="navbar-brand pull-right glyphicon glyphicon-user">
-                    <a href="#" class="navbar-link"></a>
-                </span>
+            <div class="row navbar-text">
+                <div class="col-xs-3 text-center">
+                </div>
+                <div class="col-xs-3 text-center">
+                </div>
+                <div class="col-xs-3 text-center">
+                </div>
+                <div class="col-xs-3 text-center">
+                    <a href="/assignment/user/profile.html">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
