@@ -1,13 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-    <meta name="viewport" content="initial-scale=1.25, user-scalable=no">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/assignment/css/styles.css" type="text/css" rel="stylesheet"/>
-</head>
-<body>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -29,7 +20,7 @@
 
     <div class="form-group">
         <Label>Username</Label>
-        <input class="form-control" type="text" placeholder="alice">
+        <input ng-model="model.user.username" class="form-control" type="text" placeholder="alice">
     </div>
     <div class="form-group">
         <Label>Email</Label>
@@ -37,14 +28,14 @@
     </div>
     <div class="form-group">
         <Label>First Name</Label>
-        <input class="form-control" type="text" placeholder="Alice">
+        <input ng-model="model.user.firstName" class="form-control" type="text" placeholder="Alice">
     </div>
     <div class="form-group">
         <Label>Last Name</Label>
-        <input class="form-control" type="text" placeholder="Wonderland">
+        <input ng-model="model.user.lastName" class="form-control" type="text" placeholder="Wonderland">
     </div>
     <a class="btn btn-primary btn-block" href="/assignment/website/website-list.html">Websites</a>
-    <a class="btn btn-danger btn-block" href="login.html">Logout</a>
+    <a class="btn btn-danger btn-block" href="login.view.client.html">Logout</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -57,12 +48,10 @@
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <!--<a href="/assignment/user/profile.html">-->
-                    <!--<span class="glyphicon glyphicon-user"></span>-->
+                <!--<a href="/assignment/user/profile.view.client.html">-->
+                <!--<span class="glyphicon glyphicon-user"></span>-->
                 <!--</a>-->
             </div>
         </div>
     </div>
 </nav>
-</body>
-</html>
