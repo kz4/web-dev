@@ -1,17 +1,27 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .controller("LoginController", LoginController)
+        .controller("LoginController", LoginController);
+
+    var users = [
+        {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
+        {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
+        {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
+        {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
+    ];
+
     function LoginController($location) {
         var vm = this;
-        // vm.login = function () {
-        //     console.log($scope.model.user.username);
-        // }
         vm.hello="Hello world!";
         vm.login = function (username, password) {
-            console.log(username);
-            console.log(password);
-            $location.path() == '/profile'
+            for (var i in users) {
+                if (users[i].username === username && users[i].password === password) {
+                    $location.url("/user/" + users[i]._id);
+                }
+                else {
+                    vm.error = "user not found" + username + password;
+                }
+            }
         }
     }
 })();

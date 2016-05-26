@@ -1,6 +1,8 @@
 <div class="container">
 
-    {{model.hello}}
+    <div ng-if="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
 
     <h1>Login</h1>
     <div class="form-group">
