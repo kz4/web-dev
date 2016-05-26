@@ -1,2 +1,3 @@
-var module = angular.module('WebAppMaker', []);
-
+(function () {
+    var module = angular.module('WebAppMaker', ["ngRoute"]);
+})();
