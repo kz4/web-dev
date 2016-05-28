@@ -12,46 +12,57 @@
         ];
 
         var api = {
-            "createUser"   : "createUser",
-            "findUserById" : "findUserById",
-            "findUserByUsername" : "findUserByUsername",
+            createUser   : createUser,
+            findUserById : findUserById,
+            findUserByUsername : findUserByUsername,
             findUserByCredentials : findUserByCredentials,
-            "updateUser" : "updateUser",
-            "deleteUser" : "deleteUser"
+            updateUser : updateUser,
+            deleteUser : deleteUser
         };
         return api;
 
-        function createUser(user) {
+        function createUser(username, password, verifyPassword) {
+            if (!!username) {
+                ;
+            } else {
+                return null;
+            }
+
+            if (password !== verifyPassword) {
+                return null;
+            }
+
+            for (var i in users) {
+                if (users[i].username === username) {
+                    return null;
+                }
+            }
+
+            var user = {
+                _id : (new Date()).getTime()+"",
+                username : username,
+                password : password
+            };
             users.push(user);
+            return user;
         }
+
         function findUserById(id) {
-            for (var i = 0; i< users.length; i++) {
-                if (users[i]._id == id)
+            for (var i in users) {
+                if (users[i]._id === id)
                     return users[i];
             }
             return null;
         }
-        function findUserById(userId) {
-            for (var i = 0; i< users.length; i++) {
-                if (users[i]._id == userId)
-                    return users[i];
-            }
-            return null;
-        }
+
         function findUserByUsername(username) {
-            for (var i = 0; i< users.length; i++) {
-                if (users[i].username == username)
+            for (var i in users) {
+                if (users[i].username === username)
                     return users[i];
             }
             return null;
         }
-        // function findUserByCredentials(username, password) {
-        //     for (var i = 0; i< users.length; i++) {
-        //         if (users[i].username == username && users[i].password == password)
-        //             return users[i];
-        //     }
-        //     return null;
-        // }
+
         function findUserByCredentials(username, password) {
             for (var i in users) {
                 if (users[i].username === username && users[i].password === password)
@@ -59,17 +70,26 @@
             }
             return null;
         }
+
         function updateUser(userId, user) {
-            for (var i = 0; i< users.length; i++) {
-                if (users[i]._id == userId)
-                    users[i] = user;
+            for (var i in users) {
+                if (users[i]._id === userId) {
+                    users[i].firstName = user.firstName;
+                    users[i].lastName = user.lastName;
+                    return true;
+                }
             }
+            return false;
         }
+
         function deleteUser(userId) {
-            for (var i = 0; i< users.length; i++) {
-                if (users[i]._id == userId)
+            for (var i in users) {
+                if (users[i]._id === userId) {
                     users.splice(i, 1);
+                    return true;
+                }
             }
+            return false;
         }
     }
 })();
