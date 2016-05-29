@@ -14,43 +14,56 @@
                 "url": "https://youtu.be/AM2Ivdi9c4E" },
             { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
         ];
+
         var api = {
-            "createWidget" : "createWidget",
-            "findWidgetsByPageId" : "findWidgetsByPageId",
-            "findWidgetById" : "findWidgetById",
-            "updateWidget" : "updateWidget",
-            "deleteWidget" : "deleteWidget"
+            createWidget : createWidget,
+            findWidgetsByPageId : findWidgetsByPageId,
+            findWidgetById : findWidgetById,
+            updateWidget : updateWidget,
+            deleteWidget : deleteWidget
         }
         return api;
+
         function createWidget(pageId, widget) {
             widget.pageId = pageId;
             widgets.push(widget);
         }
+
         function findWidgetsByPageId(pageId) {
-            for (var i = 0; i < widgets.length; i++) {
-                if (widgets[i].pageId == pageId)
+            for (var i in widgets) {
+                if (widgets[i].pageId === pageId)
                     return widgets[i];
             }
             return null;
         }
+
         function findWidgetById(widgetId) {
-            for (var i = 0; i < widgets.length; i++) {
-                if (widgets[i]._id == widgetId)
+            for (var i in widgets) {
+                if (widgets[i]._id === widgetId)
                     return widgets[i];
             }
             return null;
         }
+
         function updateWidget(widgetId, widget) {
-            for (var i = 0; i < widgets.length; i++) {
-                if (widgets[i]._id == widgetId)
+            for (var i in widgets) {
+                if (widgets[i]._id === widgetId) {
                     widgets[i] = widget;
+
+                    return true;
+                }
             }
+            return false;
         }
+
         function deleteWidget(widgetId) {
-            for (var i = 0; i < widgets.length; i++) {
-                if (widgets[i]._id == widgetId)
+            for (var i in widgets) {
+                if (widgets[i]._id === widgetId) {
                     widgets.slice(i, 1);
+                    return true;
+                }
             }
+            return false;
         }
     }
 })();
