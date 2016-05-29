@@ -21,26 +21,25 @@
         };
         return api;
 
-        function createWebsite(userId, name) {
-            if (!!name) {
-                ;
+        function createWebsite(userId, newWebsite) {
+            if (newWebsite && newWebsite.name) {
+                for (var i in websites) {
+                    if (websites[i].name === newWebsite.name) {
+                        return null;
+                    }
+                }
+
+                var website = {
+                    _id : (new Date()).getTime()+"",
+                    name : newWebsite.name,
+                    description : newWebsite.description,
+                    developerId : userId
+                };
+                websites.push(website);
+                return website;
             } else {
                 return null;
             }
-
-            for (var i in websites) {
-                if (websites[i].name === name) {
-                    return null;
-                }
-            }
-
-            var website = {
-                _id : (new Date()).getTime()+"",
-                name : name,
-                developerId : userId
-            };
-            websites.push(website);
-            return website;
         }
 
         function findWebsitesByUser(userId) {
@@ -65,7 +64,7 @@
             for (var i in websites) {
                 if (websites[i]._id === websiteId) {
                     websites[i].name = website.name;
-                    websites[i].developerId = website.developerId;
+                    websites[i].description = website.description;
                     return true;
                 }
             }

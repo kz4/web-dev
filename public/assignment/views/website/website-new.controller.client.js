@@ -10,8 +10,8 @@
         var userId = $routeParams.uid;
         vm.userId = userId;
 
-        function createWebsite(name) {
-            var res = WebsiteService.createWebsite(userId, name);
+        function createWebsite(newWebsite) {
+            var res = WebsiteService.createWebsite(userId, newWebsite);
             if (res) {
                 $location.url("/user/" + userId + "/website");
             } else {

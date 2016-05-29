@@ -9,7 +9,6 @@
         vm.userId = userId;
         
         var websiteId = $routeParams.wid;
-        // vm.websiteId = websiteId;
 
         vm.updateWebsite = updateWebsite;
         vm.deleteWebsite = deleteWebsite; 
@@ -24,7 +23,7 @@
             if (res) {
                 $location.url("user/" + userId + "/website")
             } else {
-                vm.error = "Failed to update website";
+                vm.error = "Failed to update website, name empty or exists already";
             }
         }
 
