@@ -49,16 +49,34 @@
         }
 
         function updateWidget(widgetId, widget) {
-            // if (widget.text && widget.size) {    // for header
-                for (var i in widgets) {
-                    if (widgets[i]._id === widgetId) {
-                        widgets[i] = widget;
-                        // widgets[i].size = widget.size;
-                        return true;
+            switch (widget.widgetType) {
+                case "HEADER":
+                    if (widget.text && widget.size) {    // for header
+                        return updateWidgetHelper(widget, widgetId)
                     }
-                }
-            // }
+                    break;
+                case "IMAGE":
+                    if (widget.url && widget.width) {
+                        return updateWidgetHelper(widget, widgetId)
+                    }
+                    break;
+                case "YOUTUBE":
+                    if (widget.url && widget.width) {
+                        return updateWidgetHelper(widget, widgetId);
+                    }
+                    break;
+            }
 
+            return false;
+        }
+
+        function updateWidgetHelper(widget, widgetId) {
+            for (var i in widgets) {
+                if (widgets[i]._id === widgetId) {
+                    widgets[i] = widget;
+                    return true;
+                }
+            }
             return false;
         }
 

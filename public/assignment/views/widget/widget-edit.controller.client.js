@@ -22,7 +22,17 @@
             if (res) {
                 $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget")
             } else {
-                vm.error = "Failed to create a widget, text and size are required";
+                switch (widget.widgetType) {
+                    case "HEADER":
+                        vm.error = "Failed to create a widget, text and size are required";
+                        break;
+                    case "IMAGE":
+                        vm.error = "Failed to create a widget, url and width are required";
+                        break;
+                    case "YOUTUBE":
+                        vm.error = "Failed to create a widget, url and size are required";
+                        break;
+                }
             }
         }
 
