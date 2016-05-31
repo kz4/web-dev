@@ -9,7 +9,11 @@
         var id = $routeParams['uid'];
 
         function init() {
-            vm.user = UserService.findUserById(id);
+            UserService
+                .findUserById(id)   // promise
+                .then(function (res) {
+                    vm.user = res.data;
+            });
         }
         init();
 

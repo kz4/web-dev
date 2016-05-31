@@ -2,7 +2,7 @@
     angular
         .module("WebAppMaker")
         .factory("UserService", UserService);
-    function UserService() {
+    function UserService($http) {
 
         var users = [
             {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
@@ -43,8 +43,9 @@
                 username : username,
                 password : password
             };
-            users.push(user);
-            return user;
+            return $http.post("/api/user", user);
+            // users.push(user);
+            // return user;
         }
 
         function findUserById(id) {
@@ -56,19 +57,23 @@
         }
 
         function findUserByUsername(username) {
-            for (var i in users) {
-                if (users[i].username === username)
-                    return users[i];
-            }
-            return null;
+            // for (var i in users) {
+            //     if (users[i].username === username)
+            //         return users[i];
+            // }
+            // return null;
+            var url = "/api/user/" + id;
+            return $http.get(url);
         }
 
         function findUserByCredentials(username, password) {
-            for (var i in users) {
-                if (users[i].username === username && users[i].password === password)
-                    return users[i];
-            }
-            return null;
+            // for (var i in users) {
+            //     if (users[i].username === username && users[i].password === password)
+            //         return users[i];
+            // }
+            // return null;
+            var url = "/api/user?username="+username+"&password="+password;
+            return $http.get(url);
         }
 
         function updateUser(userId, user) {
