@@ -4,12 +4,12 @@
         .factory("UserService", UserService);
     function UserService($http) {
 
-        var users = [
-            {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-            {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-            {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-            {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-        ];
+        // var users = [
+        //     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
+        //     {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
+        //     {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
+        //     {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
+        // ];
 
         var api = {
             createUser   : createUser,
@@ -49,11 +49,13 @@
         }
 
         function findUserById(id) {
-            for (var i in users) {
-                if (users[i]._id === id)
-                    return users[i];
-            }
-            return null;
+            // for (var i in users) {
+            //     if (users[i]._id === id)
+            //         return users[i];
+            // }
+            // return null;
+            var url = "/api/user/" + id;
+            return $http.get(url);
         }
 
         function findUserByUsername(username) {
@@ -77,14 +79,16 @@
         }
 
         function updateUser(userId, user) {
-            for (var i in users) {
-                if (users[i]._id === userId) {
-                    users[i].firstName = user.firstName;
-                    users[i].lastName = user.lastName;
-                    return true;
-                }
-            }
-            return false;
+            // for (var i in users) {
+            //     if (users[i]._id === userId) {
+            //         users[i].firstName = user.firstName;
+            //         users[i].lastName = user.lastName;
+            //         return true;
+            //     }
+            // }
+            // return false;
+            var url = "/api/user/" + userId;
+            return $http.put(url, user);
         }
 
         function deleteUser(userId) {

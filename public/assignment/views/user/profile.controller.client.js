@@ -18,12 +18,21 @@
         init();
 
         function updateUser(user) {
-            var res = UserService.updateUser(id, user);
-            if (res) {
-                vm.inf = "Profile updated";
-            } else {
-                vm.error = "Profile failed to be updated";
-            }
+            UserService
+                .updateUser(id, user)
+                .then(
+                    function (inf) {
+                        vm.inf = "Profile updated";
+                    },
+                    function (error) {
+                        vm.error = "Profile failed to be updated";
+                    }
+                );
+            // if (res) {
+            //     vm.inf = "Profile updated";
+            // } else {
+            //     vm.error = "Profile failed to be updated";
+            // }
         }
     }
 })();
