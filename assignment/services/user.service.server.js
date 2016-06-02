@@ -12,17 +12,17 @@ module.exports = function (app) {
     app.put("/api/user/:userId", updateUser);
     
     function updateUser(req, res) {
-        var id = req.param.userId;
+        var id = req.params.userId;
         var newUser = req.body;
         for (var i in users) {
             if (users[i]._id === id) {
                 users[i].firstName = newUser.firstName;
                 users[i].lastName = newUser.lastName;
-                res.send();
+                res.send(users[i]);
                 return;
             }
         }
-        return false;
+        res.send({});
     }
 
     function createUser(req, res) {
