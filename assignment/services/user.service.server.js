@@ -10,7 +10,22 @@ module.exports = function (app) {
     app.get("/api/user", getUsers);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
-    
+    app.delete("/api/user/:userId", deleteUser);
+
+    function deleteUser(req, res) {
+        var id = req.params.userId;
+        console.log(req);
+        var user = req.body;
+        for (var i in users) {
+            if (users[i]._id === id) {
+                users.splice(i, 1);
+                res.send({});
+                return;
+            }
+        }
+        res.send({});
+    }
+
     function updateUser(req, res) {
         var id = req.params.userId;
         var newUser = req.body;
@@ -27,9 +42,20 @@ module.exports = function (app) {
 
     function createUser(req, res) {
         var user = req.body;
-        user._id = (new Date()).getTime()+"";
-        users.push(user);
-        res.send(user);
+        if (user.username) {
+            for (var i in users) {
+                if (users[i].username === user.username) {
+                    res.send({});
+                    return;
+                }
+            }
+            user._id = (new Date()).getTime()+"";
+            users.push(user);
+            res.send(user);
+        } else {
+            res.send({});
+            return;
+        }
     }
 
     function getUsers(req, res) {

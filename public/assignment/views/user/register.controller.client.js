@@ -10,9 +10,9 @@
                 .createUser(username, password, verifyPassword)
                 .then(function (res) {
                     var user = res.data;
-                        if (user) {
+                        if (user._id) {
                             var id = user._id;
-                            $location.url("/user/" + id + "/website");
+                            $location.url("/user/" + id);
                         } else {
                             vm.error="Username empty, already exists or password not matches";
                         }

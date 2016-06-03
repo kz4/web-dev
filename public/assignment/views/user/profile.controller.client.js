@@ -2,9 +2,10 @@
     angular
         .module("WebAppMaker")
         .controller("ProfileController", ProfileController);
-    function ProfileController($routeParams, UserService) {
+    function ProfileController($location, $routeParams, UserService) {
         var vm = this;
         vm.updateUser = updateUser;
+        vm.deleteUser = deleteUser;
 
         var id = $routeParams['uid'];
 
@@ -28,11 +29,16 @@
                         vm.error = "Profile failed to be updated";
                     }
                 );
-            // if (res) {
-            //     vm.inf = "Profile updated";
-            // } else {
-            //     vm.error = "Profile failed to be updated";
-            // }
+        }
+
+        function deleteUser(userId) {
+            UserService
+                .deleteUser(userId)
+                .then(
+                    function (res) {
+                        $location.url("/");
+                    }
+                )
         }
     }
 })();
