@@ -26,7 +26,7 @@
         init();
 
         function updateWebsite(website) {
-            var res = WebsiteService
+            WebsiteService
                 .updateWebsite(websiteId, website)
                 .then(function (res) {
                     var website = res.data;
@@ -39,7 +39,7 @@
         }
 
         function deleteWebsite() {
-            var res = WebsiteService
+            WebsiteService
                 .deleteWebsite(websiteId)
                 .then(function (res) {
                     var result = res.data;

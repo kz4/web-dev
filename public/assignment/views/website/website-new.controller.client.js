@@ -11,7 +11,7 @@
         vm.userId = userId;
 
         function createWebsite(newWebsite) {
-            var res = WebsiteService
+            WebsiteService
                 .createWebsite(userId, newWebsite)
                 .then(function (res) {
                     var website = res.data;
