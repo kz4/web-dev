@@ -2,12 +2,7 @@
     angular
         .module("WebAppMaker")
         .factory("PageService", PageService);
-    function PageService() {
-        var pages = [
-            { "_id": "321", "name": "Post 1", "websiteId": "456" },
-            { "_id": "432", "name": "Post 2", "websiteId": "456" },
-            { "_id": "543", "name": "Post 3", "websiteId": "456" }
-        ];
+    function PageService($http) {
 
         var api = {
             createPage : createPage,
@@ -18,64 +13,40 @@
         };
         return api;
 
-        function createPage(websiteId, page) {
-            if (page && page.name) {
-                for (var i in pages) {
-                    if (pages[i].name === page.name) {
-                        return null;
-                    }
-                }
-
-                var newPage = {
-                    _id : (new Date()).getTime()+"",
-                    name : page.name,
-                    title : page.title,
+        function createPage(websiteId, newPage) {
+            if (newPage && newPage.name) {
+                var page = {
+                    name : newPage.name,
+                    title : newPage.title,
                     websiteId : websiteId
                 };
-                pages.push(newPage);
-                return newPage;
+                var url = "/api/website/" + websiteId + "/page";
+                return $http.post(url, page);
             } else {
-                return null;
+                var url = "/api/website/" + websiteId + "/page";
+                return $http.post(url, null);
             }
+
         }
 
         function findPageByWebsiteId(websiteId) {
-            var res = [];
-            for (var i in pages) {
-                if (pages[i].websiteId === websiteId) {
-                    res.push(pages[i]);
-                }
-            }
-            return res;
+            var url = "/api/website/" + websiteId + "/page";
+            return $http.get(url);
         }
 
         function findPageById(pageId) {
-            for (var i in pages) {
-                if (pages[i]._id === pageId)
-                    return pages[i];
-            }
-            return null;
+            var url = "/api/page/" + pageId;
+            return $http.get(url);
         }
 
         function updatePage(pageId, page) {
-            for (var i in pages) {
-                if (pages[i]._id === pageId) {
-                    pages[i].name = page.name;
-                    pages[i].title = page.title;
-                    return true;
-                }
-            }
-            return false;
+            var url = "/api/page/" + pageId;
+            return $http.put(url, page);
         }
 
         function deletePage(pageId) {
-            for (var i in pages) {
-                if (pages[i]._id === pageId) {
-                    pages.splice(i, 1);
-                    return true;
-                }
-            }
-            return false;
+            var url = "/api/page/" + pageId;
+            return $http.delete(url);
         }
     }
 })();

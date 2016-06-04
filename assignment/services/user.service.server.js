@@ -14,8 +14,6 @@ module.exports = function (app) {
 
     function deleteUser(req, res) {
         var id = req.params.userId;
-        console.log(req);
-        var user = req.body;
         for (var i in users) {
             if (users[i]._id === id) {
                 users.splice(i, 1);

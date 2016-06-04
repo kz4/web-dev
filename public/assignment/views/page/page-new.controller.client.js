@@ -13,12 +13,16 @@
         vm.createPage = createPage;
 
         function createPage(page) {
-            var res = PageService.createPage(websiteId, page);
-            if (res) {
-                $location.url("user/" + userId + "/website/" + websiteId + "/page");
-            } else {
-                vm.error = "Failed to create a page, name already exists or empty";
-            }
+            PageService
+                .createPage(websiteId, page)
+                .then(function (res) {
+                    var page = res.data;
+                    if (page.name) {
+                        $location.url("user/" + userId + "/website/" + websiteId + "/page");
+                    } else {
+                        vm.error = "Failed to create a page, name already exists or empty";
+                    }
+                });
         }
     }
 })();
