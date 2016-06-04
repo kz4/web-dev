@@ -18,22 +18,26 @@
         vm.deleteWidget = deleteWidget;
 
         function updateWidget(widget) {
-            var res = WidgetService.updateWidget(widgetId, widget);
-            if (res) {
-                $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget")
-            } else {
-                switch (widget.widgetType) {
-                    case "HEADER":
-                        vm.error = "Failed to create a widget, text and size are required";
-                        break;
-                    case "IMAGE":
-                        vm.error = "Failed to create a widget, url and width are required";
-                        break;
-                    case "YOUTUBE":
-                        vm.error = "Failed to create a widget, url and size are required";
-                        break;
-                }
-            }
+            WidgetService
+                .updateWidget(widgetId, widget)
+                .then(function (res) {
+                    var result = res.data;
+                    if (result) {
+                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget")
+                    } else {
+                        switch (widget.widgetType) {
+                            case "HEADER":
+                                vm.error = "Failed to create a widget, text and size are required";
+                                break;
+                            case "IMAGE":
+                                vm.error = "Failed to create a widget, url and width are required";
+                                break;
+                            case "YOUTUBE":
+                                vm.error = "Failed to create a widget, url and size are required";
+                                break;
+                        }
+                    }
+                });
         }
 
         function deleteWidget() {
@@ -46,10 +50,14 @@
         }
 
         function init() {
-            var widget = WidgetService.findWidgetById(widgetId);
-            if (widget) {
-                vm.widget = widget;
-            }
+            WidgetService
+                .findWidgetById(widgetId)
+                .then(function (res) {
+                    var widget = res.data;
+                    if (widget) {
+                        vm.widget = widget;
+                    }
+                });
         }
         init();
     }

@@ -23,12 +23,16 @@
                 widgetType : "HEADER",
                 pageId : pageId
             };
-            var res = WidgetService.createWidget(pageId, widget);
-            if (res) {
-                $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
-            } else {
-                vm.error = "Failed to create a header widget";
-            }
+            WidgetService
+                .createWidget(pageId, widget)
+                .then(function (res) {
+                    var result = res.data;
+                    if (result._id) {
+                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+                    } else {
+                        vm.error = "Failed to create a header widget";
+                    }
+                });
         }
 
         function createImageWidget() {
@@ -38,12 +42,16 @@
                 widgetType : "IMAGE",
                 pageId : pageId
             };
-            var res = WidgetService.createWidget(pageId, widget);
-            if (res) {
-                $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
-            } else {
-                vm.error = "Failed to create a image widget";
-            }
+            WidgetService
+                .createWidget(pageId, widget)
+                .then(function (res) {
+                    var result = res.data;
+                    if (result._id) {
+                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+                    } else {
+                        vm.error = "Failed to create a image widget";
+                    }
+                });
         }
 
         function createYoutubeWidget() {
@@ -53,12 +61,16 @@
                 widgetType : "YOUTUBE",
                 pageId : pageId
             };
-            var res = WidgetService.createWidget(pageId, widget);
-            if (res) {
-                $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
-            } else {
-                vm.error = "Failed to create a youtube widget";
-            }
+            WidgetService
+                .createWidget(pageId, widget)
+                .then(function (res) {
+                    var result = res.data;
+                    if (result._id) {
+                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+                    } else {
+                        vm.error = "Failed to create a youtube widget";
+                    }
+                });
         }
     }
 })();

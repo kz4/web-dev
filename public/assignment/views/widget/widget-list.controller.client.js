@@ -27,7 +27,11 @@
         }
 
         function init() {
-            vm.widgets = WidgetService.findWidgetsByPageId(pageId);
+            WidgetService
+                .findWidgetsByPageId(pageId)
+                .then(function (res) {
+                    vm.widgets = res.data;
+                });
         }
         init();
     }
