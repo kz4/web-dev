@@ -11,12 +11,16 @@
         vm.userId = userId;
 
         function createWebsite(newWebsite) {
-            var res = WebsiteService.createWebsite(userId, newWebsite);
-            if (res) {
-                $location.url("/user/" + userId + "/website");
-            } else {
-                vm.error = "Error creating a website, name empty or already exists";
-            }
+            var res = WebsiteService
+                .createWebsite(userId, newWebsite)
+                .then(function (res) {
+                    var website = res.data;
+                    if (website.name) {
+                        $location.url("/user/" + userId + "/website");
+                    } else {
+                        vm.error = "Error creating a website, name empty or already exists";
+                    }
+                });
         }
     }
 })();
