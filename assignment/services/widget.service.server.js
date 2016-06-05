@@ -22,9 +22,12 @@ module.exports = function (app) {
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
     function uploadImage(req, res) {
+        var widgetId = req.body.widgetId;
+        var pageId = req.body.pageId;
+        var websiteId = req.body.websiteId;
+        var userId = req.body.userId;
+        var width = req.body.width;
 
-        var widgetId      = req.body.widgetId;
-        var width         = req.body.width;
         var myFile        = req.file;
 
         if(myFile == null) {
@@ -45,11 +48,6 @@ module.exports = function (app) {
             }
         }
 
-        var widgetId = req.body.widgetId;
-        var pageId = req.body.pageId;
-        var websiteId = req.body.websiteId;
-        var userId = req.body.userId;
-        var width = req.body.width;
 
         res.redirect("/assignment/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
     }
@@ -76,7 +74,8 @@ module.exports = function (app) {
                 }
                 break;
             case "IMAGE":
-                if (widget.url && widget.width) {
+                // if (widget.url && widget.width) {
+                if (widget.url) {
                     return updateWidgetHelper(widget, widgetId, res)
                 }
                 break;
@@ -93,7 +92,6 @@ module.exports = function (app) {
         for (var i in widgets) {
             if (widgets[i]._id === widgetId) {
                 widgets[i] = widget;
-                // return true;
                 res.json(true);
                 return;
             }

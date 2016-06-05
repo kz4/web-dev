@@ -24,3 +24,7 @@ p.navbar-text.pull-left {
     border-bottom-left-radius: 8px;
     opacity: 0.7;
 }
+
+#searchButton {
+    margin-top: 5px
+}
