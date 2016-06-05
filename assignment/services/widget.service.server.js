@@ -1,4 +1,7 @@
 module.exports = function (app) {
+    var multer = require('multer'); // npm install multer --save
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
+
     var widgets = [
         { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
         { "_id": "234", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
@@ -16,6 +19,40 @@ module.exports = function (app) {
     app.get("/api/widget/:widgetId", findWidgetById);
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
+    app.post ("/api/upload", upload.single('myFile'), uploadImage);
+
+    function uploadImage(req, res) {
+
+        var widgetId      = req.body.widgetId;
+        var width         = req.body.width;
+        var myFile        = req.file;
+
+        if(myFile == null) {
+            res.redirect("/assignment/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+            return;
+        }
+
+        var originalname  = myFile.originalname; // file name on user's computer
+        var filename      = myFile.filename;     // new file name in upload folder
+        var path          = myFile.path;         // full path of uploaded file
+        var destination   = myFile.destination;  // folder where file is saved to
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+
+        for (var i in widgets) {
+            if (widgets[i]._id === widgetId) {
+                widgets[i].url = "/uploads/" + filename;
+            }
+        }
+
+        var widgetId = req.body.widgetId;
+        var pageId = req.body.pageId;
+        var websiteId = req.body.websiteId;
+        var userId = req.body.userId;
+        var width = req.body.width;
+
+        res.redirect("/assignment/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+    }
 
     function deleteWidget(req, res) {
         var widgetId = req.params.widgetId;
@@ -26,7 +63,6 @@ module.exports = function (app) {
                 return;
             }
         }
-        res.json(false);
     }
 
     function updateWidget(req, res) {
