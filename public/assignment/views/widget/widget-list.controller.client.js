@@ -31,6 +31,8 @@
                 .findWidgetsByPageId(pageId)
                 .then(function (res) {
                     vm.widgets = res.data;
+                    $(".container")
+                        .sortable({axis: "y"});
                 });
         }
         init();
