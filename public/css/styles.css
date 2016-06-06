@@ -283,8 +283,8 @@ Animations
 /* ==========================================================================
 Waypoinsts
 ========================================================================== */
-/*.wp1, .wp2, .wp3, .wp4, .wp5, .wp6, .wp7, .wp8, .wp9 {*/
-  /*visibility: hidden; }*/
+.wp1, .wp2, .wp3, .wp4, .wp5, .wp6, .wp7, .wp8, .wp9 {
+  visibility: hidden; }
 
 .wp2 {
   -webkit-animation-delay: 0.3s;
@@ -507,7 +507,7 @@ Features-stack
   .features ul.features-stack li:last-child {
     padding-bottom: 0px;
     border-bottom: none; }
-  .features .selfie {
+  .features .ipad-wrap {
     width: 706px;
     height: 1002px;
     /*background: url("../img/ipad-device.png") no-repeat center center;*/
@@ -529,8 +529,8 @@ Features-stack
     right: 55%;
     }
 
-/*.features .responsive-feature-img, .features-extra .responsive-feature-img {*/
-  /*display: none; }*/
+.features .responsive-feature-img, .features-extra .responsive-feature-img {
+  display: none; }
 
 .devices {
   position: relative; }
@@ -543,7 +543,7 @@ Features-stack
   z-index: 3; }
   .features-extra .btn {
     margin-top: 20px; }
-  .features-extra .iran {
+  .features-extra .macbook-wrap {
     position: absolute;
     width: 916px;
     height: 540px;
