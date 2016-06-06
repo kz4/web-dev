@@ -1,32 +1,384 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Web Dev Course Home Page</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Kaichen Zhang's Homepage</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="apple-touch-icon" href="apple-touch-icon.png">-->
+    <!--<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />-->
+    <!--<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />-->
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery.fancybox.css">
+    <link rel="stylesheet" href="css/flexslider.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/queries.css">
+    <link rel="stylesheet" href="css/etline-font.css">
+    <link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.1/animate.min.css"></script>-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"></script>
 </head>
-<body>
-    <div class="container">
-        <h1>Web Dev Course Home Page</h1>
-
-        <img class="img-circle" src="images/pic.png" alt="Profile pic" width="300" height="300" />
-
-        <h2>Required links</h2>
-        <ul>
-            <li>
-                <a href="project/index.html">Project</a>
-            </li>
-            <li>
-                <a href="assignment/index.html">Assignment</a>
-            </li>
-            <li>
-                <a href="test/index.html">Test MongoDB</a>
-            </li>
-            <li>
-                <a href="https://github.com/kz4/web-dev-kaichen-zhang">Your public repository at GitHub.com</a>
-            </li>
-        </ul>
-    </div>
+<body id="top">
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <section class="hero">
+        <section class="navigation">
+            <header>
+                <div class="header-content">
+                    <div class="logo"><a href="#"><img src="img/logo.png" alt="KZ logo"></a></div>
+                    <div class="header-nav">
+                        <nav>
+                            <ul class="primary-nav">
+                                <li><a href="#intro">Introduction</a></li>
+                                <li><a href="#projects">Project</a></li>
+                                <li><a href="#loremIpsum">Lorem Ipsum</a></li>
+                                <li><a href="#photos">Photos</a></li>
+                            </ul>
+                            <!-- <ul class="member-actions">
+                                <li><a href="#download" class="login">Log in</a></li>
+                                <li><a href="#download" class="btn-white btn-small">Sign up</a></li>
+                            </ul> -->
+                        </nav>
+                    </div>
+                    <div class="navicon">
+                        <a class="nav-toggle" href="#"><span></span></a>
+                    </div>
+                </div>
+            </header>
+        </section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="hero-content text-center">
+                        <h1>Welcome to Kaichen's</h1>
+                        <p class="intro">Making web application great again!</p>
+                        <a href="#" class="btn btn-fill btn-large btn-margin-right">Download</a> <a href="#" class="btn btn-accent btn-large">Learn more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="down-arrow floating-arrow"><a href="#intro"><i class="fa fa-angle-down"></i></a></div>
+    </section>
+    <section class="intro section-padding" id="intro">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 intro-feature">
+                    <div class="intro-icon">
+                        <img src="img/work.png" class="icon"></span>
+                    </div>
+                    <div class="intro-content">
+                        <h5>WHO AM I</h5>
+                        <p>I am currently working as a software developer at Aspen Technology in Bedford, MA. I work in the licensing and deployment team. I have extensive experience in both Windows desktop applications installation and deployment. I have also had experience in web development using MEAN stack, information retrieval using Elastic Search, computer systems using C and many more.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 intro-feature">
+                    <div class="intro-icon">
+                        <!-- <span data-icon="&#xe030;" class="icon"></span> -->
+                        <img src="img/fun.png" class="icon"></img>
+                    </div>
+                    <div class="intro-content">
+                        <h5>WHAT DO I LIKE</h5>
+                        <p>I have various hobbies during my free time. fútbol is absolutely my No. 1. I watch a lot of Chinese super leagues, English premier league and Bundesliga, while also playing in different local leagues. I used to play Chess and I participated in the 2nd World Youth U16 Chess Olympiad in Kuala Lumpur back 2002. And I play the piano when I am very bored. 
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 intro-feature">
+                    <div class="intro-icon">
+                        <!-- <span data-icon="&#xe046;" class="icon"></span> -->
+                        <img src="img/else.png" class="icon"></img>
+                    </div>
+                    <div class="intro-content last">
+                        <h5>WHAT ELSE ABOUT ME</h5>
+                        <p>I also love to read news, learn new cultures, and discuss about the politics. I believe in democracy, but only to a certain degree. I believe in diversity and immigration because that is how you can win in a global competition. Estoy aprendiendo español ahora, and I hope that will help me travel to more countries so I can learn more about their cultures and how that have shaped their lives.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="features section-padding" id="projects">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-6">
+                    <div class="feature-list">
+                        <h3>Projects that I have worked on</h3>
+                        <p>Web Applications that I have worked on. All of them are responsive, single-page application.</p>
+                        <ul class="features-stack">
+                            <li class="feature-item">
+                                <div class="feature-icon">
+                                    <span data-icon="&#xe052;" class="icon"></span>
+                                </div>
+                                <div class="feature-content">
+                                    <h5><a href="http://webdev-kz4.rhcloud.com/assignment/index.html#/">Web App Maker</a></h5>
+                                    <p>Web App Maker allows you to create your own pages. In each page, you can create your websites, and then you can create widgets on your websites, which includes text, pictures, videos and etc.</p>
+                                </div>
+                            </li>
+                            <li class="feature-item">
+                                <div class="feature-icon">
+                                    <span data-icon="&#xe043;" class="icon"></span>
+                                </div>
+                                <div class="feature-content">
+                                    <h5>Restaurants Recommender</h5>
+                                    <p>Restaurants can post out their top dishes, which customers can rate and interract with other users.</p>
+                                </div>
+                            </li>
+                            <li class="feature-item">
+                                <div class="feature-icon">
+                                    <span data-icon="&#xe03c;" class="icon"></span>
+                                </div>
+                                <div class="feature-content">
+                                    <h5>Under Development</h5>
+                                    <p>To be developed...</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="device-showcase">
+            <div class="devices">
+                <div class="ipad-wrap wp1"></div>
+                <!-- <div class="iphone-wrap wp2"></div> -->
+            </div>
+        </div>
+        <!-- <div class="responsive-feature-img"><img src="img/devices.png" alt="responsive devices"></div> -->
+        <div class="responsive-feature-img"><img src="img/self-large.jpg" alt="responsive devices"></div>
+    </section>
+    <section class="features-extra section-padding" id="loremIpsum">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="feature-list">
+                        <h3>Lorem Ipsum</h3>
+                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. </p>
+                        <p>No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
+                        </p>
+                        <!-- <a href="#" class="btn btn-ghost btn-accent btn-small">What's Sketch?</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="macbook-wrap wp3"></div>
+        <!-- <div class="responsive-feature-img"><img src="img/macbook-pro.png" alt="responsive devices"></div> -->
+        <div class="responsive-feature-img"><img src="img/iran.jpg" alt="responsive devices"></div>
+    </section>
+   <!--  <section class="hero-strip section-padding">
+        <div class="container">
+            <div class="col-md-12 text-center">
+                <h2>
+                Customise Sedna with the included <span class="sketch">Sketch <i class="version">3</i></span> file
+                </h2>
+                <p>Change/swap/edit every aspect of Sedna before you hit development with the included Sketch file.</p>
+                <a href="#" class="btn btn-ghost btn-accent btn-large">Download now!</a>
+                <div class="logo-placeholder floating-logo"><img src="img/sketch-logo.png" alt="Sketch Logo"></div>
+            </div>
+        </div>
+    </section> -->
+    <section class="blog-intro section-padding" id="photos">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Selection of photos</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12 leftcol">
+                    <h5>TRAVEL</h5>
+                    <p>There is a saying that goes: "Read ten thousand books, walk ten thousand miles." When you walk on the road, you observe the things around you and find out the differences. Then you stop to ponder, why do things work out differently? This is what is called reflection. You slow down your pase, raise your hands, capture that moment and make the memory permenant.</p>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12 rightcol">
+                    <h5></h5>
+                    <p>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="blog text-center">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <article class="blog-post">
+                        <figure>
+                            <a href="img/1-large.jpg" class="single_image">
+                                <div class="blog-img-wrap">
+                                    <div class="overlay">
+                                        <i class="fa fa-search"></i>
+                                    </div>
+                                    <img src="img/1.jpg" alt="Himalayas"/>
+                                </div>
+                            </a>
+                            <!-- <figcaption> -->
+                            <!-- <h2><a href="#" class="blog-category" data-toggle="tooltip" data-placement="top" data-original-title="See more posts">Product</a></h2> -->
+                            <p class="entry-content">
+                            <!-- <a href="#" class="blog-post-title"> -->
+                            You can see eight over 8000-meter mountains in this village of Himalayas, which explains how tough it could be by just living here. But lives are admirable, when they see a challenge, they fight for it. That is how human beings develop. All lives matter.
+                            <!-- <i class="fa fa-angle-right"></i></a> -->
+                            </p>
+                            <!-- </figcaption> -->
+                        </figure>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <article class="blog-post">
+                        <figure>
+                            <a href="img/2-large.jpg" class="single_image">
+                                <div class="blog-img-wrap">
+                                    <div class="overlay">
+                                        <i class="fa fa-search"></i>
+                                    </div>
+                                    <img src="img/2.jpg" alt="Nepal kids"/>
+                                </div>
+                            </a>
+                          <!--   <figcaption>
+                            <h2><a href="#" class="blog-category" data-toggle="tooltip" data-placement="top" data-original-title="See more posts">Technology</a></h2>
+                            <p><a href="#" class="blog-post-title">Why IE8 support is deminishing <i class="fa fa-angle-right"></i></a></p>
+                            </figcaption> -->
+                            <p class="entry-content" ata-toggle="tooltip" data-original-title="See more posts">
+                            These two kids live peacefully in Nepal. Materially speaking, they might have not lived in a prosperous civilization, but that does not prevent them from living happily under their own sky.
+                            </p>
+                        </figure>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <article class="blog-post">
+                        <figure>
+                            <a href="img/3-large.jpg" class="single_image">
+                                <div class="blog-img-wrap">
+                                    <div class="overlay">
+                                        <i class="fa fa-search"></i>
+                                    </div>
+                                    <img src="img/3.jpg" class="single_image" alt="Xiapu, China"/>
+                                </div>
+                            </a>
+                            <!-- <figcaption>
+                            <h2><a href="#" class="blog-category" data-toggle="tooltip" data-placement="top" data-original-title="See more posts">Product</a></h2>
+                            <p><a href="#" class="blog-post-title">Sedna tutorial: How to begin your <i class="fa fa-angle-right"></i></a></p>
+                            </figcaption> -->
+                            <p class="entry-content">
+                            <!-- <a href="#" class="blog-post-title"> -->
+                            This one was taken from a small plane up in the sky in Xiapu, Fujian, China. We always see how polluted China is on the news, but actually, not everywhere is like that. There are many places where you can take breathtaking pictures while enjoying some fresh air.
+                            <!-- <i class="fa fa-angle-right"></i></a> -->
+                            </p>
+                        </figure>
+                    </article>
+                </div>
+                <!-- <a href="#" class="btn btn-ghost btn-accent btn-small">More news</a> -->
+            </div>
+        </div>
+    </section>
+ <!--    <section class="testimonial-slider section-padding text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="flexslider">
+                        <ul class="slides">
+                            <li>
+                                <div class="avatar"><img src="img/avatar.jpg" alt="Sedna Testimonial Avatar"></div>
+                                <h2>"Lorem ipsum dolor sit amet, nullam lucia nisi."</h2>
+                                <p class="author">Peter Finlan, Product Designer.</p>
+                            </li>
+                            <li>
+                                <div class="avatar"><img src="img/mani.jpg" alt="Sedna Testimonial Avatar"></div>
+                                <h2>"Nunc vel maximus purus. Nullam ac urna ornare."</h2>
+                                <p class="author">Manoela Ilic, Founder @ Codrops.</p>
+                            </li>
+                            <li>
+                                <div class="avatar"><img src="img/130.jpg" alt="Sedna Testimonial Avatar"></div>
+                                <h2>"Nullam ac urna ornare, ultrices nisl ut, lacinia nisi."</h2>
+                                <p class="author">Blaz Robar, Pixel Guru</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+   <!--  <section class="sign-up section-padding text-center" id="download">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h3>Get started with Sedna, absolutely free</h3>
+                    <p>Grab your copy today, exclusively from Codrops</p>
+                    <form class="signup-form" action="#" method="POST" role="form">
+                        <div class="form-input-group">
+                            <i class="fa fa-envelope"></i><input type="text" class="" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-input-group">
+                            <i class="fa fa-lock"></i><input type="text" class="" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="btn-fill sign-up-btn">Sign up for free</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <section class="to-top">
+        <div class="container">
+            <div class="row">
+                <div class="to-top-wrap">
+                    <a href="#top" class="top"><i class="fa fa-angle-up"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="footer-links">
+                        <ul class="footer-group">
+                            <li><a href="">Placeholder1</a></li>
+                            <li><a href="">Placeholder2</a></li>
+                            <li><a href="">Placeholder3</a></li>
+                            <li><a href="">Placeholder4</a></li>
+                            <li><a href="">Placeholder5</a></li>
+                        </ul>
+                        <p>Copyright © 2016 <a href="#">Kaichen Zhang</a><br>
+                        Crafted with <span class="fa fa-heart pulse2"></span> by <a href="http://www.peterfinlan.com/">Kaichen Zhang</a>.</p>
+                    </div>
+                </div>
+                <div class="social-share">
+                    <p>Social media</p>
+                    <a href="https://github.com/kz4/"><img src="img/github-64px.png"></img></a>
+                    <a href="http://weibo.com/u/2122225861"><img src="img/weibo-64px.png"></img></a>
+                    <a href="https://www.linkedin.com/in/kaichen-zhang-288b0937"><img src="img/In-2CRev-66px-R.png"></img></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+    <!--<script src="bower_components/retina.js/dist/retina.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/retina.js/1.3.0/retina.js"></script>
+    <!--<script src="js/jquery.fancybox.pack.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/jquery.flexslider-min.js"></script>
+    <!--<script src="bower_components/classie/classie.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/classie/1.0.1/classie.js"></script>
+    <!--<script src="bower_components/jquery-waypoints/lib/jquery.waypoints.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.js"></script>
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+    function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+    e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+    e.src='//www.google-analytics.com/analytics.js';
+    r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+    </script>
 </body>
 </html>
