@@ -28,3 +28,11 @@ p.navbar-text.pull-left {
 #searchButton {
     margin-top: 5px
 }
+
+.navbar-header{
+    width: 100%;
+}
+
+/*.navbar{*/
+    /*width: 100%;*/
+/*}*/

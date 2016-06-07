@@ -47,9 +47,19 @@ module.exports = function (app) {
                     return;
                 }
             }
-            user._id = (new Date()).getTime()+"";
-            users.push(user);
-            res.send(user);
+            // user._id = (new Date()).getTime()+"";
+            // users.push(user);
+            // res.send(user);
+            UserModel
+                .createUser(user)
+                .then(
+                    function (user) {
+                        res.json(user);
+                    },
+                    function (error) {
+                        res.statusCode(400).send(error);
+                    }
+                )
         } else {
             res.send({});
             return;
@@ -71,13 +81,23 @@ module.exports = function (app) {
 
     function findUserById(req, res) {
         var id = req.params.userId;
-        for (var i in users) {
-            if (users[i]._id === id) {
-                res.send(users[i]);
-                return;
-            }
-        }
-        res.send({});
+        // for (var i in users) {
+        //     if (users[i]._id === id) {
+        //         res.send(users[i]);
+        //         return;
+        //     }
+        // }
+        // res.send({});
+        UserModel
+            .findUserById(id)
+            .then(
+                function (user) {
+                    res.json(user);
+                },
+                function (error) {
+                    res.statusCode(400).send(error);
+                }
+            )
     }
 
     function findUserByCredentials(username, password, res) {
