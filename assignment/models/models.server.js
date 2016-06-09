@@ -6,5 +6,6 @@ module.exports = function () {
     var models = {
         userModel: require("./user/user.model.server.js")()
         // add all the other models, website, page and wiget models
-    }
+    };
+    return models;
 };

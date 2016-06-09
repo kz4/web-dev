@@ -12,7 +12,7 @@
                 .findUserByCredentials(username, password)  // promise
                 .then(function (res) {
                     var user = res.data;
-                    if (user._id) {
+                    if (user && user._id) {
                         var id = user._id;
                         $location.url("/user/" + id);
                     } else {
