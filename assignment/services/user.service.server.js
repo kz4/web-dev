@@ -19,7 +19,7 @@ module.exports = function (app, models) {
                 function (error) {
                     res.statusCode(404).send(error);
                 }
-            )
+            );
     }
 
     function updateUser(req, res) {
@@ -34,26 +34,35 @@ module.exports = function (app, models) {
                 function (error) {
                     res.statusCode(404).send(error);
                 }
-            )
+            );
     }
 
     function createUser(req, res) {
         var user = req.body;
         if (user.username) {
-            // TODO: check if username exists
             userModel
-                .createUser(user)
-                .then(
-                    function (user) {
-                        res.json(user);
-                    },
-                    function (error) {
-                        res.statusCode(404).send(error);
+                // check if username exists
+                .findUserByUsername(user.username)
+                .then(function (userExists) {
+                    // if user cannot be found
+                    if (!userExists) {
+                        return userModel
+                            .createUser(user)
+                            .then(
+                                function (user) {
+                                    res.json(user);
+                                },
+                                function (error) {
+                                    // res.statusCode(404).send(error);
+                                    res.send(error);
+                                }
+                            )
+                    } else {
+                        // Username already exists
+                        // res.status(400).send("Username already exists");
+                        res.send("Username already exists");
                     }
-                )
-        } else {
-            res.send({});
-            return;
+                });
         }
     }
 
@@ -81,7 +90,7 @@ module.exports = function (app, models) {
                 function (error) {
                     res.statusCode(404).send(error);
                 }
-            )
+            );
     }
 
     function findUserByCredentials(username, password, res) {
@@ -94,7 +103,7 @@ module.exports = function (app, models) {
                 function (error) {
                     res.statusCode(404).send(error);
                 }
-            )
+            );
     }
 
     function findUserByUsername(username, res) {
@@ -107,6 +116,6 @@ module.exports = function (app, models) {
                 function (error) {
                     res.statusCode(404).send(error);
                 }
-            )
+            );
     }
 };
