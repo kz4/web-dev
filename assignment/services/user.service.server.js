@@ -2,6 +2,7 @@ module.exports = function (app, models) {
     
     var userModel = models.userModel;
     var websiteModel = models.websiteModel;
+    var pageModel = models.pageModel;
 
     app.post("/api/user", createUser);
     app.get("/api/user", getUsers);
@@ -19,6 +20,18 @@ module.exports = function (app, models) {
                         .findAllWebsitesForUser(id)
                         .then(function (websites) {
                             for (var i in websites) {
+                                pageModel
+                                    .findAllPagesForWebsite(websites[i]._id)
+                                    .then(function (pages) {
+                                        for (var j in pages) {
+                                            pageModel
+                                                .deletePage(pages[j]._id)
+                                                .then(function () {
+                                                    // res.sendStatus(200);
+
+                                                })
+                                        }
+                                    });
                                 websiteModel
                                     .deleteWebsite(websites[i]._id)
                                     .then(function () {

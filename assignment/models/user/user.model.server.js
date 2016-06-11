@@ -4,7 +4,6 @@ module.exports = function () {
     var UserSchema = require("./user.schema.server")();
     var User = mongoose.model("User", UserSchema);
 
-
     var api = {
         createUser: createUser,
         findUserById: findUserById,
@@ -16,7 +15,7 @@ module.exports = function () {
         spliceWebsite: spliceWebsite
     };
     return api;
-
+    
     function spliceWebsite(userId, websiteId) {
         return User.findOne({_id: userId},
             function(err, doc) {

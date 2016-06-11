@@ -85,12 +85,12 @@ module.exports = function (app, models) {
             websiteModel
                 .createWebsiteForUser(userId, website)
                 .then(
-                    function (website) {
+                    function (newWebsite) {
                         userModel
-                            .populateWebsite(userId, website)
+                            .populateWebsite(userId, newWebsite)
                             .then(
                                 function () {
-                                    res.json(website);
+                                    res.json(newWebsite);
                                 }
                             );
                     },
