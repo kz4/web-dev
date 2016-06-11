@@ -14,8 +14,9 @@ module.exports = function () {
     mongoose.connect(connectionString);
     
     var models = {
-        userModel: require("./user/user.model.server.js")()
-        // add all the other models, website, page and wiget models
+        userModel: require("./user/user.model.server")(),
+        websiteModel: require("./website/website.model.server")()
+        // add all the other models, page and wiget models
     };
     return models;
 };

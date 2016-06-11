@@ -1,6 +1,7 @@
 module.exports = function (app, models) {
     
     var userModel = models.userModel;
+    var websiteModel = models.websiteModel;
 
     app.post("/api/user", createUser);
     app.get("/api/user", getUsers);
@@ -14,10 +15,21 @@ module.exports = function (app, models) {
             .deleteUser(id)
             .then(
                 function () {
-                    res.sendStatus(200);
+                    websiteModel
+                        .findAllWebsitesForUser(id)
+                        .then(function (websites) {
+                            for (var i in websites) {
+                                websiteModel
+                                    .deleteWebsite(websites[i]._id)
+                                    .then(function () {
+                                        res.sendStatus(200);
+                                    })
+                            }
+                        });
                 },
                 function (error) {
-                    res.statusCode(404).send(error);
+                    // res.statusCode(404).send(error);
+                    res.send(error);
                 }
             );
     }
@@ -28,11 +40,12 @@ module.exports = function (app, models) {
         userModel
             .updateUser(id, newUser)
             .then(
-                function (user) {
+                function () {
                     res.sendStatus(200);
                 },
                 function (error) {
-                    res.statusCode(404).send(error);
+                    // res.statusCode(404).send(error);
+                    res.send(error);
                 }
             );
     }
@@ -88,7 +101,8 @@ module.exports = function (app, models) {
                     res.json(user);
                 },
                 function (error) {
-                    res.statusCode(404).send(error);
+                    // res.statusCode(404).send(error);
+                    res.send(error);
                 }
             );
     }
@@ -101,7 +115,8 @@ module.exports = function (app, models) {
                     res.json(user);
                 },
                 function (error) {
-                    res.statusCode(404).send(error);
+                    // res.statusCode(404).send(error);
+                    res.send(error);
                 }
             );
     }
@@ -114,7 +129,8 @@ module.exports = function (app, models) {
                     res.json(user);
                 },
                 function (error) {
-                    res.statusCode(404).send(error);
+                    // res.statusCode(404).send(error);
+                    res.send(error);
                 }
             );
     }

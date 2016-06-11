@@ -18,7 +18,8 @@
                     if (website.name) {
                         $location.url("/user/" + userId + "/website");
                     } else {
-                        vm.error = "Error creating a website, name empty or already exists";
+                        // in this case website is an error message
+                        vm.error = website;
                     }
                 });
         }

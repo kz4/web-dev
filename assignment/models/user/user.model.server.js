@@ -11,10 +11,28 @@ module.exports = function () {
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
         updateUser: updateUser,
-        deleteUser: deleteUser
+        deleteUser: deleteUser,
+        populateWebsite: populateWebsite,
+        spliceWebsite: spliceWebsite
     };
     return api;
-    
+
+    function spliceWebsite(userId, websiteId) {
+        return User.findOne({_id: userId},
+            function(err, doc) {
+                doc.websites.pull(websiteId);
+                doc.save();
+            });
+    }
+
+    function populateWebsite(userId, website) {
+        return User.findOne({_id: userId},
+            function(err, doc) {
+                doc.websites.push(website);
+                doc.save();
+            });
+    }
+
     function deleteUser(userId) {
         return User.remove({_id: userId});
     }
@@ -47,7 +65,7 @@ module.exports = function () {
         return User.findById(userId);
     }
 
-    function findUserByCredentials(username, password, res) {
+    function findUserByCredentials(username, password) {
         return User.findOne({username: username, password: password});
     }
 };
