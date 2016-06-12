@@ -9,10 +9,29 @@ module.exports = function () {
         findAllPagesForWebsite: findAllPagesForWebsite,
         findPageById: findPageById,
         updatePage: updatePage,
-        deletePage: deletePage
+        deletePage: deletePage,
+        populateWidget: populateWidget,
+        spliceWidget: spliceWidget
     };
     return api;
-    
+
+    function spliceWidget(pageId, widgetId) {
+        return Page.findOne({_id: pageId},
+            function (err, doc) {
+                doc.widgets.pull(widgetId);
+                doc.save();
+            });
+    }
+
+    function populateWidget(pageId, widget) {
+        return Page.findOne({_id: pageId},
+            function (err, doc) {
+                doc.widgets.push(widget);
+                doc.save();
+            }
+        );
+    }
+
     function deletePage(pageId) {
         return Page.remove({_id: pageId});
     }

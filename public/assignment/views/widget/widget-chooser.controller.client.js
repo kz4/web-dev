@@ -17,18 +17,18 @@
         vm.createYoutubeWidget = createYoutubeWidget;
 
         function createHeaderWidget() {
-            var widgetId = (new Date()).getTime()+"";
+            // var widgetId = (new Date()).getTime()+"";
             var widget = {
-                _id : widgetId,
-                widgetType : "HEADER",
-                pageId : pageId
+                // _id : widgetId,
+                widgetType : "HEADING"
+                // pageId : pageId
             };
             WidgetService
                 .createWidget(pageId, widget)
                 .then(function (res) {
                     var result = res.data;
                     if (result._id) {
-                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + result._id);
                     } else {
                         vm.error = "Failed to create a header widget";
                     }
@@ -36,18 +36,18 @@
         }
 
         function createImageWidget() {
-            var widgetId = (new Date()).getTime()+"";
+            // var widgetId = (new Date()).getTime()+"";
             var widget = {
-                _id : widgetId,
-                widgetType : "IMAGE",
-                pageId : pageId
+                // _id : widgetId,
+                widgetType : "IMAGE"
+                // pageId : pageId
             };
             WidgetService
                 .createWidget(pageId, widget)
                 .then(function (res) {
                     var result = res.data;
                     if (result._id) {
-                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + result._id);
                     } else {
                         vm.error = "Failed to create a image widget";
                     }
@@ -55,18 +55,18 @@
         }
 
         function createYoutubeWidget() {
-            var widgetId = (new Date()).getTime()+"";
+            // var widgetId = (new Date()).getTime()+"";
             var widget = {
-                _id : widgetId,
-                widgetType : "YOUTUBE",
-                pageId : pageId
+                // _id : widgetId,
+                widgetType : "YOUTUBE"
+                // pageId : pageId
             };
             WidgetService
                 .createWidget(pageId, widget)
                 .then(function (res) {
                     var result = res.data;
                     if (result._id) {
-                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + result._id);
                     } else {
                         vm.error = "Failed to create a youtube widget";
                     }

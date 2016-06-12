@@ -26,7 +26,7 @@
                         $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget")
                     } else {
                         switch (widget.widgetType) {
-                            case "HEADER":
+                            case "HEADING":
                                 vm.error = "Failed to create a widget, text and size are required";
                                 break;
                             case "IMAGE":

@@ -1,8 +1,9 @@
 module.exports = function (app, models) {
-    
+
     var userModel = models.userModel;
     var websiteModel = models.websiteModel;
     var pageModel = models.pageModel;
+    var widgetModel = models.widgetModel;
 
     app.post("/api/user", createUser);
     app.get("/api/user", getUsers);
@@ -23,21 +24,45 @@ module.exports = function (app, models) {
                                 pageModel
                                     .findAllPagesForWebsite(websites[i]._id)
                                     .then(function (pages) {
-                                        for (var j in pages) {
-                                            pageModel
-                                                .deletePage(pages[j]._id)
-                                                .then(function () {
-                                                    // res.sendStatus(200);
-
-                                                })
-                                        }
-                                    });
+                                            for (var j in pages) {
+                                                widgetModel
+                                                    .findAllWidgetsForPage(pages[j]._id)
+                                                    .then(function (widgets) {
+                                                        for (var k in widgets) {
+                                                            widgetModel
+                                                                .deleteWidget(widgets[k]._id)
+                                                                .then(function () {
+                                                                        res.sendStatus(200);
+                                                                    }, function (error) {
+                                                                        res.send(error);
+                                                                    });
+                                                        }
+                                                    }, function (error) {
+                                                        res.send(error);
+                                                    });
+                                                pageModel
+                                                    .deletePage(pages[j]._id)
+                                                    .then(function () {
+                                                            res.sendStatus(200);
+                                                        },
+                                                        function (error) {
+                                                            res.send(error);
+                                                        });
+                                            }
+                                        },
+                                        function (error) {
+                                            res.send(error);
+                                        });
                                 websiteModel
                                     .deleteWebsite(websites[i]._id)
                                     .then(function () {
                                         res.sendStatus(200);
-                                    })
+                                    }, function (error) {
+                                        res.send(error);
+                                    });
                             }
+                        }, function (error) {
+                            res.send(error);
                         });
                 },
                 function (error) {
@@ -67,7 +92,7 @@ module.exports = function (app, models) {
         var user = req.body;
         if (user.username) {
             userModel
-                // check if username exists
+            // check if username exists
                 .findUserByUsername(user.username)
                 .then(function (userExists) {
                     // if user cannot be found

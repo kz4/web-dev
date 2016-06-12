@@ -1,7 +1,7 @@
 module.exports = function (app, models) {
 
-    var pageModel = models.pageModel;
     var websiteModel = models.websiteModel;
+    var pageModel = models.pageModel;
 
     app.get("/api/website/:websiteId/page", findAllPagesForWebsite);
     app.post("/api/website/:websiteId/page", createPage);
@@ -31,10 +31,9 @@ module.exports = function (app, models) {
                             function (error) {
                                 res.send(error);
                             }
-                        )
+                        );
                 }
-            )
-
+            );
     }
 
     function updatePage(req, res) {
@@ -82,10 +81,7 @@ module.exports = function (app, models) {
                                 function (error) {
                                     res.send(error);
                                 }
-                            )
-
-
-                            // res.json(page);
+                            );
                         },
                         function (error) {
                             res.json(error);
