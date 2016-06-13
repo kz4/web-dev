@@ -99,8 +99,8 @@ module.exports = function () {
             case 'HTML':
                 widget.widgetType = 'HTML';
                 break;
-            case 'INPUT':
-                widget.widgetType = 'INPUT';
+            case 'TEXT':
+                widget.widgetType = 'TEXT';
                 break;
             default:
                 break;

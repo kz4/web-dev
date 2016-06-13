@@ -38,6 +38,9 @@
                             case "HTML":
                                 vm.error = "Failed to create a widget";
                                 break;
+                            case "TEXT":
+                                vm.error = "Failed to create a widget";
+                                break;
                         }
                     }
                 });

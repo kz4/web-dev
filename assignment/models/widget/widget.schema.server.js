@@ -6,7 +6,7 @@ module.exports = function () {
         _page: {type: mongoose.Schema.ObjectId, ref: "Page"},
         widgetType: {
             type: String,
-            enum: ['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'INPUT']
+            enum: ['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'TEXT']
         },
         name: String,
         text: String,
@@ -19,6 +19,7 @@ module.exports = function () {
         size: Number,
         order: Number,
         class: String,
+        html: String,
         icon: String,
         deletable: Boolean,
         formatted: Boolean,
