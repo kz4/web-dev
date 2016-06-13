@@ -62,6 +62,7 @@ module.exports = function () {
                 width: widget.width || "",
                 height: widget.height || "",
                 rows: widget.rows || 0,
+                html: widget.html || "",
                 size: widget.size || 0,
                 class: widget.class || "",
                 icon: widget.icon || "",

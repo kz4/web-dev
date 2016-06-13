@@ -35,6 +35,9 @@
                             case "YOUTUBE":
                                 vm.error = "Failed to create a widget, url and size are required";
                                 break;
+                            case "HTML":
+                                vm.error = "Failed to create a widget";
+                                break;
                         }
                     }
                 });

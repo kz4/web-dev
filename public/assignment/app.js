@@ -1,3 +1,3 @@
 (function () {
-    var module = angular.module('WebAppMaker', ["ngRoute", "wamDirectives"]);
+    var module = angular.module('WebAppMaker', ["ngRoute", "wamDirectives", "textAngular"]);
 })();

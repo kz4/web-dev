@@ -15,6 +15,25 @@
         vm.createHeaderWidget = createHeaderWidget;
         vm.createImageWidget = createImageWidget;
         vm.createYoutubeWidget = createYoutubeWidget;
+        vm.createHtmlWidget = createHtmlWidget;
+
+        function createHtmlWidget() {
+            var widget = {
+                // _id : widgetId,
+                widgetType : "HTML"
+                // pageId : pageId
+            };
+            WidgetService
+                .createWidget(pageId, widget)
+                .then(function (res) {
+                    var result = res.data;
+                    if (result._id) {
+                        $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + result._id);
+                    } else {
+                        vm.error = "Failed to create a HTML widget";
+                    }
+                });
+        }
 
         function createHeaderWidget() {
             // var widgetId = (new Date()).getTime()+"";

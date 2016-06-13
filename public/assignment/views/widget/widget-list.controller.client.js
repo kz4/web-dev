@@ -27,7 +27,7 @@
         }
 
         function getSafeHtml(widget) {
-            return $sce.trustAsHtml(widget.text);
+            return $sce.trustAsHtml(widget.html);
         }
 
         function getSafeUrl(widget) {

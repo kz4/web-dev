@@ -129,6 +129,16 @@ module.exports = function (app, models) {
                     return updateWidgetHelper(widget, widgetId, res);
                 }
                 break;
+            case "HTML":
+                if (widget) {
+                    return updateWidgetHelper(widget, widgetId, res);
+                }
+                break;
+            case "TEXT":
+                if (widget) {
+                    return updateWidgetHelper(widget, widgetId, res);
+                }
+                break;
         }
         res.json(false);
     }

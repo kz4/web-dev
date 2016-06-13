@@ -23,7 +23,7 @@
             <div ng-switch-when="HTML">
                 <p ng-bind-html="data.getSafeHtml(widget)"></p>
             </div>
-            <div ng-switch-when="YOUTUBE">
+            <div ng-switch-when="YOUTUBE" class="youtube-widget">
                 <iframe width="{{widget.width}}" ng-src="{{data.getSafeUrl(widget)}}" frameborder="0" allowfullscreen></iframe>
             </div>
             <div ng-switch-default>
