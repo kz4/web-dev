@@ -14,6 +14,17 @@
 
         vm.getSafeHtml = getSafeHtml;
         vm.getSafeUrl = getSafeUrl;
+        vm.sorted = sorted;
+
+        function sorted(startIndex, endIndex) {
+            WidgetService
+                .reorderWidget(pageId, startIndex, endIndex)
+                .then(function (res) {
+                    // vm.widgets = res.data;
+                    init();
+                })
+
+        }
 
         function getSafeHtml(widget) {
             return $sce.trustAsHtml(widget.text);
@@ -31,8 +42,8 @@
                 .findWidgetsByPageId(pageId)
                 .then(function (res) {
                     vm.widgets = res.data;
-                    $(".container")
-                        .sortable({axis: "y"});
+                    // $(".container")
+                    //     .sortable({axis: "y"});
                 });
         }
         init();

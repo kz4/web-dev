@@ -11,6 +11,25 @@ module.exports = function (app, models) {
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
+    // app.put ("/api/page/:pageId/widget?start=index1&end=index2", reorderWidget);
+    app.put ("/api/page/:pageId/widget", reorderWidget);
+
+    function reorderWidget(req, res) {
+        var pageId = req.params.pageId;
+        var startIndex = parseInt(req.query.start);
+        var endIndex = parseInt(req.query.end);
+
+        widgetModel
+            .reorderWidget(startIndex, endIndex, pageId)
+            .then(
+                function () {
+                    res.sendStatus(200);
+                },
+                function () {
+                    res.sendStatus(400);
+                }
+            );
+    }
 
     function uploadImage(req, res) {
         var widgetId = req.body.widgetId;
@@ -148,16 +167,16 @@ module.exports = function (app, models) {
             widgetModel
                 .createWidget(pageId, widget)
                 .then(function (newWidget) {
-                    pageModel
-                        .populateWidget(pageId, newWidget)
-                        .then(
-                            function () {
-                                res.json(newWidget);
-                            },
-                            function (error) {
-                                res.send(error);
-                            }
-                        );
+                        pageModel
+                            .populateWidget(pageId, newWidget)
+                            .then(
+                                function () {
+                                    res.json(newWidget);
+                                },
+                                function (error) {
+                                    res.send(error);
+                                }
+                            );
                     },
                     function (error) {
                         res.json(error);

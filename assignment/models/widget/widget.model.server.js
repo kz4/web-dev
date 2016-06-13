@@ -10,18 +10,46 @@ module.exports = function () {
         findWidgetById: findWidgetById,
         updateWidget: updateWidget,
         deleteWidget: deleteWidget,
-        reorderWidget: reorderWidget,
+        reorderWidget: reorderWidget
     };
     return api;
-    
-    function reorderWidget() {
-        
+
+    function reorderWidget(startIndex, endIndex, pageId) {
+        return Widget
+            .find({_page: pageId})
+            .then(
+                function (widgets) {
+                    for (var i in widgets) {
+                        var widget = widgets[i];
+                        if (startIndex >= endIndex) {
+                            if (widget.order < startIndex && widget.order >= endIndex) {
+                                widget.order++;
+                                widget.save(function () {
+                                });
+                            } else if (widget.order === startIndex) {
+                                widget.order = endIndex;
+                                widget.save(function () {
+                                });
+                            }
+                        } else {
+                            if (widget.order > startIndex && widget.order <= endIndex) {
+                                widget.order--;
+                                widget.save(function () {
+                                });
+                            } else if (widget.order === startIndex) {
+                                widget.order = endIndex;
+                                widget.save(function () {
+                                });
+                            }
+                        }
+                    }
+                });
     }
-    
+
     function deleteWidget(widgetId) {
         return Widget.remove({_id: widgetId});
     }
-    
+
     function updateWidget(widgetId, widget) {
         return Widget.update({_id: widgetId}, {
             $set:
@@ -41,8 +69,6 @@ module.exports = function () {
                 formatted: widget.formatted || false
             }
         });
-
-        // return Widget.update({_id: widgetId}, {$set: widget});
     }
 
     function findWidgetById(widgetId) {
@@ -55,6 +81,9 @@ module.exports = function () {
 
     function createWidget(pageId, widget) {
         widget._page = pageId;
+        // Widget.count({}, function( err, count){
+        //     console.log( "Number of users:", count );
+        // })
 
         switch (widget.widgetType) {
             case 'HEADING':
@@ -76,6 +105,17 @@ module.exports = function () {
                 break;
         }
 
-        return Widget.create(widget);
+        // return Widget.create(widget);
+        return Widget
+            .find({_page: pageId})
+            .then(
+                function (widgets) {
+                    widget.order = widgets.length;
+                    return Widget.create(widget);
+                },
+                function (error) {
+                    return null;
+                }
+            );
     }
 };
