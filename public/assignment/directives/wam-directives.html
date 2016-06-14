@@ -1,4 +1,4 @@
-<!--{{data.widgets}}-->
+{{data.widgets}}
 
 <div class="sortableWidgets">
     <div ng-repeat="widget in data.widgets | orderBy : 'order'">
@@ -32,6 +32,7 @@
 ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
 ['indent','outdent'],['html']]"></div>
                 <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
+                       ng-model="widget.text"
                        placeholder="{{widget.textInput.placeholder}}" class="form-control"/>
                 <textarea ng-if="!widget.formatted && (widget.rows > 1)"
                           rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"

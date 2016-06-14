@@ -20,8 +20,9 @@
             WidgetService
                 .reorderWidget(pageId, startIndex, endIndex)
                 .then(function (res) {
+                    var res = res.data;
                     // vm.widgets = res.data;
-                    init();
+                    // init();
                 })
 
         }

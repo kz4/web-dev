@@ -45,7 +45,7 @@
                     if (result._id) {
                         $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + result._id);
                     } else {
-                        vm.error = "Failed to create a HTML widget";
+                        vm.error = "Failed to create a HTML widget, html text string is required";
                     }
                 });
         }

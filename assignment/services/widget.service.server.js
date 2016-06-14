@@ -11,7 +11,6 @@ module.exports = function (app, models) {
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
-    // app.put ("/api/page/:pageId/widget?start=index1&end=index2", reorderWidget);
     app.put ("/api/page/:pageId/widget", reorderWidget);
 
     function reorderWidget(req, res) {
@@ -130,7 +129,7 @@ module.exports = function (app, models) {
                 }
                 break;
             case "HTML":
-                if (widget) {
+                if (widget.html) {
                     return updateWidgetHelper(widget, widgetId, res);
                 }
                 break;
