@@ -9,7 +9,8 @@
 
         function login(username, password) {
             UserService
-                .findUserByCredentials(username, password)  // promise
+                // .findUserByCredentials(username, password)  // promise
+                .login(username, password)  // promise
                 .then(function (res) {
                     var user = res.data;
                     if (user && user._id) {

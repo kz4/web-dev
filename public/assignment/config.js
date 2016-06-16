@@ -28,7 +28,10 @@
             .when("/user/:uid", {
                 templateUrl: "views/user/profile.view.client.html",
                 controller: "ProfileController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
             })
             .when("/user/:uid/website", {
                 templateUrl: "views/website/website-list.view.client.html",
@@ -81,5 +84,29 @@
                 controller: "LoginController",
                 controllerAs: "model"
             });
+
+        function checkLoggedIn(UserService, $location, $q) {
+
+            // First create a deferred object that defers the promise
+            var deferred = $q.defer();
+
+            UserService
+                .loggedIn()
+                .then(
+                    function (res) {
+                        var user = res.data;
+                        if (user == '0') {
+                            deferred.reject();
+                            $location.url("/login");
+                        } else {
+                            deferred.resolve();
+                        }
+                    },
+                    function (err) {
+                        $location.url("/login");
+                    });
+
+            return deferred.promise;
+        }
     }
 })();

@@ -24,21 +24,21 @@ module.exports = function () {
                         if (startIndex >= endIndex) {
                             if (widget.order < startIndex && widget.order >= endIndex) {
                                 widget.order++;
-                                widget.save(function () {
+                                widget.save(function (err, doc) {
                                 });
                             } else if (widget.order === startIndex) {
                                 widget.order = endIndex;
-                                widget.save(function () {
+                                widget.save(function (err, doc) {
                                 });
                             }
                         } else {
                             if (widget.order > startIndex && widget.order <= endIndex) {
                                 widget.order--;
-                                widget.save(function () {
+                                widget.save(function (err, doc) {
                                 });
                             } else if (widget.order === startIndex) {
                                 widget.order = endIndex;
-                                widget.save(function () {
+                                widget.save(function (err, doc) {
                                 });
                             }
                         }

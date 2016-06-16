@@ -10,9 +10,44 @@
             findUserByUsername : findUserByUsername,
             findUserByCredentials : findUserByCredentials,
             updateUser : updateUser,
-            deleteUser : deleteUser
+            deleteUser : deleteUser,
+            login: login,
+            logout: logout,
+            loggedIn: loggedIn,
+            register: register
         };
         return api;
+
+        function register(username, password, verifyPassword) {
+            var url = "/api/register";
+            if (username) {
+                if (password === verifyPassword) {
+                    var user = {
+                        username: username,
+                        password: password
+                    };
+                    return $http.post(url, user);
+                }
+            }
+            return $http.post(url, null);
+        }
+
+        function loggedIn() {
+            return $http.get("/api/loggedIn");
+        }
+
+        function logout() {
+            return $http.post("/api/logout");
+        }
+
+        function login(username, password) {
+            var user = {
+                username: username,
+                password: password
+            };
+            var url = "/api/login";
+            return $http.post(url, user);
+        }
 
         function createUser(username, password, verifyPassword) {
             if (username) {
@@ -25,7 +60,7 @@
                 }
             }
             return $http.post("/api/user", null);
-         }
+        }
 
         function findUserById(id) {
             var url = "/api/user/" + id;

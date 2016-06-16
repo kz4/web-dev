@@ -2,10 +2,11 @@
     angular
         .module("WebAppMaker")
         .controller("ProfileController", ProfileController);
-    function ProfileController($location, $routeParams, UserService) {
+    function ProfileController($location, $rootScope, $routeParams, UserService) {
         var vm = this;
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
+        vm.logout = logout;
 
         var id = $routeParams['uid'];
 
@@ -17,6 +18,20 @@
             });
         }
         init();
+
+        function logout() {
+            $rootScope.currentUser = null;
+            UserService
+                .logout()
+                .then(
+                    function (res) {
+                        $location.url("/login");
+                    },
+                    function () {
+                        $location.url("/login");
+                    }
+                );
+        }
 
         function updateUser(user) {
             UserService
@@ -37,6 +52,10 @@
                 .then(
                     function (res) {
                         $location.url("/");
+                    },
+                    function (res) {
+                        var err = res.data;
+                        vm.error = err;
                     }
                 )
         }
