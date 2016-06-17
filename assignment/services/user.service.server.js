@@ -185,9 +185,8 @@ module.exports = function (app, models) {
         userModel
             .deleteUser(id)
             .then(
-                function (res) {
-                    // res.statusCode(200);
-                    res.sendStatus(200);
+                function () {
+                    res.send(200);
                 }, function () {
                     res.status(400).send("Error deleting a user");
                 }
