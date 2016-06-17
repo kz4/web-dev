@@ -13,7 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // session has to be created after cookie
-// console.log(process.env.SESSION_SECRET);
+console.log(process.env.SESSION_SECRET);
+
+console.log(process.env.FACEBOOK);
+
 // app.use(session({ secret: process.env.SESSION_SECRET }));
 app.use(session({ secret: "secret" }));
 
@@ -32,7 +35,21 @@ app.use(express.static(__dirname + '/public'));
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
 var port      = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
+var mongoose = require('mongoose');
+var connectionString = 'mongodb://127.0.0.1:27017/cs5610summer1';
+
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+        process.env.OPENSHIFT_APP_NAME;
+}
+
+mongoose.connect(connectionString);
+
 var assignment = require("./assignment/app.js")(app);
+// var assignment = require("./project/app.js")(app);
 
 // equivalent to
 // var assignment = require("./assignment/app.js");
