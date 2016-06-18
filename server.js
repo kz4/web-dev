@@ -13,12 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // session has to be created after cookie
-console.log(process.env.SESSION_SECRET);
-
-console.log(process.env.FACEBOOK);
-
-// app.use(session({ secret: process.env.SESSION_SECRET }));
-app.use(session({ secret: "secret" }));
+// IMPORTANT: I am using zsh shell, environment variables are
+// set in .zshrc under root. For bash shell, environment
+// variables are stored in .bash_profile under root
+app.use(session({ secret: process.env.SESSION_SECRET }));
 
 // Configure and Initialize Passport and Passport Session Support
 app.use(passport.initialize());

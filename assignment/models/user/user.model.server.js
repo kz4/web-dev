@@ -12,10 +12,15 @@ module.exports = function () {
         updateUser: updateUser,
         deleteUser: deleteUser,
         populateWebsite: populateWebsite,
-        spliceWebsite: spliceWebsite
+        spliceWebsite: spliceWebsite,
+        findUserByFacebookId: findUserByFacebookId
     };
     return api;
-    
+
+    function findUserByFacebookId(id) {
+        return User.findOne({"facebook.id": id});
+    }
+
     function spliceWebsite(userId, websiteId) {
         return User.findOne({_id: userId},
             function(err, doc) {
