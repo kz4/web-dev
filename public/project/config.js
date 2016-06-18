@@ -5,9 +5,9 @@
 	function Config($routeProvider) {
 		$routeProvider
 			.when("/", {
-				templateUrl: "main.html",
-				//controller: "LoginController",
-				//controllerAs: "model"
+				templateUrl: "views/category/category-list.view.client.html",
+				controller: "views/category/category-list.controller.client.js",
+				controllerAs: "model"
 			})
 			// .when("/flickr", {
 			.when("/user/:uid/website/:wid/page/:pid/widget/:wgid/flickr", {
