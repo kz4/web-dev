@@ -122,7 +122,7 @@ module.exports = function (app, models) {
 
     function facebookLogin(token, refreshToken, profile, done) {
         userModel
-            .findUserByGoogleId(profile.id)
+            .findUserByFacebookId(profile.id)
             .then(
                 function (facebookUser) {
                     if (facebookUser) {
