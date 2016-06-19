@@ -9,6 +9,16 @@
 				controller: "CategoryListController",
 				controllerAs: "model"
 			})
+			.when("/category/:categoryId/restaurant", {
+				templateUrl: "views/restaurant/restaurant-list.view.client.html",
+				controller: "RestaurantListController",
+				controllerAs: "model"
+			})
+			.when("/category/:categoryId/restaurant/:restaurantId", {
+				templateUrl: "views/restaurant/restaurant-info.view.client.html",
+				controller: "RestaurantInfoController",
+				controllerAs: "model"
+			})
 			// .when("/flickr", {
 			// .when("/user/:uid/website/:wid/page/:pid/widget/:wgid/flickr", {
 			// 	templateUrl: "views/widget/widget-flickr-search.view.client.html",

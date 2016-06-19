@@ -1,13 +1,13 @@
 (function () {
     angular
         .module("ProjectMaker")
-        .controller("RestaurantListController", RestaurantListController);
+        .controller("RestaurantInfoController", RestaurantInfoController);
      
-    function RestaurantListController($routeParams) {
+    function RestaurantInfoController($routeParams) {
         var vm = this;
 
-        var categoryId = $routeParams['categoryId'];
-        vm.categoryId = categoryId;
+        var restaurantId = $routeParams['restaurantId'];
+        vm.restaurantId = restaurantId;
 
     //    function init() {
     //        vm.websites = WebsiteService

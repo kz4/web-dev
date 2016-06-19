@@ -1,0 +1,75 @@
+<!--start-header-->
+<div class="header">
+	<div class="container">
+		<div class="head">
+			<div class="navigation">
+				<span class="menu"></span>
+				<ul class="navig">
+					<li><a href="#/" class="active">Yummy Booklet</a></li>
+
+					<li><a href="#/login" class="login">Log in</a></li>
+					<li><a href="#/register" class="register">Register</a></li>
+				</ul>
+			</div>
+			<div class="header-right">
+				<div class="search-bar">
+					<input type="text" value="Search" onfocus="this.value = '';"
+					       onblur="if (this.value == '') {this.value = 'Search';}">
+					<input type="submit" value="">
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+<!-- script-for-menu -->
+<!-- script-for-menu -->
+<script>
+	$("span.menu").click(function () {
+		$(" ul.navig").slideToggle("slow", function () {
+		});
+	});
+</script>
+<!-- script-for-menu -->
+<div class="about">
+	<div class="container">
+		<div class="about-main">
+			<div class="col-md-8 about-left">
+				<div class="about-two">
+					<a href="single.html"><img src="images/c-1.jpg" alt="" /></a>
+					<p>Posted by <a href="#">Johnson</a> on 10 feb, 2015 <a href="#">comments(2)</a></p>
+					<!--map-->
+					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11795.998380023964!2d-71.09120065!3d42.342532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1466309400204" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+					<div class="about-btn">
+						<a href="single.html">Read More</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 about-right heading">
+				<div class="abt-1">
+					<h3>Restaurant Name</h3>
+				</div>
+				<div class="abt-2">
+					<ul>
+						<li><a href="single.html">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </a></li>
+						<li><a href="single.html">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</a></li>
+						<li><a href="single.html">When an unknown printer took a galley of type and scrambled it to make a type specimen book. </a> </li>
+						<li><a href="single.html">It has survived not only five centuries, but also the leap into electronic typesetting</a> </li>
+						<li><a href="single.html">Remaining essentially unchanged. It was popularised in the 1960s with the release of </a> </li>
+						<li><a href="single.html">Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing </a> </li>
+						<li><a href="single.html">Software like Aldus PageMaker including versionsof Lorem Ipsum.</a> </li>
+					</ul>
+				</div>
+				<div class="abt-2">
+					<div class="news">
+						<form>
+							<input type="text" value="message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" />
+							<input type="submit" value="Comment">
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>

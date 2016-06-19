@@ -1,40 +1,93 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="">Websites</a>
-            <p class="navbar-text pull-right">
-                <a href="#/user/{{model.userId}}/website/new" class="navbar-link">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </a>
-            </p>
-        </div>
-    </div>
-</nav>
+<!--start-header-->
+<div class="header">
+	<div class="container">
+		<div class="head">
+			<div class="navigation">
+				<span class="menu"></span>
+				<ul class="navig">
+					<li><a href="#/" class="active">Yummy Booklet</a></li>
 
-<div class="container">
-    <ul class="list-group">
-        <li ng-repeat="website in model.websites" class="list-group-item">
-            <a href="#/user/{{website._user}}/website/{{website._id}}/page">
-                {{website.name}}
-            </a>
-            <a href="" class="pull-right">
-                <span class="glyphicon glyphicon-play pull-right"></span>
-            </a>
-            <a href="#/user/{{model.userId}}/website/{{website._id}}" class="pull-right">
-                <span class="glyphicon glyphicon-cog pull-right"></span>
-            </a>
-        </li>
-    </ul>
+					<li><a href="#/login" class="login">Log in</a></li>
+					<li><a href="#/register" class="register">Register</a></li>
+				</ul>
+			</div>
+			<div class="header-right">
+				<div class="search-bar">
+					<input type="text" value="Search" onfocus="this.value = '';"
+					       onblur="if (this.value == '') {this.value = 'Search';}">
+					<input type="submit" value="">
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
 </div>
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <p class="navbar-text pull-right">
-                <a href="#/user/{{model.userId}}">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </p>
-        </div>
-    </div>
-</nav>
+<!-- script-for-menu -->
+<!-- script-for-menu -->
+<script>
+	$("span.menu").click(function () {
+		$(" ul.navig").slideToggle("slow", function () {
+		});
+	});
+</script>
+<!-- script-for-menu -->
+<div class="about">
+	<div class="container">
+		<div class="about-main">
+				<div class="about-one">
+					<p>Find The Most</p>
+					<h3>Breakfast & Brunch</h3>
+				</div>
+				<div class="about-tre">
+					<div class="a-1">
+						<div class="col-md-6 abt-left">
+							<a href="#/category/{{model.categoryId}}/restaurant/0"><img src="images/c-3.jpg" alt="" /></a>
+							<h3><a href="single.html">Restaurant Name</a></h3>
+							<p>Vivamus interdum diam diam, non faucibus tortor consequat vitae. Proin sit amet augue sed massa pellentesque viverra. Suspendisse iaculis purus eget est pretium aliquam ut sed diam.</p>
+						</div>
+						<div class="col-md-6 abt-left">
+							<a href="single.html"><img src="images/c-4.jpg" alt="" /></a>
+							<h3><a href="single.html">Tasty Coffee</a></h3>
+							<p>Vivamus interdum diam diam, non faucibus tortor consequat vitae. Proin sit amet augue sed massa pellentesque viverra. Suspendisse iaculis purus eget est pretium aliquam ut sed diam.</p>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="a-1">
+						<div class="col-md-6 abt-left">
+							<a href="single.html"><img src="images/c-5.jpg" alt="" /></a>
+							<h6>Find The Most</h6>
+							<h3><a href="single.html">Tasty Coffee</a></h3>
+							<p>Vivamus interdum diam diam, non faucibus tortor consequat vitae. Proin sit amet augue sed massa pellentesque viverra. Suspendisse iaculis purus eget est pretium aliquam ut sed diam.</p>
+							<label>May 29, 2015</label>
+						</div>
+						<div class="col-md-6 abt-left">
+							<a href="single.html"><img src="images/c-6.jpg" alt="" /></a>
+							<h6>Find The Most</h6>
+							<h3><a href="single.html">Tasty Coffee</a></h3>
+							<p>Vivamus interdum diam diam, non faucibus tortor consequat vitae. Proin sit amet augue sed massa pellentesque viverra. Suspendisse iaculis purus eget est pretium aliquam ut sed diam.</p>
+							<label>May 29, 2015</label>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="a-1">
+						<div class="col-md-6 abt-left">
+							<a href="single.html"><img src="images/c-7.jpg" alt="" /></a>
+							<h6>Find The Most</h6>
+							<h3><a href="single.html">Tasty Coffee</a></h3>
+							<p>Vivamus interdum diam diam, non faucibus tortor consequat vitae. Proin sit amet augue sed massa pellentesque viverra. Suspendisse iaculis purus eget est pretium aliquam ut sed diam.</p>
+							<label>May 29, 2015</label>
+						</div>
+						<div class="col-md-6 abt-left">
+							<a href="single.html"><img src="images/c-8.jpg" alt="" /></a>
+							<h6>Find The Most</h6>
+							<h3><a href="single.html">Tasty Coffee</a></h3>
+							<p>Vivamus interdum diam diam, non faucibus tortor consequat vitae. Proin sit amet augue sed massa pellentesque viverra. Suspendisse iaculis purus eget est pretium aliquam ut sed diam.</p>
+							<label>May 29, 2015</label>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
