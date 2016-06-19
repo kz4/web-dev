@@ -45,6 +45,11 @@
 			<Label>Password</Label>
 			<input ng-model="password" class="form-control" type="password" placeholder="12345"/>
 		</div>
-		<a ng-click="model.login(username, password)" class="btn btn-block">Login</a>
+		<a ng-click="model.login(username, password)" class="btn btn-primary btn-block">Login</a>
+		<a class="btn btn-success btn-block" href="#/register">Register</a>
+		<a href="/auth/google" class="btn btn-primary btn-block" >
+			<span class="fa fa-google-plus-square"></span>
+			Google
+		</a>
 	</div>
 </div>

@@ -19,7 +19,7 @@
         return api;
 
         function register(username, password, verifyPassword) {
-            var url = "/api/register";
+            var url = "/api/project/register";
             if (username) {
                 if (password === verifyPassword) {
                     var user = {

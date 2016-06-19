@@ -17,7 +17,7 @@ module.exports = function (app, models) {
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
-    app.post('/api/login', passport.authenticate('local'), login);
+    app.post('/api/login', passport.authenticate('assignmentLogin'), login);
     app.get('/auth/facebook', passport.authenticate('facebook'));
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
@@ -29,7 +29,7 @@ module.exports = function (app, models) {
     app.get("/api/loggedIn", loggedIn);
     app.post('/api/register', register);
 
-    passport.use('local', new LocalStrategy(localStrategy));    // 'local' is optional because it's well-known, for others it has to match the passport authenticate
+    passport.use('assignmentLogin', new LocalStrategy(localStrategy));    // 'local' is optional because it's well-known, for others it has to match the passport authenticate
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 

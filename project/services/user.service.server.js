@@ -27,7 +27,7 @@ module.exports = function (app, models) {
 
     app.post("/api/logout", logout);
     app.get("/api/loggedIn", loggedIn);
-    app.post('/api/register', register);
+    app.post('/api/project/register', register);
 
     projectPassport.use('local', new LocalStrategy(localStrategy));    // 'local' is optional because it's well-known, for others it has to match the passport authenticate
     projectPassport.serializeUser(projectSerializeUser);
