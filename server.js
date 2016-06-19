@@ -47,7 +47,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 mongoose.connect(connectionString);
 
 var assignment = require("./assignment/app.js")(app);
-// var assignment = require("./project/app.js")(app);
+var project = require("./project/app.js")(app);
 
 // equivalent to
 // var assignment = require("./assignment/app.js");

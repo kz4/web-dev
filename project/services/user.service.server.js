@@ -1,14 +1,15 @@
 // The passport local strategy allows implementing simple username and password based authentication.
-var passport = require('passport');
+var projectPassport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
 module.exports = function (app, models) {
 
     var userModel = models.userModel;
-    var websiteModel = models.websiteModel;
-    var pageModel = models.pageModel;
-    var widgetModel = models.widgetModel;
+    // var websiteModel = models.websiteModel;
+    // var pageModel = models.pageModel;
+    // var widgetModel = models.widgetModel;
 
 
     app.post("/api/user", createUser);
@@ -16,14 +17,29 @@ module.exports = function (app, models) {
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
-    app.post('/api/login', passport.authenticate('local'), login);
+    app.post('/api/login', projectPassport.authenticate('local'), login);
+    app.get('/auth/google', projectPassport.authenticate('google', { scope : ['profile', 'email'] }));
+    app.get('/auth/google/callback',
+        projectPassport.authenticate('google', {
+            successRedirect: '/project/#/user',
+            failureRedirect: '/project//#/login'
+        }));
+
     app.post("/api/logout", logout);
     app.get("/api/loggedIn", loggedIn);
     app.post('/api/register', register);
 
-    passport.use('local', new LocalStrategy(localStrategy));    // 'local' is optional because it's well-known, for others it has to match the passport authenticate
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
+    projectPassport.use('local', new LocalStrategy(localStrategy));    // 'local' is optional because it's well-known, for others it has to match the passport authenticate
+    projectPassport.serializeUser(projectSerializeUser);
+    projectPassport.deserializeUser(projectDeserializeUser);
+
+    var googleConfig = {
+        clientID     : process.env.GOOGLE_CLIENT_ID,
+        clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL  : process.env.GOOGLE_CALLBACK_URL
+    }
+
+    projectPassport.use('google', new GoogleStrategy(googleConfig, googleLogin));
 
     function register(req, res) {
         var username = req.body.username;
@@ -104,11 +120,45 @@ module.exports = function (app, models) {
         res.json(user);
     }
 
-    function serializeUser(user, done) {
+    function googleLogin(token, refreshToken, profile, done) {
+        userModel
+            .findUserByGoogleId(profile.id)
+            .then(
+                function (googleUser) {
+                    if (googleUser) {
+                        return done(null, googleUser);
+                    } else {
+                        googleUser = {
+                            username: profile.displayName.replace(/ /g, ''),
+                            email: profile.emails[0].value,
+                            firstName: profile.name.givenName,
+                            lastName:  profile.name.familyName,
+                            google: {
+                                token: token,
+                                id: profile.id,
+                                displayname: profile.displayName
+                            }
+                        };
+                        userModel
+                            .createUser(googleUser)
+                            .then(
+                                function (user) {
+                                    done(null, user);
+                                },
+                                function (error) {
+
+                                }
+                            )
+                    }
+                }
+            )
+    }
+
+    function projectSerializeUser(user, done) {
         done(null, user);
     }
 
-    function deserializeUser(user, done) {
+    function projectDeserializeUser(user, done) {
         userModel
             .findUserById(user._id)
             .then(
@@ -185,9 +235,8 @@ module.exports = function (app, models) {
         userModel
             .deleteUser(id)
             .then(
-                function (res) {
-                    // res.statusCode(200);
-                    res.sendStatus(200);
+                function () {
+                    res.send(200);
                 }, function () {
                     res.status(400).send("Error deleting a user");
                 }

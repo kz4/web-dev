@@ -2,7 +2,7 @@ module.exports = function () {
 
     var mongoose = require('mongoose');
     var UserSchema = require("./user.schema.server")();
-    var User = mongoose.model("User", UserSchema);
+    var ProjectUser = mongoose.model("ProjectUser", UserSchema);
 
     var api = {
         createUser: createUser,
@@ -12,12 +12,17 @@ module.exports = function () {
         updateUser: updateUser,
         deleteUser: deleteUser,
         populateWebsite: populateWebsite,
-        spliceWebsite: spliceWebsite
+        spliceWebsite: spliceWebsite,
+        findUserByGoogleId: findUserByGoogleId
     };
     return api;
-    
+
+    function findUserByGoogleId(id) {
+        return ProjectUser.findOne({"google.id": id});
+    }
+
     function spliceWebsite(userId, websiteId) {
-        return User.findOne({_id: userId},
+        return ProjectUser.findOne({_id: userId},
             function(err, doc) {
                 doc.websites.pull(websiteId);
                 doc.save();
@@ -25,7 +30,7 @@ module.exports = function () {
     }
 
     function populateWebsite(userId, website) {
-        return User.findOne({_id: userId},
+        return ProjectUser.findOne({_id: userId},
             function(err, doc) {
                 doc.websites.push(website);
                 doc.save();
@@ -33,11 +38,11 @@ module.exports = function () {
     }
 
     function deleteUser(userId) {
-        return User.remove({_id: userId});
+        return ProjectUser.remove({_id: userId});
     }
 
     function updateUser(userId, user) {
-        return User.update({_id: userId}, {
+        return ProjectUser.update({_id: userId}, {
 
             // delete user._id;     // add this line, for older version of mongodb that set the _id,
             // if you just want to do $set: user
@@ -51,20 +56,20 @@ module.exports = function () {
             }
         });
     }
-    
+
     function createUser(user) {
-        return User.create(user);
+        return ProjectUser.create(user);
     }
 
     function findUserByUsername(username) {
-        return User.findOne({username: username});
+        return ProjectUser.findOne({username: username});
     }
 
     function findUserById(userId) {
-        return User.findById(userId);
+        return ProjectUser.findById(userId);
     }
 
     function findUserByCredentials(username, password) {
-        return User.findOne({username: username, password: password});
+        return ProjectUser.findOne({username: username, password: password});
     }
 };
