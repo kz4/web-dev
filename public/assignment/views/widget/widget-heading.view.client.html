@@ -18,28 +18,46 @@
 </nav>
 
 <div class="container">
-    <div class="form-group">
-        <Label>Name</Label>
-        <input ng-model="model.widget.name" class="form-control" type="text" placeholder="">
-    </div>
-    <div class="form-group">
-        <Label>Text</Label>
-        <input ng-model="model.widget.text" class="form-control" type="text"
-               placeholder="Two Problems With the New York Times Facebook Live Pitch Meeting">
-    </div>
-    <div class="form-group">
-        <Label>Size</Label>
-        <select ng-model="model.widget.size" class="form-control">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-        </select>
-    </div>
-    <a ng-click="model.deleteWidget()"
-       class="btn btn-danger btn-block">Delete</a>
+    <form name="newHeadingForm" novalidate>
+        <div class="form-group"
+             ng-class="{ 'has-error': newHeadingForm.name.$error.required && model.submitted}">
+            <Label>Name</Label>
+            <input ng-model="model.widget.name" class="form-control" type="text"
+                   name="name" placeholder="" required>
+            <span ng-show="newHeadingForm.name.$error.required && model.submitted"
+                  class="help-block">
+                Widget name required
+            </span>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error': newHeadingForm.text.$error.required && model.submitted}">
+            <Label>Text</Label>
+            <input ng-model="model.widget.text" class="form-control" type="text"
+                   name="text" placeholder="Two Problems With the New York Times Facebook Live Pitch Meeting" required>
+            <span ng-show="newHeadingForm.text.$error.required && model.submitted"
+                  class="help-block">
+                Heading text required
+            </span>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error': newHeadingForm.size.$error.required && model.submitted}">
+            <Label>Size</Label>
+            <select ng-model="model.widget.size" class="form-control" name="size" required>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+            </select>
+            <span ng-show="newHeadingForm.size.$error.required && model.submitted"
+                  class="help-block">
+                Heading size required
+            </span>
+        </div>
+        <a ng-click="model.deleteWidget()"
+           class="btn btn-danger btn-block">Delete</a>
+    </form>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

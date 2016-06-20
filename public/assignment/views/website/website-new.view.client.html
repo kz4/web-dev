@@ -2,14 +2,14 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a class="navbar-link" href="#/user/{{model.userId}}/website">
+                <button type="submit" style="display: none" class="navbar-link" href="#/user/{{model.userId}}/website">
                     <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
+                </button>
             </p>
             <a class="navbar-brand" href="">New Website</a>
             <p class="navbar-text pull-right">
                 <a ng-click="model.createWebsite(newWebsite)"
-                        class="navbar-link pull-right">
+                   class="navbar-link pull-right">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -19,20 +19,30 @@
 
 <div class="container">
 
-    <div ng-if="model.error" class="alert alert-danger">
-        {{model.error}}
-    </div>
+    <form name="newWebsiteForm" novalidate>
+        <div ng-if="model.error" class="alert alert-danger">
+            {{model.error}}
+        </div>
 
-    <div class="form-group">
-        <Label>Name</Label>
-        <input ng-model="newWebsite.name"
-               class="form-control" type="text" placeholder="alice">
-    </div>
-    <div class="form-group">
-        <Label>Description</Label>
+        <div class="form-group"
+             ng-class="{ 'has-error': newWebsiteForm.name.$error.required && model.submitted}">
+            <Label>Name</Label>
+            <input ng-model="newWebsite.name"
+                   name="name"
+                   class="form-control" type="text" placeholder="alice" required>
+            <span ng-show="newWebsiteForm.name.$error.required && model.submitted"
+              class="help-block">
+                Website required
+            </span>
+        </div>
+        <div class="form-group">
+            <Label>Description</Label>
         <textarea ng-model="newWebsite.description"
                   rows="5" class="form-control" type="text" placeholder="This is a description"></textarea>
-    </div>
+        </div>
+    </form>
+
+    {{newWebsiteForm}}
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

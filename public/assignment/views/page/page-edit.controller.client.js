@@ -14,6 +14,7 @@
 
         vm.updatePage = updatePage;
         vm.deletePage = deletePage;
+        vm.submitted = false;
 
         function init() {
             PageService
@@ -25,11 +26,12 @@
         init();
 
         function updatePage(page) {
+            vm.submitted = true;
             PageService
                 .updatePage(pageId, page)
                 .then(function (res) {
                     var result = res.data;
-                    if (result) {
+                    if (result.name) {
                         $location.url("user/" + userId + "/website/" + websiteId + "/page/");
                     } else {
                         vm.error = "Failed to update the page";

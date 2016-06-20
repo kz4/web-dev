@@ -6,11 +6,13 @@
     function NewWebsiteController($location, $routeParams, WebsiteService) {
         var vm = this;
         vm.createWebsite = createWebsite;
+        vm.submitted = false;
 
         var userId = $routeParams.uid;
         vm.userId = userId;
 
         function createWebsite(newWebsite) {
+            vm.submitted = true;
             WebsiteService
                 .createWebsite(userId, newWebsite)
                 .then(function (res) {

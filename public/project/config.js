@@ -9,7 +9,15 @@
 				controller: "CategoryListController",
 				controllerAs: "model"
 			})
+			// .when("/da-thumbs", {
+			// 	templateUrl: "views/category/category-list.view.client.html#da-thumbs",
+			// })
 			.when("/category/:categoryId/restaurant", {
+				templateUrl: "views/restaurant/restaurant-list.view.client.html",
+				controller: "RestaurantListController",
+				controllerAs: "model"
+			})
+			.when("/category/:categoryId/zip/:zip/restaurant", {
 				templateUrl: "views/restaurant/restaurant-list.view.client.html",
 				controller: "RestaurantListController",
 				controllerAs: "model"

@@ -18,25 +18,44 @@
 </nav>
 
 <div class="container">
-    <div class="form-group">
+    <form name="newYoutubeForm" novalidate>
+        <div class="form-group"
+             ng-class="{ 'has-error': newYoutubeForm.name.$error.required && model.submitted}">
         <Label>Name</Label>
-        <input ng-model="model.widget.name" class="form-control" type="text" placeholder="">
-    </div>
-    <div class="form-group">
+            <input ng-model="model.widget.name" class="form-control" type="text"
+                   name="name" placeholder="" required>
+            <span ng-show="newYoutubeForm.name.$error.required && model.submitted"
+                  class="help-block">
+                Widget name required
+            </span>
+        </div>
+        <div class="form-group">
         <Label>Text</Label>
-        <input ng-model="model.widget.text" class="form-control" type="text" placeholder="">
-    </div>
-    <div class="form-group">
+            <input ng-model="model.widget.text" class="form-control" type="text" placeholder="">
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error': newYoutubeForm.url.$error.required && model.submitted}">
         <Label>URL</Label>
-        <input ng-model="model.widget.url" class="form-control" type="text"
-               placeholder="https://www.youtube.com/embed/aD4grQXZPfg">
-    </div>
-    <div class="form-group">
-        <Label>Width</Label>
-        <input ng-model="model.widget.width" class="form-control" type="text" placeholder="100%">
-    </div>
-    <a ng-click="model.deleteWidget()"
-       class="btn btn-danger btn-block">Delete</a>
+            <input ng-model="model.widget.url" class="form-control" type="text"
+                   name="url" placeholder="https://www.youtube.com/embed/aD4grQXZPfg" required>
+            <span ng-show="newYoutubeForm.url.$error.required && model.submitted"
+                  class="help-block">
+                Youtube Url required
+            </span>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error': newYoutubeForm.width.$error.required && model.submitted}">
+            <Label>Width</Label>
+            <input ng-model="model.widget.width" class="form-control" type="text"
+                   name="width" placeholder="100%" required>
+            <span ng-show="newYoutubeForm.width.$error.required && model.submitted"
+                  class="help-block">
+                Youtube width required
+            </span>
+        </div>
+        <a ng-click="model.deleteWidget()"
+           class="btn btn-danger btn-block">Delete</a>
+    </form>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

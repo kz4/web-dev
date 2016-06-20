@@ -13,16 +13,18 @@
         vm.pageId = pageId;
         var widgetId = $routeParams.wgid;
         vm.widgetId = widgetId;
+        vm.submitted = false;
 
         vm.updateWidget = updateWidget;
         vm.deleteWidget = deleteWidget;
 
         function updateWidget(widget) {
+            vm.submitted = true;
             WidgetService
                 .updateWidget(widgetId, widget)
                 .then(function (res) {
                     var result = res.data;
-                    if (result) {
+                    if (result && widget.name || result && widget.widgetType === "HTML") {
                         $location.url("user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget")
                     } else {
                         switch (widget.widgetType) {

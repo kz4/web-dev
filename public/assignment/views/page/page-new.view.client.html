@@ -17,19 +17,26 @@
 </nav>
 
 <div class="container">
-
+    <form name="newPageForm" novalidate>
     <div ng-if="model.error" class="alert alert-danger">
         {{model.error}}
     </div>
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{ 'has-error': newPageForm.name.$error.required && model.submitted}">
         <Label>Name</Label>
-        <input ng-model="page.name" class="form-control" type="text" placeholder="Alice Wonderland" required>
+        <input ng-model="page.name" class="form-control" type="text"
+               placeholder="Alice Wonderland" name="name" required>
+        <span ng-show="newPageForm.name.$error.required && model.submitted"
+              class="help-block">
+                Page name required
+        </span>
     </div>
     <div class="form-group">
         <Label>Title</Label>
         <input ng-model="page.title" class="form-control" type="text" placeholder="Party Time">
     </div>
+    </form>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

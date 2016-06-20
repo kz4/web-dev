@@ -12,6 +12,7 @@
 
         vm.updateWebsite = updateWebsite;
         vm.deleteWebsite = deleteWebsite;
+        vm.submitted = false;
 
         function init() {
             WebsiteService
@@ -26,6 +27,7 @@
         init();
 
         function updateWebsite(website) {
+            vm.submitted = true;
             WebsiteService
                 .updateWebsite(websiteId, website)
                 .then(function (res) {

@@ -11,8 +11,10 @@
         vm.websiteId = websiteId;
         
         vm.createPage = createPage;
+        vm.submitted = false;
 
         function createPage(page) {
+            vm.submitted = true;
             PageService
                 .createPage(websiteId, page)
                 .then(function (res) {
@@ -22,6 +24,9 @@
                     } else {
                         vm.error = "Failed to create a page, name already exists or empty";
                     }
+                },
+                function (error) {
+                    vm.error = "Failed to create a page, name already exists or empty";
                 });
         }
     }
