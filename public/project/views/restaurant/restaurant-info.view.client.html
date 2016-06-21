@@ -38,8 +38,9 @@
 				<div class="about-two">
 					<a href="single.html"><img src="images/c-1.jpg" alt="" /></a>
 					<p>Posted by <a href="#">Johnson</a> on 10 feb, 2015 <a href="#">comments(2)</a></p>
-					<!--map-->
-					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11795.998380023964!2d-71.09120065!3d42.342532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1466309400204" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+					<iframe src="{{model.googleMapSrc}}"
+							width="400" height="300" frameborder="0" style="border:0" allowfullscreen>
+					</iframe>
 					<div class="about-btn">
 						<a href="single.html">Read More</a>
 					</div>
@@ -47,14 +48,14 @@
 			</div>
 			<div class="col-md-4 about-right heading">
 				<div class="abt-1">
-					<h3>Restaurant Name</h3>
+					<h3>{{model.restaurant.name}}</h3>
 				</div>
 				<div class="abt-2">
 					<ul>
-						<li><a href="single.html">Rating</a></li>
-						<li><a href="single.html">Categories</a></li>
-						<li><a href="single.html">Phone</a></li>
-						<li><a href="single.html">location</a></li>
+						<li><img width="30%" ng-src="{{model.restaurant.rating_img_url_large}}"/></li>
+						<li><a href="single.html">{{model.categories}}</a></li>
+						<li><a href="single.html">{{model.restaurant.display_phone}}</a></li>
+						<li><a href="single.html">{{model.location}}</a></li>
 						<li><a href="single.html">reservation</a></li>
 					</ul>
 				</div>

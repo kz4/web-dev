@@ -8,17 +8,28 @@ var _ = require('lodash');
 module.exports = function (app, models) {
 
     var userModel = models.userModel;
-    // var restaurantModel = models.restaurantModel;
-
 
     app.post("/api/restaurant/:categoryId", getRestaurantByCategoryId);
+    app.get("/api/restaurant/:restaurantId", getRestaurantByYelprestaurantId);
+
+    function getRestaurantByYelprestaurantId(req, res) {
+        var restaurantId = req.params.restaurantId;
+        var params = restaurantId;
+
+        request_yelp_business(params,
+            function(err, response, body){
+                if(err){
+                    res.status(400).send(err);
+                }
+                if(body){
+                    res.send(body);
+                }
+            });
+    }
 
     function getRestaurantByCategoryId(req, res) {
         var id = req.params.categoryId;
         var locationInfo = req.body;
-        
-        console.log(id);
-        console.log(locationInfo.zip);
 
         var category_filter = "";
         switch (id) {
@@ -35,11 +46,7 @@ module.exports = function (app, models) {
             category_filter: category_filter
         };
 
-        // var params = {category_filter: category_filter};
-        // params.location = locationInfo.zip;
-
-        // request_yelp(params, callback)
-        request_yelp(params,
+        request_yelp_search(params,
             function(err, response, body){
                 if(err){
                     res.status(400).send(err);
@@ -47,9 +54,8 @@ module.exports = function (app, models) {
                 }
                 if(body){
                     res.send(body);
-                    console.log(body);
                 }
-            })
+            });
     }
 
 
@@ -58,7 +64,7 @@ module.exports = function (app, models) {
      * set_parameters: object with params to search
      * callback: callback(error, response, body)
      */
-    var request_yelp = function(set_parameters, callback) {
+    var request_yelp_search = function(set_parameters, callback) {
 
         /* The type of request */
         var httpMethod = 'GET';
@@ -105,8 +111,48 @@ module.exports = function (app, models) {
         request(apiURL, function(error, response, body){
             return callback(error, response, body);
         });
-
     };
+    
+    var request_yelp_business = function (set_parameters, callback) {
+        /* The type of request */
+        var httpMethod = 'GET';
+
+        /* The url we are using for the request */
+        var url = 'http://api.yelp.com/v2/business/' + set_parameters;
+
+        /* We set the require parameters here */
+        var required_parameters = {
+            oauth_consumer_key : process.env.YELP_CONSUMER_KEY,
+            oauth_token : process.env.YELP_TOKEN,
+            oauth_nonce : n(),
+            oauth_timestamp : n().toString().substr(0,10),
+            oauth_signature_method : 'HMAC-SHA1',
+            oauth_version : '1.0'
+        };
+
+        /* We set our secrets here */
+        var consumerSecret = process.env.YELP_CONSUMER_SECRET;
+        var tokenSecret = process.env.YELP_TOKEN_SECRET;
+
+        /* Then we call Yelp's Oauth 1.0a server, and it returns a signature */
+        /* Note: This signature is only good for 300 seconds after the oauth_timestamp */
+        // var signature = oauthSignature.generate(httpMethod, url, parameters, consumerSecret, tokenSecret, { encodeSignature: false});
+        var signature = oauthSignature.generate(httpMethod, url, required_parameters, consumerSecret, tokenSecret, { encodeSignature: false});
+
+        /* We add the signature to the list of paramters */
+        required_parameters.oauth_signature = signature;
+
+        /* Then we turn the paramters object, to a query string */
+        var paramURL = qs.stringify(required_parameters);
+
+        /* Add the query string to the url */
+        var apiURL = url+'?'+paramURL;
+
+        /* Then we use request to send make the API Request */
+        request(apiURL, function(error, response, body){
+            return callback(error, response, body);
+        });
+    }
 
     function loggedIn(req, res) {
         if (req.isAuthenticated()) {

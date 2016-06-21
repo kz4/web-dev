@@ -14,7 +14,7 @@
 
         function selectRestaurant(restaurant) {
             // $window.location.href = restaurant.url;
-            $location.url()
+            $location.url("category/" + categoryId + "/zip/" + zip + "/restaurant/" + restaurant.id);
         }
         
        function init() {

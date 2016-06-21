@@ -27,6 +27,11 @@
 				controller: "RestaurantInfoController",
 				controllerAs: "model"
 			})
+			.when("/category/:categoryId/zip/:zip/restaurant/:restaurantId", {
+				templateUrl: "views/restaurant/restaurant-info.view.client.html",
+				controller: "RestaurantInfoController",
+				controllerAs: "model"
+			})
 			// .when("/flickr", {
 			// .when("/user/:uid/website/:wid/page/:pid/widget/:wgid/flickr", {
 			// 	templateUrl: "views/widget/widget-flickr-search.view.client.html",

@@ -541,7 +541,7 @@ ul.navig li a.active {
 .abt-2 ul {
 	padding: 0;
 	margin-top: 8%;
-	horiz-align: middle;
+	margin-left: 10%;
 }
 
 .news form input[type="text"] {
