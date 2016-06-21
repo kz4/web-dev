@@ -102,7 +102,7 @@ ul.navig li {
 
 ul.navig li a {
 	font-size: 0.94em;
-	color: #65190e;
+	color: #735238;
 	text-decoration: none;
 	padding-right: 30px;
 }
@@ -117,7 +117,7 @@ ul.navig li a:hover ul.navig li a:after {
 
 @media (max-width: 768px) {
 	span.menu:before {
-		content: url(../images/nav-icon.png);
+		content: url(../images/menu-icon.png);
 		cursor: pointer;
 		height: 32px;
 	}
@@ -322,7 +322,7 @@ ul.navig li a.active {
 	border-bottom: 1px solid #190608;
 	color: #190608;
 	padding-bottom: 2px;
-	width: 28%;
+	width: 40%;
 	margin: 0 auto;
 	font-family: 'Raleway-Regular';
 }
@@ -468,6 +468,11 @@ ul.navig li a.active {
 
 .about-tre {
 	margin-top: 5%;
+}
+
+.about-tre h3 {
+	font-size: 15px;
+	color: #3d1a1b;
 }
 
 .abt-left img {
@@ -2653,7 +2658,13 @@ body {
 }
 
 input.form-control {
-	margin-bottom: 5px;
+	margin: 20px auto 5px auto;
+	/*margin-bottom: 5px;*/
+	/*margin-top: 20px;*/
+	/*margin-left: auto;*/
+	/*margin-right: auto;*/
+	width: 30%;
+	text-align: center;
 }
 
 p.navbar-text.pull-right {
@@ -2682,7 +2693,4 @@ p.navbar-text.pull-left {
 	width: 100%;
 }
 
-.zip-input {
-	text-align: center;
-}
 
