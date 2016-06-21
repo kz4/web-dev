@@ -3,23 +3,35 @@
         .module("ProjectMaker")
         .controller("RestaurantListController", RestaurantListController);
      
-    function RestaurantListController($routeParams) {
+    function RestaurantListController($routeParams, RestaurantService, $location, $window) {
         var vm = this;
 
         var categoryId = $routeParams['categoryId'];
+        var zip = $routeParams.zip;
         vm.categoryId = categoryId;
+        vm.zip = zip;
+        vm.selectRestaurant = selectRestaurant;
 
-    //    function init() {
-    //        vm.websites = WebsiteService
-    //            .findWebsitesByUser(userId)
-    //            .then(function (res) {
-    //                var websites = res.data;
-    //                if (websites) {
-    //                    vm.websites = websites;
-    //                }
-    //            })
-    //    }
-    //    init();
+        function selectRestaurant(restaurant) {
+            // $window.location.href = restaurant.url;
+            $location.url()
+        }
+        
+       function init() {
+           var locationInfo = {
+               location: location,
+                zip: zip
+           };
+           RestaurantService
+               .findRestaurantServicesByCategoryId(categoryId, locationInfo)
+               .then(function (res) {
+                   var restaurants = res.data;
+                   if (restaurants.businesses) {
+                       vm.restaurants = restaurants.businesses;
+                   }
+               })
+       }
+       init();
     }
 
 })();

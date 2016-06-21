@@ -29,6 +29,12 @@
 		$(" ul.navig").slideToggle("slow", function () {
 		});
 	});
+	$("div.banner-btn").click(function () {
+//		$(" ul.navig").slideToggle("slow", function () {
+//		});
+		document.getElementById("da-thumbs").scrollIntoView();
+
+	});
 </script>
 <!-- script-for-menu -->
 <!--banner-starts-->
@@ -36,10 +42,13 @@
 	<div class="container">
 		<div class="banner-top">
 			<div class="banner-text">
-				<h2>Aliquam erat</h2>
-				<h1>Suspendisse potenti</h1>
+				<h2>Please enter a zip code</h2>
+				<!--<h1>Suspendisse potenti</h1>-->
+				<input ng-model="zip" class="form-control zip-input" type="text" placeholder="02115" />
+				<!--<a ng-click="model.login(username, password)" class="btn btn-primary btn-block">Submit</a>-->
 				<div class="banner-btn">
-					<a href="single.html">Read More</a>
+					<!--<a href="#da-thumbs" target="_self">Submit</a>-->
+					<a ng-click="model.setZipCode(zip)">Submit</a>
 				</div>
 			</div>
 		</div>
@@ -55,7 +64,7 @@
 		<section>
 			<ul id="da-thumbs" class="da-thumbs">
 				<li>
-					<a href="#/category/0/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a href="#/category/0/zip/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/brunch.png" alt="Breakfast & Brunch"/>
 						<div>
 							<h5>Breakfast & Brunch</h5>
@@ -63,7 +72,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/1/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a href="#/category/1/zip/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/seafood.jpg" alt=""/>
 						<div>
 							<h5>Seafood</h5>
@@ -71,7 +80,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/2/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a href="#/category/2/zip/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/salad.jpg" alt=""/>
 						<div>
 							<h5>Salad</h5>
@@ -79,7 +88,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/3/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a href="#/category/3/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/sushi.jpg" alt=""/>
 						<div>
 							<h5>Sushi</h5>
@@ -87,7 +96,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/4/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a href="#/category/4/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/burger.jpg" alt=""/>
 						<div>
 							<h5>Burgers</h5>
@@ -95,7 +104,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/5/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a href="#/category/5/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/pizza.jpg" alt=""/>
 						<div>
 							<h5>Pizza</h5>
@@ -103,7 +112,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/6/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a href="#/category/6/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/soup.jpg" alt=""/>
 						<div>
 							<h5>Soup</h5>
@@ -111,7 +120,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/7/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a href="#/category/7/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/icecream.jpg" alt=""/>
 						<div>
 							<h5>Ice Cream & Frozen Yogurt</h5>
@@ -119,7 +128,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/8/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a href="#/category/8/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/coffee.jpg" alt=""/>
 						<div>
 							<h5>Coffee & Tea</h5>
