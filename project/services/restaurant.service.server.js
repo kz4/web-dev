@@ -73,8 +73,8 @@ module.exports = function (app, models) {
 
         /* We set the require parameters here */
         var required_parameters = {
-            oauth_consumer_key : process.env.TWITTER_CONSUMER_KEY,
-            oauth_token : process.env.TWITTER_TOKEN,
+            oauth_consumer_key : process.env.YELP_CONSUMER_KEY,
+            oauth_token : process.env.YELP_TOKEN,
             oauth_nonce : n(),
             oauth_timestamp : n().toString().substr(0,10),
             oauth_signature_method : 'HMAC-SHA1',
@@ -85,8 +85,8 @@ module.exports = function (app, models) {
         var parameters = _.assign(default_parameters, set_parameters, required_parameters);
 
         /* We set our secrets here */
-        var consumerSecret = process.env.TWITTER_CONSUMER_SECRET;
-        var tokenSecret = process.env.TWITTER_TOKEN_SECRET;
+        var consumerSecret = process.env.YELP_CONSUMER_SECRET;
+        var tokenSecret = process.env.YELP_TOKEN_SECRET;
 
         /* Then we call Yelp's Oauth 1.0a server, and it returns a signature */
         /* Note: This signature is only good for 300 seconds after the oauth_timestamp */
