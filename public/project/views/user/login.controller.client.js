@@ -6,8 +6,10 @@
 	function LoginController($location, UserService) {
 		var vm = this;
 		vm.login = login;
+		vm.submitted = false;
 
 		function login(username, password) {
+			vm.submitted = true;
 			UserService
 			// .findUserByCredentials(username, password)  // promise
 				.login(username, password)  // promise
@@ -16,6 +18,7 @@
 						if (user && user._id) {
 							var id = user._id;
 							$location.url("/user/" + id);
+							vm.submitted = false;
 						} else {
 							vm.error = "User not found";
 						}

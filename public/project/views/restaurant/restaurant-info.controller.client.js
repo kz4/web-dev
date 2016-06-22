@@ -21,25 +21,38 @@
         }
         
        function init() {
-           vm.website = RestaurantService
-               .findRestaurantByYelpRestaurantId(restaurantId)
+           var keyUrl = "";
+           RestaurantService
+               .getGoogleMapKey()
                .then(function (res) {
-                   var restaurant = res.data;
-                   if (restaurant) {
-                       vm.restaurant = restaurant;
-                       var categories = restaurant.categories.map(selectUpperCase).join(", ")
-                       vm.categories = categories;
-
-                       var location = restaurant.location.display_address.join(", ");
-                       vm.location = location;
-                       
-                       var googleMapSrc = "https://www.google.com/maps/embed/v1/place?q="
-                           + restaurant.location.coordinate.latitude + ","
-                           + restaurant.location.coordinate.longitude
-                           + "&key=AIzaSyBHDbyc9TApTKqHTu-hjqb_CXY_6s8bqhQ";
-                       vm.googleMapSrc = getSafeUrl(googleMapSrc);
-                   }
+                   var googleMapKey = res.data;
+                   keyUrl = "&key=" + googleMapKey;
                })
+               .then(
+                   RestaurantService
+                       .findRestaurantByYelpRestaurantId(restaurantId)
+                       .then(function (res) {
+                           var restaurant = res.data;
+                           if (restaurant) {
+                               vm.restaurant = restaurant;
+                               var categories = restaurant.categories.map(selectUpperCase).join(", ")
+                               vm.categories = categories;
+
+                               var location = restaurant.location.display_address.join(", ");
+                               vm.location = location;
+                               var imageUrl = restaurant.image_url.substring(0, restaurant.image_url.lastIndexOf("ms"))
+                                   + 'o.jpg';
+                               vm.image = imageUrl;
+
+                               var googleMapSrc = "https://www.google.com/maps/embed/v1/place?q="
+                                   + restaurant.location.coordinate.latitude + ","
+                                   + restaurant.location.coordinate.longitude
+                                   + keyUrl;
+                               vm.googleMapSrc = getSafeUrl(googleMapSrc);
+                           }
+                       })
+               )
+
        }
        init();
     }

@@ -11,6 +11,12 @@ module.exports = function (app, models) {
 
     app.post("/api/restaurant/:categoryId", getRestaurantByCategoryId);
     app.get("/api/restaurant/:restaurantId", getRestaurantByYelprestaurantId);
+    app.get("/api/googleMapKey", getGoogleMapKey);
+
+    function getGoogleMapKey(req, res) {
+        var key = process.env.GOOGLE_MAP_KEY;
+        return res.send(key);
+    }
 
     function getRestaurantByYelprestaurantId(req, res) {
         var restaurantId = req.params.restaurantId;

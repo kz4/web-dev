@@ -6,9 +6,15 @@
     function RestaurantService($http) {
         var api = {
             findRestaurantServicesByCategoryId : findRestaurantServicesByCategoryId,
-            findRestaurantByYelpRestaurantId : findRestaurantByYelpRestaurantId
+            findRestaurantByYelpRestaurantId : findRestaurantByYelpRestaurantId,
+            getGoogleMapKey : getGoogleMapKey 
         };
         return api;
+        
+        function getGoogleMapKey() {
+            var url = "/api/googleMapKey";
+            return $http.get(url);
+        }
 
         function findRestaurantByYelpRestaurantId(restaurantId) {
             var url = "/api/restaurant/" + restaurantId;

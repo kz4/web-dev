@@ -4,7 +4,7 @@
         .controller("RegisterController", RegisterController)
     function RegisterController($location, $rootScope, UserService) {
         var vm = this;
-        vm.register = register
+        vm.register = register;
         vm.submitted = false;
         vm.badPassword = false;
 

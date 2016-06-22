@@ -23,7 +23,8 @@
 	</div>
 </div>
 <!-- script-for-menu -->
-<!-- script-for-menu -->
+
+<!-- script that when click submitting button in the zip code, the pages scrolls down to category list -->
 <script>
 	$("span.menu").click(function () {
 		$(" ul.navig").slideToggle("slow", function () {
@@ -36,19 +37,27 @@
 
 	});
 </script>
-<!-- script-for-menu -->
+
 <!--banner-starts-->
 <div class="banner">
 	<div class="container">
 		<div class="banner-top">
 			<div class="banner-text">
 				<h2>Please enter a zip code</h2>
-				<input ng-model="zip" class="form-control zip-input" type="text" placeholder="zip code" />
-				<!--<a ng-click="model.login(username, password)" class="btn btn-primary btn-block">Submit</a>-->
-				<div class="banner-btn">
-					<!--<a href="#da-thumbs" target="_self">Submit</a>-->
-					<a ng-click="model.setZipCode(zip)">Submit</a>
-				</div>
+				<form name="zipForm" novalidate>
+					<div ng-class="{ 'has-error': zipForm.zipCodeInput.$error.required && model.submitted}">
+						<input ng-model="zip" name="zip" class="form-control zip-input" type="text" placeholder="zip code" required>
+						<!--<a ng-click="model.login(username, password)" class="btn btn-primary btn-block">Submit</a>-->
+						<span ng-show="zipForm.zip.$error.required && model.submitted"
+							  class="help-block">
+							Zip Code required
+						</span>
+						<div class="banner-btn">
+							<!--<a href="#da-thumbs" target="_self">Submit</a>-->
+							<a ng-click="model.setZipCode(zip)">Submit</a>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
