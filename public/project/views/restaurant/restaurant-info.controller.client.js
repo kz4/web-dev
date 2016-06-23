@@ -17,17 +17,86 @@
         vm.replyAcomment = replyAcomment;
         vm.submitAReplyToAComment = submitAReplyToAComment;
         vm.cancelAReplyToAComment = cancelAReplyToAComment;
+        vm.replyAReply = replyAReply;
+        vm.submitAReplyToAReply = submitAReplyToAReply;
+        vm.cancelAReplyToAReply = cancelAReplyToAReply;
+
         var isUserLoggedIn = false;
-        vm.isReplyButtonClicked = false;
+        vm.isReplyACommentButtonClicked = false;
+        vm.isReplyAReplyButtonClicked = false;
         // vm.isThisReplyCommentAreaShown = false;
         
-        var commentIndex = 0;
+        // var commentIndex = 0;
 
         var comments = [];
         vm.comments = comments;
+        
+        function cancelAReplyToAReply() {
+            vm.isReplyAReplyButtonClicked = false;
+            for (var i in comments) {
+                comments[i].isThisReplyCommentAreaShown = false;
+                for (var j = 0; j < comments[i].replies.length; j++) {
+                    if (comments[i].replies[j]) {
+                        comments[i].replies[j].isThisReplyReplyAreaShown = false;
+                    }
+                }
+            }
+        }
+        
+        function submitAReplyToAReply(replyToAReply, commentId, replierId, replier, parentIndex) {
+            if(isUserLoggedIn) {
+                var newReplyToAComment = {
+                    "replierId": $rootScope.currentUser._id,
+                    "replier": $rootScope.currentUser.username,
+                    "hostId": "HostID",
+                    "host": "Some host",
+                    "date": new Date().toString(),
+                    "content": replyToAReply,
+                    isThisReplyCommentAreaShown: false,
+                    isThisReplyReplyAreaShown: false
+                };
+                comments[parentIndex].replies.push(newReplyToAComment);
+                vm.isReplyACommentButtonClicked = false;
+                vm.isReplyAReplyButtonClicked = false;
+                for (var i in comments) {
+                    comments[i].isThisReplyCommentAreaShown = false;
+                    for (var j = 0; j < comments[i].replies.length; j++) {
+                        if (comments[i].replies[j]) {
+                            comments[i].replies[j].isThisReplyReplyAreaShown = false;
+                        }
+                    }
+                }
+            } else {
+                vm.isReplyACommentButtonClicked = false;
+                $location.url("/login");
+            }
+        }
+
+        function replyAReply(commentId, replierId, replier, index, parentIndex) {
+            vm.isReplyAReplyButtonClicked = true;
+            // for (var i in comments) {
+                // if (comments[i].commentIndex === parentIndex) {
+            for (var i = 0; i < comments.length; i++) {
+                if (i === parentIndex) {
+                    for (var j = 0; j < comments[i].replies.length; j++) {
+                        if (index === j) {
+                            comments[i].replies[j].isThisReplyReplyAreaShown = true;
+                        }
+                    }
+                }
+            }
+        }
 
         function cancelAReplyToAComment(commentId, replyHostId, replyHost, commentIndex) {
-            vm.isReplyButtonClicked = false;
+            vm.isReplyACommentButtonClicked = false;
+            for (var i in comments) {
+                comments[i].isThisReplyCommentAreaShown = false;
+                for (var j = 0; j < comments[i].replies.length; j++) {
+                    if (comments[i].replies[j]) {
+                        comments[i].replies[j].isThisReplyReplyAreaShown = false;
+                    }
+                }
+            }
         }
         
         function submitAReplyToAComment(replyToAComment, commentId, replyHostId, replyHost, commentIndex) {
@@ -47,21 +116,31 @@
                     "host": replyHost,
                     "date": new Date().toString(),
                     "content": replyToAComment,
-                    isThisReplyCommentAreaShown: false
+                    isThisReplyCommentAreaShown: false,
+                    isThisReplyReplyAreaShown: false
                 };
                 comments[commentIndex].replies.push(newReplyToAComment);
-                comments[commentIndex].isThisReplyCommentAreaShown = false;
-                vm.isReplyButtonClicked = false;
+                vm.isReplyACommentButtonClicked = false;
+                for (var i in comments) {
+                    comments[i].isThisReplyCommentAreaShown = false;
+                    for (var j = 0; j < comments[i].replies.length; j++) {
+                        if (comments[i].replies[j]) {
+                            comments[i].replies[j].isThisReplyReplyAreaShown = false;
+                        }
+                    }
+                }
             } else {
-                vm.isReplyButtonClicked = false;
+                vm.isReplyACommentButtonClicked = false;
                 $location.url("/login");
             }
         }
 
         function replyAcomment(commentId, replyHostId, replyHost, commentIndex) {
-            vm.isReplyButtonClicked = true;
-            for (var i in comments) {
-                if (comments[i].commentIndex === commentIndex) {
+            vm.isReplyACommentButtonClicked = true;
+            // for (var i in comments) {
+            for (var i = 0; i < comments.length; i++) {
+                // if (comments[i].commentIndex === commentIndex) {
+                if (i === commentIndex) {
                     comments[i].isThisReplyCommentAreaShown = true;
                 }
             }
@@ -92,13 +171,13 @@
                         "categoryId": categoryId,
                         "zip": zip,
                         "restaurantId": restaurantId,
-                        "commentIndex": commentIndex,
+                        // "commentIndex": commentIndex,
                         "commenterId": $rootScope.currentUser._id,
                         "commenter": $rootScope.currentUser.username,
                         "content": comment,
                         "replies":[]
                     };
-                    commentIndex++;
+                    // commentIndex++;
                     comments.push(newComment);
                 }
             } else {

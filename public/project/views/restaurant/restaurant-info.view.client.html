@@ -97,7 +97,7 @@
 								<br/>
 								<span>{{comment.content}}</span>
 								<div ng-if="comment.isThisReplyCommentAreaShown">
-									<div ng-if="model.isReplyButtonClicked" class="form-group">
+									<div ng-if="model.isReplyACommentButtonClicked" class="form-group">
 										<textarea ng-model="replyToAComment" class="form-control" rows="4" placeholder="This is a reply"></textarea>
 										<button ng-click="model.submitAReplyToAComment(replyToAComment, comment._id, comment.commenterId, comment.commenter, $index)"
 												class="btn btn-primary">Submit
@@ -124,18 +124,23 @@
 										</a>
 										<span>at {{model.getLongDateTime(reply.date)}}:</span>&nbsp;
 										<span>{{reply.content}}</span>&nbsp;
-										<button ng-click="model.replyAcomment(comment._id, reply.replierId, reply.replier, $parent.$index)"
+										<button ng-click="model.replyAReply(comment._id, reply.replierId, reply.replier, $index, $parent.$index)"
 												class="replyBtn">reply
 										</button>
-										<!--<div ng-if="model.isReplyButtonClicked" class="form-group">-->
-										<!--<textarea ng-model="replyToAComment" class="form-control" rows="4" placeholder="This is a reply"></textarea>-->
-										<!--<button ng-click="model.submitAReply(comment._id, comment.commenterId, comment.commenter, $index)"-->
-										<!--class="replyBtn">Submit-->
-										<!--</button>-->
-										<!--<button ng-click="model.cancelAReply(comment._id, comment.commenterId, comment.commenter, $index)"-->
-										<!--class="replyBtn">Cancel-->
-										<!--</button>-->
-										<!--</div>-->
+
+
+										<div ng-if="reply.isThisReplyReplyAreaShown">
+											<div ng-if="model.isReplyAReplyButtonClicked" class="form-group">
+												<textarea ng-model="replyToAReply" class="form-control" rows="4" placeholder="This is a reply to a reply"></textarea>
+												<button ng-click="model.submitAReplyToAReply(replyToAReply, comment._id, reply.replierId, reply.replier, $parent.$parent.$parent.$index)"
+														class="btn btn-primary">Submit
+												</button>
+												<button ng-click="model.cancelAReplyToAReply(comment._id, comment.commenterId, comment.commenter, $index)"
+														class="btn btn-danger">Cancel
+												</button>
+											</div>
+										</div>
+
 									</div>
 								</div>
 							</div>
