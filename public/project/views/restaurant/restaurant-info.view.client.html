@@ -14,7 +14,7 @@
 			<div class="header-right">
 				<div class="search-bar">
 					<input type="text" value="Search" onfocus="this.value = '';"
-					       onblur="if (this.value == '') {this.value = 'Search';}">
+						   onblur="if (this.value == '') {this.value = 'Search';}">
 					<input type="submit" value="">
 				</div>
 			</div>
@@ -60,12 +60,87 @@
 						<li><a href="single.html">reservation</a></li>
 					</ul>
 				</div>
+				<!--<div class="abt-2">-->
 				<div class="abt-2">
-					<div class="news">
-						<form>
-							<input type="text" value="message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" />
-							<input type="submit" value="Comment">
+					<!--<div class="news">-->
+					<div class="">
+						<!--<form>-->
+						<!--<input type="text" value="message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" />-->
+						<!--<input type="submit" value="Comment">-->
+						<!--</form>-->
+						<h3>Comments</h3>
+						<form id="anchor">
+							<div class="form-group">
+								<textarea ng-model="comment" class="form-control" rows="4" placeholder="{{commentPlaceholder}}"></textarea>
+							</div>
+							<div class="form-group row">
+								<div class="col-xs-6 text-align-left">
+									<button ng-click="model.leaveAComment(comment)" type="submit" class="btn submitBtn">{{commentBtnText}}</button>
+								</div>
+								<!--<div ng-show="isReply" class="col-xs-6 text-align-right">-->
+								<!--<button ng-click="cancelReply()" type="button" class="btn cancelBtn">Cancel</button>-->
+								<!--</div>-->
+							</div>
+
 						</form>
+
+						<!--iterate comments-->
+						<div ng-repeat="comment in model.comments">
+							<div class="commentDiv">
+								<a href="#/{{comment.commenterId}}/favors">
+									<span class="text-info">{{comment.commenter}}</span>
+								</a>&nbsp;
+								<span>posted at {{model.getLongDateTime(comment.date)}}</span>&nbsp;
+								<button ng-click="model.replyAcomment(comment._id, comment.commenterId, comment.commenter, $index)"
+										class="replyBtn">reply
+								</button>
+								<br/>
+								<span>{{comment.content}}</span>
+								<div ng-if="comment.isThisReplyCommentAreaShown">
+									<div ng-if="model.isReplyButtonClicked" class="form-group">
+										<textarea ng-model="replyToAComment" class="form-control" rows="4" placeholder="This is a reply"></textarea>
+										<button ng-click="model.submitAReplyToAComment(replyToAComment, comment._id, comment.commenterId, comment.commenter, $index)"
+												class="btn btn-primary">Submit
+										</button>
+										<button ng-click="model.cancelAReplyToAComment(comment._id, comment.commenterId, comment.commenter, $index)"
+												class="btn btn-danger">Cancel
+										</button>
+									</div>
+								</div>
+							</div>
+
+							<!--iterate replies in each comment-->
+							<div ng-show="comment.replies.length > 0" class="replyDiv">
+								<div class="replyDiv1">
+									<span class="glyphicon glyphicon-triangle-top"></span>
+								</div>
+								<div class="replyDiv2">
+									<div ng-repeat="reply in comment.replies">
+										<a href="#/{{reply.replierId}}/favors">
+											<span class="text-info">{{(reply.replier)}}</span>
+										</a>&nbsp;@
+										<a href="#/{{reply.hostId}}/favors">
+											<span class="text-info">{{(reply.host)}}</span>
+										</a>
+										<span>at {{model.getLongDateTime(reply.date)}}:</span>&nbsp;
+										<span>{{reply.content}}</span>&nbsp;
+										<button ng-click="model.replyAcomment(comment._id, reply.replierId, reply.replier, $parent.$index)"
+												class="replyBtn">reply
+										</button>
+										<!--<div ng-if="model.isReplyButtonClicked" class="form-group">-->
+										<!--<textarea ng-model="replyToAComment" class="form-control" rows="4" placeholder="This is a reply"></textarea>-->
+										<!--<button ng-click="model.submitAReply(comment._id, comment.commenterId, comment.commenter, $index)"-->
+										<!--class="replyBtn">Submit-->
+										<!--</button>-->
+										<!--<button ng-click="model.cancelAReply(comment._id, comment.commenterId, comment.commenter, $index)"-->
+										<!--class="replyBtn">Cancel-->
+										<!--</button>-->
+										<!--</div>-->
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>

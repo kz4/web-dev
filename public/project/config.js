@@ -64,6 +64,15 @@
 					loggedIn: checkLoggedIn
 				}
 			})
+			.when("/usertemp", {
+				templateUrl: "views/user/profileinfo.html",
+				//controller: "ProfileController",
+				//controllerAs: "model",
+				//resolve: {
+				//	loggedIn: checkLoggedIn
+				//}
+			})
+
 			// .when("/user/:uid/website", {
 			// 	templateUrl: "views/website/website-list.view.client.html",
 			// 	controller: "WebsiteListController",
