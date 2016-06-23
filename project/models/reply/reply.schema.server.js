@@ -1,0 +1,16 @@
+module.exports = function () {
+    var mongoose = require("mongoose");
+
+    var ReplySchema = mongoose.schema({
+        replierId: String,
+        replier: String,
+        hostId: String,
+        host: String,
+        date: {type: Date, default: Date.now},
+        content: String,
+        isThisReplyCommentAreaShown: Boolean,
+        isThisReplyReplyAreaShown: Boolean
+    }, {collection: "project.reply"});
+
+    return ReplySchema;
+};

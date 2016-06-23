@@ -10,7 +10,7 @@
         vm.userId = userId;
 
         function init() {
-            vm.websites = WebsiteService
+            WebsiteService
                 .findWebsitesByUser(userId)
                 .then(function (res) {
                     var websites = res.data;

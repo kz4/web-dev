@@ -3,7 +3,7 @@
         .module("ProjectMaker")
         .controller("RestaurantInfoController", RestaurantInfoController);
      
-    function RestaurantInfoController($sce, $routeParams, RestaurantService, UserService, $location, $rootScope) {
+    function RestaurantInfoController($sce, $routeParams, RestaurantService, UserService, $location, $rootScope, CommentService) {
         var vm = this;
         var categoryId = $routeParams.categoryId;
         vm.categoryId = categoryId;
@@ -22,28 +22,32 @@
         vm.cancelAReplyToAReply = cancelAReplyToAReply;
 
         var isUserLoggedIn = false;
-        vm.isReplyACommentButtonClicked = false;
-        vm.isReplyAReplyButtonClicked = false;
-        // vm.isThisReplyCommentAreaShown = false;
-        
+
         // var commentIndex = 0;
 
         var comments = [];
-        vm.comments = comments;
         
-        function cancelAReplyToAReply() {
-            vm.isReplyAReplyButtonClicked = false;
-            for (var i in comments) {
-                comments[i].isThisReplyCommentAreaShown = false;
-                for (var j = 0; j < comments[i].replies.length; j++) {
-                    if (comments[i].replies[j]) {
-                        comments[i].replies[j].isThisReplyReplyAreaShown = false;
+        function cancelAReplyToAReply(index, parentIndex) {
+            // for (var i in comments) {
+            //     comments[i].isThisReplyCommentAreaShown = false;
+            //     for (var j = 0; j < comments[i].replies.length; j++) {
+            //         if (comments[i].replies[j]) {
+            //             comments[i].replies[j].isThisReplyReplyAreaShown = false;
+            //         }
+            //     }
+            // }
+            for (var i = 0; i < comments.length; i++) {
+                if (i === parentIndex) {
+                    for (var j = 0; j < comments[i].replies.length; j++) {
+                        if (j === index) {
+                            comments[i].replies[j].isThisReplyReplyAreaShown = false;
+                        }
                     }
                 }
             }
         }
         
-        function submitAReplyToAReply(replyToAReply, commentId, replierId, replier, parentIndex) {
+        function submitAReplyToAReply(replyToAReply, commentId, replierId, replier, index, parentIndex) {
             if(isUserLoggedIn) {
                 var newReplyToAComment = {
                     "replierId": $rootScope.currentUser._id,
@@ -52,30 +56,33 @@
                     "host": "Some host",
                     "date": new Date().toString(),
                     "content": replyToAReply,
-                    isThisReplyCommentAreaShown: false,
-                    isThisReplyReplyAreaShown: false
+                    "isThisReplyCommentAreaShown": false,
+                    "isThisReplyReplyAreaShown": false
                 };
                 comments[parentIndex].replies.push(newReplyToAComment);
-                vm.isReplyACommentButtonClicked = false;
-                vm.isReplyAReplyButtonClicked = false;
-                for (var i in comments) {
-                    comments[i].isThisReplyCommentAreaShown = false;
-                    for (var j = 0; j < comments[i].replies.length; j++) {
-                        if (comments[i].replies[j]) {
-                            comments[i].replies[j].isThisReplyReplyAreaShown = false;
+                // for (var i in comments) {
+                //     comments[i].isThisReplyCommentAreaShown = false;
+                //     for (var j = 0; j < comments[i].replies.length; j++) {
+                //         if (comments[i].replies[j]) {
+                //             comments[i].replies[j].isThisReplyReplyAreaShown = false;
+                //         }
+                //     }
+                // }
+                for (var i = 0; i < comments.length; i++) {
+                    if (i === parentIndex) {
+                        for (var j = 0; j < comments[i].replies.length; j++) {
+                            if (j === index) {
+                                comments[i].replies[j].isThisReplyReplyAreaShown = false;
+                            }
                         }
                     }
                 }
             } else {
-                vm.isReplyACommentButtonClicked = false;
                 $location.url("/login");
             }
         }
 
         function replyAReply(commentId, replierId, replier, index, parentIndex) {
-            vm.isReplyAReplyButtonClicked = true;
-            // for (var i in comments) {
-                // if (comments[i].commentIndex === parentIndex) {
             for (var i = 0; i < comments.length; i++) {
                 if (i === parentIndex) {
                     for (var j = 0; j < comments[i].replies.length; j++) {
@@ -88,13 +95,17 @@
         }
 
         function cancelAReplyToAComment(commentId, replyHostId, replyHost, commentIndex) {
-            vm.isReplyACommentButtonClicked = false;
-            for (var i in comments) {
-                comments[i].isThisReplyCommentAreaShown = false;
-                for (var j = 0; j < comments[i].replies.length; j++) {
-                    if (comments[i].replies[j]) {
-                        comments[i].replies[j].isThisReplyReplyAreaShown = false;
-                    }
+            // for (var i in comments) {
+            //     comments[i].isThisReplyCommentAreaShown = false;
+            //     for (var j = 0; j < comments[i].replies.length; j++) {
+            //         if (comments[i].replies[j]) {
+            //             comments[i].replies[j].isThisReplyReplyAreaShown = false;
+            //         }
+            //     }
+            // }
+            for (var i = 0; i < comments.length; i++) {
+                if (i === commentIndex) {
+                    comments[i].isThisReplyCommentAreaShown = false;
                 }
             }
         }
@@ -116,32 +127,42 @@
                     "host": replyHost,
                     "date": new Date().toString(),
                     "content": replyToAComment,
-                    isThisReplyCommentAreaShown: false,
-                    isThisReplyReplyAreaShown: false
+                    "isThisReplyCommentAreaShown": false,
+                    "isThisReplyReplyAreaShown": false
                 };
                 comments[commentIndex].replies.push(newReplyToAComment);
-                vm.isReplyACommentButtonClicked = false;
-                for (var i in comments) {
-                    comments[i].isThisReplyCommentAreaShown = false;
-                    for (var j = 0; j < comments[i].replies.length; j++) {
-                        if (comments[i].replies[j]) {
-                            comments[i].replies[j].isThisReplyReplyAreaShown = false;
-                        }
+                // for (var i in comments) {
+                //     comments[i].isThisReplyCommentAreaShown = false;
+                //     for (var j = 0; j < comments[i].replies.length; j++) {
+                //         if (comments[i].replies[j]) {
+                //             comments[i].replies[j].isThisReplyReplyAreaShown = false;
+                //         }
+                //     }
+                // }
+                for (var i = 0; i < comments.length; i++) {
+                    if (i === commentIndex) {
+                        comments[i].isThisReplyCommentAreaShown = false;
                     }
                 }
             } else {
-                vm.isReplyACommentButtonClicked = false;
                 $location.url("/login");
             }
         }
 
         function replyAcomment(commentId, replyHostId, replyHost, commentIndex) {
-            vm.isReplyACommentButtonClicked = true;
-            // for (var i in comments) {
             for (var i = 0; i < comments.length; i++) {
-                // if (comments[i].commentIndex === commentIndex) {
                 if (i === commentIndex) {
                     comments[i].isThisReplyCommentAreaShown = true;
+                    CommentService
+                        .updateComment(commentId, comments[i])
+                        .then(
+                            function (res) {
+                                
+                            },
+                            function (err) {
+                                vm.error = err;
+                            }
+                        )
                 }
             }
         }
@@ -175,10 +196,16 @@
                         "commenterId": $rootScope.currentUser._id,
                         "commenter": $rootScope.currentUser.username,
                         "content": comment,
+                        "isThisReplyCommentAreaShown": false,
                         "replies":[]
                     };
                     // commentIndex++;
-                    comments.push(newComment);
+                    // comments.push(newComment);
+                    CommentService
+                        .createComment(newComment)
+                        .then(function (res) {
+                            var returnedComment = res.data;
+                        })
                 }
             } else {
                 $location.url("/login");
@@ -247,6 +274,17 @@
                    function (err) {
                        $location.url("/login");
                    });
+
+           CommentService
+               .getAllComments()
+               .then(
+                   function (res) {
+                       vm.comments = res.data;
+                   },
+                   function (err) {
+                       vm.error = err;
+                   }
+               )
        }
        init();
     }
