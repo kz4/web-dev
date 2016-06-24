@@ -18,8 +18,8 @@
             return $http.get("/api/comment/" + commentId);
         }
 
-        function getAllComments() {
-            return $http.get("/api/comment");
+        function getAllComments(restaurantId) {
+            return $http.get("/api/comment/restaurant/" + restaurantId);
         }
 
         // function updateReply(put) {

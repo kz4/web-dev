@@ -1,5 +1,5 @@
 <!--start-header-->
-<div class="header">
+<div class="header" id="head">
 	<div class="container">
 		<div class="head">
 			<div class="navigation">
@@ -25,18 +25,18 @@
 <!-- script-for-menu -->
 
 <!-- script that when click submitting button in the zip code, the pages scrolls down to category list -->
-<script>
-	$("span.menu").click(function () {
-		$(" ul.navig").slideToggle("slow", function () {
-		});
-	});
-	$("div.banner-btn").click(function () {
-//		$(" ul.navig").slideToggle("slow", function () {
-//		});
-		document.getElementById("da-thumbs").scrollIntoView();
+<!--<script>-->
+	<!--$("span.menu").click(function () {-->
+		<!--$(" ul.navig").slideToggle("slow", function () {-->
+		<!--});-->
+	<!--});-->
+	<!--$("div.banner-btn").click(function () {-->
+<!--//		$(" ul.navig").slideToggle("slow", function () {-->
+<!--//		});-->
+		<!--document.getElementById("da-thumbs").scrollIntoView();-->
 
-	});
-</script>
+	<!--});-->
+<!--</script>-->
 
 <!--banner-starts-->
 <div class="banner">
@@ -45,12 +45,12 @@
 			<div class="banner-text">
 				<h2>Please enter a zip code</h2>
 				<form name="zipForm" novalidate>
-					<div ng-class="{ 'has-error': zipForm.zipCodeInput.$error.required && model.submitted}">
-						<input ng-model="zip" name="zip" class="form-control zip-input" type="text" placeholder="zip code" required>
+					<div ng-class="{ 'has-error': model.invalid && model.submitted}">
+						<input id="zipBox" ng-model="zip" ng-change="model.onChanged()" name="zip" class="form-control zip-input" type="text" placeholder="zip code" required>
 						<!--<a ng-click="model.login(username, password)" class="btn btn-primary btn-block">Submit</a>-->
-						<span ng-show="zipForm.zip.$error.required && model.submitted"
+						<span ng-show="model.invalid && model.submitted"
 							  class="help-block">
-							Zip Code required
+							Valid ZIP code required
 						</span>
 						<div class="banner-btn">
 							<!--<a href="#da-thumbs" target="_self">Submit</a>-->
@@ -72,7 +72,8 @@
 		<section>
 			<ul id="da-thumbs" class="da-thumbs">
 				<li>
-					<a href="#/category/0/zip/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<!--<a href="#/category/0/zip/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">-->
+					<a ng-click="model.selectCategory(0, zip)" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/brunch.png" alt="Breakfast & Brunch"/>
 						<div>
 							<h5>Breakfast & Brunch</h5>

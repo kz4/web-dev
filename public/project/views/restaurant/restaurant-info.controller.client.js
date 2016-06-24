@@ -354,13 +354,13 @@
                    function (err) {
                        $location.url("/login");
                    });
-           refreshPage();
+           refreshPage(restaurantId);
        }
        init();
 
-        function refreshPage(){
+        function refreshPage(restaurantId){
             CommentService
-                .getAllComments()
+                .getAllComments(restaurantId)
                 .then(
                     function (res) {
                         var comments = res.data;

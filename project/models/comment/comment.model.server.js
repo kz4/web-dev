@@ -27,8 +27,8 @@ module.exports = function () {
         return Comment.findById(commentId);
     }
 
-    function getAllComments() {
-        return Comment.find();
+    function getAllComments(restaurantId) {
+        return Comment.find({restaurantId: restaurantId});
     }
 
     // function populateReply() {

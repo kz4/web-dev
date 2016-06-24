@@ -4,7 +4,7 @@ module.exports = function(app, models) {
 
     app.post("/api/comment", createComment);
     app.put("/api/comment/:commentId", updateComment);
-    app.get("/api/comment", getAllComments);
+    app.get("/api/comment/restaurant/:restaurantId", getAllComments);
     app.get("/api/comment/:commentId", findCommentByCommentId);
     // post("/api/reply", createReply);
 
@@ -23,8 +23,9 @@ module.exports = function(app, models) {
     }
 
     function getAllComments(req, res) {
+        var restaurantId = req.params.restaurantId;
         commentModel
-            .getAllComments()
+            .getAllComments(restaurantId)
             .then(
                 function (comments) {
                     res.json(comments);
