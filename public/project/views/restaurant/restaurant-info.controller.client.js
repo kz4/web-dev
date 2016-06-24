@@ -3,7 +3,7 @@
         .module("ProjectMaker")
         .controller("RestaurantInfoController", RestaurantInfoController);
      
-    function RestaurantInfoController($sce, $routeParams, RestaurantService, UserService, $location, $rootScope, CommentService) {
+    function RestaurantInfoController($sce, $routeParams, RestaurantService, UserService, $location, $rootScope, CommentService, ReplyService) {
         var vm = this;
         var categoryId = $routeParams.categoryId;
         vm.categoryId = categoryId;
@@ -20,6 +20,23 @@
         vm.replyAReply = replyAReply;
         vm.submitAReplyToAReply = submitAReplyToAReply;
         vm.cancelAReplyToAReply = cancelAReplyToAReply;
+
+        vm.findRepliesByCommentId = findRepliesByCommentId;
+        vm.findReplyByReplyId = findReplyByReplyId;
+        
+        function findReplyByReplyId(replyId) {
+            
+        }
+
+        function findRepliesByCommentId(commetId) {
+            ReplyService
+                .findRepliesByCommentId(commetId)
+                .then(
+                    function (replies) {
+                        vm.replies = replies;
+                    }
+                )
+        }
 
         var isUserLoggedIn = false;
 
@@ -82,43 +99,71 @@
             }
         }
 
-        function replyAReply(commentId, replierId, replier, index, parentIndex) {
-            for (var i = 0; i < comments.length; i++) {
-                if (i === parentIndex) {
-                    for (var j = 0; j < comments[i].replies.length; j++) {
-                        if (index === j) {
-                            comments[i].replies[j].isThisReplyReplyAreaShown = true;
-                        }
-                    }
-                }
-            }
-        }
-
-        function cancelAReplyToAComment(commentId, replyHostId, replyHost, commentIndex) {
-            // for (var i in comments) {
-            //     comments[i].isThisReplyCommentAreaShown = false;
-            //     for (var j = 0; j < comments[i].replies.length; j++) {
-            //         if (comments[i].replies[j]) {
-            //             comments[i].replies[j].isThisReplyReplyAreaShown = false;
+        function replyAReply(commentId, replyId, replierId, replier, index, parentIndex) {
+            // for (var i = 0; i < comments.length; i++) {
+            //     if (i === parentIndex) {
+            //         for (var j = 0; j < comments[i].replies.length; j++) {
+            //             if (index === j) {
+            //                 comments[i].replies[j].isThisReplyReplyAreaShown = true;
+            //             }
             //         }
             //     }
             // }
-            for (var i = 0; i < comments.length; i++) {
-                if (i === commentIndex) {
-                    comments[i].isThisReplyCommentAreaShown = false;
-                }
-            }
+            ReplyService
+                .getReplyByReplyId(replyId)
+                .then(
+                    function (reply) {
+                        reply.isThisReplyReplyAreaShown = true;
+                    },
+                    function (err){
+                        vm.error = err;
+                    }
+                )
+                .then(
+                    function (reply) {
+                        ReplyService
+                            .updateReply(commentId, replyId, reply)
+                            .then(function (response) {
+
+                            },
+                            function (err) {
+                                vm.error = err;
+                            })
+                    }
+                )
+                
+        }
+
+        function cancelAReplyToAComment(commentId, replyHostId, replyHost, commentIndex) {
+                CommentService
+                .findCommentByCommentId(commentId)
+                .then(
+                    function (res) {
+                        var comment = res.data;
+                        comment.isThisReplyCommentAreaShown = false;
+                        CommentService
+                            .updateComment(commentId, comment)
+                            .then(
+                                function () {
+                                    refreshPage();
+                                }
+                            )
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                )
+
+
+            // for (var i = 0; i < comments.length; i++) {
+            //     if (i === commentIndex) {
+            //         comments[i].isThisReplyCommentAreaShown = false;
+            //     }
+            // }
         }
         
         function submitAReplyToAComment(replyToAComment, commentId, replyHostId, replyHost, commentIndex) {
             if(isUserLoggedIn) {
-
-                // selectedCommentIndex = commentIndex;
-                // currentCommentId = angular.copy(commentId);
-                // currentReplyHostId = angular.copy(replyHostId);
-                // currentReplyHost = angular.copy(replyHost);
-                // $scope.commentPlaceholder = "reply to " + replyHost + "..";
-                // $scope.commentBtnText = "Reply";
                 // $anchorScroll("anchor");
                 var newReplyToAComment = {
                     "replierId": $rootScope.currentUser._id,
@@ -130,41 +175,75 @@
                     "isThisReplyCommentAreaShown": false,
                     "isThisReplyReplyAreaShown": false
                 };
-                comments[commentIndex].replies.push(newReplyToAComment);
-                // for (var i in comments) {
-                //     comments[i].isThisReplyCommentAreaShown = false;
-                //     for (var j = 0; j < comments[i].replies.length; j++) {
-                //         if (comments[i].replies[j]) {
-                //             comments[i].replies[j].isThisReplyReplyAreaShown = false;
-                //         }
+                // comments[commentIndex].replies.push(newReplyToAComment);
+                // for (var i = 0; i < comments.length; i++) {
+                //     if (i === commentIndex) {
+                //         comments[i].isThisReplyCommentAreaShown = false;
                 //     }
                 // }
-                for (var i = 0; i < comments.length; i++) {
-                    if (i === commentIndex) {
-                        comments[i].isThisReplyCommentAreaShown = false;
-                    }
-                }
+                ReplyService
+                    .createReply(commentId, newReplyToAComment)
+                    .then(
+                        function (res) {
+                            var newReplyRes = res.data;
+                            var newReplyId = newReplyRes._id;
+                            cancelAReplyToAComment(newReplyRes.commentId, "", "", "");
+                        },
+                        function (err) {
+                            vm.error = err;
+                        }
+                    );
+
+                // CommentService
+                //     .updateComment(commentId, )
+                //     .then(
+                //         function (response) {
+                //
+                //         },
+                //         function (err) {
+                //             vm.error = err;
+                //         }
+                //     )
+
             } else {
                 $location.url("/login");
             }
         }
 
         function replyAcomment(commentId, replyHostId, replyHost, commentIndex) {
-            for (var i = 0; i < comments.length; i++) {
-                if (i === commentIndex) {
-                    comments[i].isThisReplyCommentAreaShown = true;
+
+            // for (var i = 0; i < comments.length; i++) {
+            //     if (i === commentIndex) {
+            //         comments[i].isThisReplyCommentAreaShown = true;
+            //         CommentService
+            //             .updateComment(commentId, comments[i])
+            //             .then(
+            //                 function (res) {
+            //
+            //                 },
+            //                 function (err) {
+            //                     vm.error = err;
+            //                 }
+            //             )
+            //     }
+            // }
+            // var comment = null;
+            CommentService
+                .findCommentByCommentId(commentId)
+                .then(function (res) {
+                    var comment = res.data;
+                    comment.isThisReplyCommentAreaShown = true;
                     CommentService
-                        .updateComment(commentId, comments[i])
+                        .updateComment(commentId, comment)
                         .then(
-                            function (res) {
-                                
+                            function () {
+                                refreshPage();
                             },
                             function (err) {
                                 vm.error = err;
                             }
                         )
-                }
-            }
+                });
         }
 
         function getLongDateTime(timeString) {
@@ -205,6 +284,7 @@
                         .createComment(newComment)
                         .then(function (res) {
                             var returnedComment = res.data;
+                            refreshPage()
                         })
                 }
             } else {
@@ -274,19 +354,27 @@
                    function (err) {
                        $location.url("/login");
                    });
-
-           CommentService
-               .getAllComments()
-               .then(
-                   function (res) {
-                       vm.comments = res.data;
-                   },
-                   function (err) {
-                       vm.error = err;
-                   }
-               )
+           refreshPage();
        }
        init();
+
+        function refreshPage(){
+            CommentService
+                .getAllComments()
+                .then(
+                    function (res) {
+                        var comments = res.data;
+                        vm.comments = comments;
+
+                        for (var i = 0; i < comments.length; i++) {
+                            findRepliesByCommentId(comments[i]._id);
+                        }
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                )
+        }
     }
 
 })();

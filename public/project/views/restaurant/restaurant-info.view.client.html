@@ -97,8 +97,11 @@
 									<span class="text-info">{{comment.commenter}}</span>
 								</a>&nbsp;
 								<span>posted at {{model.getLongDateTime(comment.date)}}</span>&nbsp;
-								<button ng-click="model.replyAcomment(comment._id, comment.commenterId, comment.commenter, $index)"
-										class="replyBtn">reply
+								<!--<button ng-click="model.replyAcomment(comment._id, comment.commenterId, comment.commenter, $index)"-->
+										<!--class="replyBtn">reply-->
+								<!--</button>-->
+								<button ng-click="comment.isThisReplyCommentAreaShown = true">
+									Reply
 								</button>
 								<br/>
 								<span>{{comment.content}}</span>
@@ -109,7 +112,7 @@
 										<button ng-click="model.submitAReplyToAComment(replyToAComment, comment._id, comment.commenterId, comment.commenter, $index)"
 												class="btn btn-primary">Submit
 										</button>
-										<button ng-click="model.cancelAReplyToAComment(comment._id, comment.commenterId, comment.commenter, $index)"
+										<button ng-click="comment.isThisReplyCommentAreaShown = false"
 												class="btn btn-danger">Cancel
 										</button>
 									<!--</div>-->
@@ -122,7 +125,9 @@
 									<span class="glyphicon glyphicon-triangle-top"></span>
 								</div>
 								<div class="replyDiv2">
-									<div ng-repeat="reply in comment.replies">
+									<!--<div ng-repeat="reply in comment.replies">-->
+									<!--<div ng-repeat="reply in model.replies">-->
+									<div ng-repeat="reply in model.replies">
 										<a href="#/{{reply.replierId}}/favors">
 											<span class="text-info">{{(reply.replier)}}</span>
 										</a>&nbsp;@
@@ -131,7 +136,10 @@
 										</a>
 										<span>at {{model.getLongDateTime(reply.date)}}:</span>&nbsp;
 										<span>{{reply.content}}</span>&nbsp;
-										<button ng-click="model.replyAReply(comment._id, reply.replierId, reply.replier, $index, $parent.$index)"
+										<!--<button ng-click="model.replyAReply(comment._id, reply._id, reply.replierId, reply.replier, $index, $parent.$index)"-->
+												<!--class="replyBtn">reply-->
+										<!--</button>-->
+										<button ng-click="reply.isThisReplyReplyAreaShown = true"
 												class="replyBtn">reply
 										</button>
 
@@ -143,7 +151,10 @@
 												<button ng-click="model.submitAReplyToAReply(replyToAReply, comment._id, reply.replierId, reply.replier, $index, $parent.$parent.$index)"
 														class="btn btn-primary">Submit
 												</button>
-												<button ng-click="model.cancelAReplyToAReply($index, $parent.$parent.$index)"
+												<!--<button ng-click="model.cancelAReplyToAReply($index, $parent.$parent.$index)"-->
+														<!--class="btn btn-danger">Cancel-->
+												<!--</button>-->
+												<button ng-click="reply.isThisReplyReplyAreaShown = false"
 														class="btn btn-danger">Cancel
 												</button>
 											<!--</div>-->

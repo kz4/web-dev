@@ -1,7 +1,8 @@
 module.exports = function () {
     var mongoose = require("mongoose");
 
-    var ReplySchema = mongoose.schema({
+    var ReplySchema = mongoose.Schema({
+        commentId: String,
         replierId: String,
         replier: String,
         hostId: String,

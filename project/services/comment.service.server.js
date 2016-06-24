@@ -3,9 +3,24 @@ module.exports = function(app, models) {
     var commentModel = models.commentModel;
 
     app.post("/api/comment", createComment);
-    app.put("/api/comment", updateComment);
+    app.put("/api/comment/:commentId", updateComment);
     app.get("/api/comment", getAllComments);
+    app.get("/api/comment/:commentId", findCommentByCommentId);
     // post("/api/reply", createReply);
+
+    function findCommentByCommentId(req, res) {
+        var commentId = req.params.commentId;
+        commentModel
+            .findCommentByCommentId(commentId)
+            .then(
+                function (comment) {
+                     res.json(comment);
+                },
+                function (err) {
+                    res.send(err);
+                }
+            )
+    }
 
     function getAllComments(req, res) {
         commentModel
@@ -29,9 +44,10 @@ module.exports = function(app, models) {
     // }
 
     function updateComment(req, res) {
+        var commentId = req.params.commentId;
         var comment = req.body;
         commentModel
-            .updateComment(comment)
+            .updateComment(commentId, comment)
             .then(
                 function () {
                     res.send(200);

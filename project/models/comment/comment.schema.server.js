@@ -11,7 +11,7 @@ module.exports = function () {
         commenter: String,
         content: String,
         isThisReplyCommentAreaShown: Boolean,
-        replies: [{type: mongoose.Schema.ObjectId, ref: "Comment"}]
+        replies: [{type: mongoose.Schema.ObjectId, ref: "Reply"}]
     }, {collection: "project.comment"});
 
     return CommentSchema;

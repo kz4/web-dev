@@ -7,10 +7,25 @@ module.exports = function () {
     var api = {
         createComment : createComment,
         updateComment : updateComment,
-        getAllComments : getAllComments
+        getAllComments : getAllComments,
+        findCommentByCommentId : findCommentByCommentId,
         // populateReply : populateReply
+        populateReply : populateReply
     };
     return api;
+
+    function populateReply(commentId, reply) {
+        return Comment.findOne({_id: commentId},
+            function (err, doc) {
+                doc.replies.push(reply);
+                doc.save();
+            }
+        );
+    }
+
+    function findCommentByCommentId(commentId) {
+        return Comment.findById(commentId);
+    }
 
     function getAllComments() {
         return Comment.find();
