@@ -366,9 +366,9 @@
                         var comments = res.data;
                         vm.comments = comments;
 
-                        for (var i = 0; i < comments.length; i++) {
-                            findRepliesByCommentId(comments[i]._id);
-                        }
+                        // for (var i = 0; i < comments.length; i++) {
+                        //     findRepliesByCommentId(comments[i]._id);
+                        // }
                     },
                     function (err) {
                         vm.error = err;
