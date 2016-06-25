@@ -15,7 +15,12 @@ module.exports = function () {
         email: String,
         phone: String,
         dob: Date,
-        // websites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Website'}],
+        following: [{type: mongoose.Schema.ObjectId, ref: "User"}],
+        followedBy: [{type: mongoose.Schema.ObjectId, ref: "User"}],
+        userType: {
+            type: String,
+            enum: ['NORMAL', 'ADMIN']
+        },
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "project.user"});
 

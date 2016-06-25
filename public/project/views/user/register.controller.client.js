@@ -7,13 +7,14 @@
         vm.register = register;
         vm.submitted = false;
         vm.badPassword = false;
+        vm.isAdmin = false;
 
         function register(username, password, verifyPassword) {
             vm.submitted = true;
             if (password === verifyPassword) {
                 UserService
                 // .createUser(username, password, verifyPassword)
-                    .register(username, password, verifyPassword)
+                    .register(username, password, verifyPassword, vm.isAdmin)
                     .then(function (res) {
                         var user = res.data;
                         if (user._id) {

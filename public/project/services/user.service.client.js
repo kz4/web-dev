@@ -17,7 +17,9 @@
             register: register,
             getCurrentUser: getCurrentUser,
             getCurrentUsername: getCurrentUsername,
-            setCurrentUser: setCurrentUser
+            setCurrentUser: setCurrentUser,
+            isLoggedIn: isLoggedIn,
+            isAdmin: isAdmin
         };
         return api;
 
@@ -37,13 +39,18 @@
             }
         }
 
-        function register(username, password, verifyPassword) {
+        function register(username, password, verifyPassword, isAdmin) {
+            var userType = "NORMAL";
+            if (isAdmin) {
+                userType = "ADMIN";
+            }
             var url = "/api/project/register";
             if (username) {
                 if (password === verifyPassword) {
                     var user = {
                         username: username,
-                        password: password
+                        password: password,
+                        userType: userType
                     };
                     return $http.post(url, user);
                 }
@@ -57,6 +64,10 @@
 
         function isLoggedIn() {
             return ($rootScope.currentUser !== undefined && $rootScope.currentUser !== null);
+        }
+
+        function isAdmin() {
+            return (isLoggedIn() && $rootScope.currentUser.roles.indexOf("admin") >= 0);
         }
 
         function logout() {
