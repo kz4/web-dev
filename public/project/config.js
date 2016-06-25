@@ -30,7 +30,10 @@
 			.when("/category/:categoryId/zip/:zip/restaurant/:restaurantId", {
 				templateUrl: "views/restaurant/restaurant-info.view.client.html",
 				controller: "RestaurantInfoController",
-				controllerAs: "model"
+				controllerAs: "model",
+				resolve: {
+					loggedIn: checkLoggedIn
+				}
 			})
 			// .when("/flickr", {
 			// .when("/user/:uid/website/:wid/page/:pid/widget/:wgid/flickr", {
@@ -49,6 +52,14 @@
 				controllerAs: "model"
 			})
 			.when("/user/", {
+				templateUrl: "views/user/profile-info.view.client.html",
+				controller: "ProfileInfoController",
+				controllerAs: "model",
+				resolve: {
+					loggedIn: checkLoggedIn
+				}
+			})
+			.when("/user/:uid/edit", {
 				templateUrl: "views/user/profile.view.client.html",
 				controller: "ProfileController",
 				controllerAs: "model",
@@ -57,20 +68,12 @@
 				}
 			})
 			.when("/user/:uid", {
-				templateUrl: "views/user/profile.view.client.html",
-				controller: "ProfileController",
+				templateUrl: "views/user/profile-info.view.client.html",
+				controller: "ProfileInfoController",
 				controllerAs: "model",
 				resolve: {
 					loggedIn: checkLoggedIn
 				}
-			})
-			.when("/usertemp", {
-				templateUrl: "views/user/profileinfo.html",
-				//controller: "ProfileController",
-				//controllerAs: "model",
-				//resolve: {
-				//	loggedIn: checkLoggedIn
-				//}
 			})
 
 			// .when("/user/:uid/website", {

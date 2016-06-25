@@ -3,22 +3,35 @@
 	<div class="container">
 		<div class="head">
 			<div class="navigation">
-				<span class="menu"></span>
-				<ul class="navig">
-					<li><a href="#/" class="active">Yummy Booklet</a></li>
+				<nav class="navbar-default navbar-fixed-top navig">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a href="#/" class="navbar-brand active">Yummy Booklet</a>
+							<p class="navbar-text pull-right">
+								<a href="#/login" class="login">Log in</a>
+								<span>|</span>
+								<a href="#/register" class="register">Register</a>
+							</p>
+						</div>
+					</div>
+				</nav>
+				<!--<span class="menu"></span>-->
+				<!--<ul class="navig">-->
+				<!--<li><a href="#/" class="active">Yummy Booklet</a></li>-->
 
-					<li><a href="#/login" class="login">Log in</a></li>
-					<li><a href="#/register" class="register">Register</a></li>
-				</ul>
+				<!--<li><a href="#/login" class="login">Log in</a></li>-->
+				<!--<li><a href="#/register" class="register">Register</a></li>-->
+				<!--</ul>-->
+				<!--</div>-->
+				<!--<div class="header-right">-->
+				<!--<div class="search-bar">-->
+				<!--<input type="text" value="Search" onfocus="this.value = '';"-->
+				<!--onblur="if (this.value == '') {this.value = 'Search';}">-->
+				<!--<input type="submit" value="">-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="clearfix"></div>-->
 			</div>
-			<div class="header-right">
-				<div class="search-bar">
-					<input type="text" value="Search" onfocus="this.value = '';"
-						   onblur="if (this.value == '') {this.value = 'Search';}">
-					<input type="submit" value="">
-				</div>
-			</div>
-			<div class="clearfix"></div>
 		</div>
 	</div>
 </div>
@@ -81,7 +94,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/1/zip/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a hng-click="model.selectCategory(1, zip)" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/seafood.jpg" alt=""/>
 						<div>
 							<h5>Seafood</h5>
@@ -89,7 +102,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/2/zip/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a ng-click="model.selectCategory(2, zip)" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/salad.jpg" alt=""/>
 						<div>
 							<h5>Salad</h5>
@@ -97,7 +110,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/3/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a ng-click="model.selectCategory(3, zip)" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/sushi.jpg" alt=""/>
 						<div>
 							<h5>Sushi</h5>
@@ -105,7 +118,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/4/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a ng-click="model.selectCategory(4, zip)" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/burger.jpg" alt=""/>
 						<div>
 							<h5>Burgers</h5>
@@ -113,7 +126,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/5/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a ng-click="model.selectCategory(5, zip)" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/pizza.jpg" alt=""/>
 						<div>
 							<h5>Pizza</h5>
@@ -121,7 +134,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/6/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a ng-click="model.selectCategory(6, zip)" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/soup.jpg" alt=""/>
 						<div>
 							<h5>Soup</h5>
@@ -129,7 +142,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/7/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a ng-click="model.selectCategory(7, zip)" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/icecream.jpg" alt=""/>
 						<div>
 							<h5>Ice Cream & Frozen Yogurt</h5>
@@ -137,7 +150,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#/category/8/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a ng-click="model.selectCategory(8, zip)" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/coffee.jpg" alt=""/>
 						<div>
 							<h5>Coffee & Tea</h5>

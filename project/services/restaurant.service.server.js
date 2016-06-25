@@ -42,7 +42,30 @@ module.exports = function (app, models) {
             case "0":
                 category_filter = "breakfast_brunch";
                 break;
-        
+            case "1":
+                category_filter = "seafood";
+                break;
+            case "2":
+                category_filter = "salad";
+                break;
+            case "3":
+                category_filter = "sushi";
+                break;
+            case "4":
+                category_filter = "burgers";
+                break;
+            case "5":
+                category_filter = "pizza";
+                break;
+            case "6":
+                category_filter = "soup";
+                break;
+            case "7":
+                category_filter = "icecream";
+                break;
+            case "8":
+                category_filter = "coffee";
+                break;
             default:
                 category_filter = "All";
         }

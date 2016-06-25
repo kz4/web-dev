@@ -28,7 +28,13 @@ module.exports = function () {
     }
 
     function getAllComments(restaurantId) {
-        return Comment.find({restaurantId: restaurantId});
+        return Comment.find({restaurantId: restaurantId})
+            .populate('replies')
+            .exec(function(error, doc) {
+            // doc.connections[0].item is a User doc
+            // doc.connections[1].item is an Organization doc
+        });
+
     }
 
     // function populateReply() {

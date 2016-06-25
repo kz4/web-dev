@@ -79,7 +79,7 @@ body a:hover {
 	position: relative;
 }
 
-.header {
+.header.navigation.navig.container {
 	background-color: #3d1a1b;
 	padding: 2em 0px;
 	box-shadow: 0px 1px 9px 1px rgba(0, 0, 0, 0.11);
