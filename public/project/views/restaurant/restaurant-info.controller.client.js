@@ -23,7 +23,24 @@
 
         vm.findRepliesByCommentId = findRepliesByCommentId;
         vm.findReplyByReplyId = findReplyByReplyId;
-        
+
+        vm.currentUser = $rootScope.currentUser;
+        vm.logout = logout;
+
+        function logout() {
+            $rootScope.currentUser = null;
+            UserService
+                .logout()
+                .then(
+                    function (res) {
+                        $location.url("/login");
+                    },
+                    function () {
+                        $location.url("/login");
+                    }
+                );
+        }
+
         function findReplyByReplyId(replyId) {
             
         }

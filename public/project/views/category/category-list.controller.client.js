@@ -3,7 +3,7 @@
         .module("ProjectMaker")
         .controller("CategoryListController", CategoryListController);
 
-    function CategoryListController($location, $anchorScroll) {
+    function CategoryListController(UserService, $location, $anchorScroll, $rootScope) {
         var vm = this;
         vm.setZipCode = setZipCode;
         vm.submitted = false;
@@ -11,6 +11,22 @@
 
         vm.selectCategory = selectCategory;
         vm.onChanged = onChanged;
+        vm.currentUser = $rootScope.currentUser;
+        vm.logout = logout;
+
+        function logout() {
+            $rootScope.currentUser = null;
+            UserService
+                .logout()
+                .then(
+                    function (res) {
+                        $location.url("/login");
+                    },
+                    function () {
+                        $location.url("/login");
+                    }
+                );
+        }
 
         function onChanged() {
             vm.submitted = false;
@@ -20,7 +36,7 @@
             vm.submitted = true;
             if (isValidUSZip(zip)) {
                 vm.submitted = false;
-                $location.url("/category/" + categoryId + "/zip/" +zip + "/restaurant")
+                $location.url("/category/" + categoryId + "/zip/" + zip + "/restaurant")
             } else {
                 vm.invalid = true;
                 $anchorScroll("head");

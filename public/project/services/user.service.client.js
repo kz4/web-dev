@@ -1,22 +1,41 @@
-(function() {
+(function () {
     angular
         .module("ProjectMaker")
         .factory("UserService", UserService);
 
-    function UserService($http) {
+    function UserService($http, $rootScope) {
         var api = {
-            createUser   : createUser,
-            findUserById : findUserById,
-            findUserByUsername : findUserByUsername,
-            findUserByCredentials : findUserByCredentials,
-            updateUser : updateUser,
-            deleteUser : deleteUser,
+            createUser: createUser,
+            findUserById: findUserById,
+            findUserByUsername: findUserByUsername,
+            findUserByCredentials: findUserByCredentials,
+            updateUser: updateUser,
+            deleteUser: deleteUser,
             login: login,
             logout: logout,
             loggedIn: loggedIn,
-            register: register
+            register: register,
+            getCurrentUser: getCurrentUser,
+            getCurrentUsername: getCurrentUsername,
+            setCurrentUser: setCurrentUser
         };
         return api;
+
+        function setCurrentUser(user) {
+            $rootScope.currentUser = user;
+        }
+
+        function getCurrentUser() {
+            return $rootScope.currentUser;
+        }
+
+        function getCurrentUsername() {
+            if (isLoggedIn()) {
+                return $rootScope.currentUser.username;
+            } else {
+                return null;
+            }
+        }
 
         function register(username, password, verifyPassword) {
             var url = "/api/project/register";
@@ -36,6 +55,10 @@
             return $http.get("/api/loggedIn");
         }
 
+        function isLoggedIn() {
+            return ($rootScope.currentUser !== undefined && $rootScope.currentUser !== null);
+        }
+
         function logout() {
             return $http.post("/api/logout");
         }
@@ -53,8 +76,8 @@
             if (username) {
                 if (password === verifyPassword) {
                     var user = {
-                        username : username,
-                        password : password
+                        username: username,
+                        password: password
                     };
                     return $http.post("/api/user", user);
                 }
@@ -73,7 +96,7 @@
         }
 
         function findUserByCredentials(username, password) {
-            var url = "/api/user?username="+username+"&password="+password;
+            var url = "/api/user?username=" + username + "&password=" + password;
             return $http.get(url);
         }
 

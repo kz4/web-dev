@@ -3,24 +3,35 @@
         .module("ProjectMaker")
         .controller("ProfileInfoController", ProfileInfoController);
     
-    function ProfileInfoController($location, $rootScope, $routeParams, UserService) {
+    function ProfileInfoController($location, $rootScope, UserService, $routeParams) {
         var vm = this;
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
         vm.logout = logout;
-        vm.user = $rootScope.currentUser;
+        var currentUser = $rootScope.currentUser;
+        vm.currentUser = currentUser;
+        vm.follow = follow;
+        var userId = $routeParams.uid;
 
-        // var id = $routeParams['uid'];
-        var id = $rootScope.currentUser._id;
+        // var id = $rootScope.currentUser._id;
 
         function init() {
             UserService
-                .findUserById(id)   // promise
-                .then(function (res) {
-                    vm.user = res.data;
-                });
+                .findUserById(userId)
+                .then(
+                    function (res) {
+                        vm.user = res.data;
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                )
         }
         init();
+
+        function follow() {
+            
+        }
 
         function logout() {
             $rootScope.currentUser = null;

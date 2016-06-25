@@ -2,25 +2,32 @@
 	angular
 		.module("ProjectMaker")  // without [] means to retrieve module
 		.config(Config);
+
 	function Config($routeProvider) {
 		$routeProvider
 			.when("/", {
 				templateUrl: "views/category/category-list.view.client.html",
 				controller: "CategoryListController",
-				controllerAs: "model"
+				controllerAs: "model",
+				resolve: {
+					checkCurrentUser: checkCurrentUser
+				}
 			})
-			// .when("/da-thumbs", {
-			// 	templateUrl: "views/category/category-list.view.client.html#da-thumbs",
-			// })
 			.when("/category/:categoryId/restaurant", {
 				templateUrl: "views/restaurant/restaurant-list.view.client.html",
 				controller: "RestaurantListController",
-				controllerAs: "model"
+				controllerAs: "model",
+				resolve: {
+					checkCurrentUser: checkCurrentUser
+				}
 			})
 			.when("/category/:categoryId/zip/:zip/restaurant", {
 				templateUrl: "views/restaurant/restaurant-list.view.client.html",
 				controller: "RestaurantListController",
-				controllerAs: "model"
+				controllerAs: "model",
+				resolve: {
+					checkCurrentUser: checkCurrentUser
+				}
 			})
 			.when("/category/:categoryId/restaurant/:restaurantId", {
 				templateUrl: "views/restaurant/restaurant-info.view.client.html",
@@ -32,15 +39,9 @@
 				controller: "RestaurantInfoController",
 				controllerAs: "model",
 				resolve: {
-					loggedIn: checkLoggedIn
+					checkCurrentUser: checkCurrentUser
 				}
 			})
-			// .when("/flickr", {
-			// .when("/user/:uid/website/:wid/page/:pid/widget/:wgid/flickr", {
-			// 	templateUrl: "views/widget/widget-flickr-search.view.client.html",
-			// 	controller: "FlickrImageSearchController",
-			// 	controllerAs: "model"
-			// })
 			.when("/login", {
 				templateUrl: "views/user/login.view.client.html",
 				controller: "LoginController",
@@ -56,15 +57,7 @@
 				controller: "ProfileInfoController",
 				controllerAs: "model",
 				resolve: {
-					loggedIn: checkLoggedIn
-				}
-			})
-			.when("/user/:uid/edit", {
-				templateUrl: "views/user/profile.view.client.html",
-				controller: "ProfileController",
-				controllerAs: "model",
-				resolve: {
-					loggedIn: checkLoggedIn
+					checkCurrentUser: checkCurrentUser
 				}
 			})
 			.when("/user/:uid", {
@@ -72,87 +65,65 @@
 				controller: "ProfileInfoController",
 				controllerAs: "model",
 				resolve: {
+					checkCurrentUser: checkCurrentUser
+				}
+			})
+			.when("/user/:uid/edit", {
+				templateUrl: "views/user/profile-edit.view.client.html",
+				controller: "ProfileEditController",
+				controllerAs: "model",
+				resolve: {
 					loggedIn: checkLoggedIn
 				}
 			})
-
-			// .when("/user/:uid/website", {
-			// 	templateUrl: "views/website/website-list.view.client.html",
-			// 	controller: "WebsiteListController",
-			// 	controllerAs: "model"
-			// })
-			// .when("/user/:uid/website/new", {
-			// 	templateUrl: "views/website/website-new.view.client.html",
-			// 	controller: "NewWebsiteController",
-			// 	controllerAs: "model"
-			// })
-			// .when("/user/:uid/website/:wid", {
-			// 	templateUrl: "views/website/website-edit.view.client.html",
-			// 	controller: "EditWebsiteController",
-			// 	controllerAs: "model"
-			// })
-			// .when("/user/:uid/website/:wid/page", {
-			// 	templateUrl: "views/page/page-list.view.client.html",
-			// 	controller: "PageListController",
-			// 	controllerAs: "model"
-			// })
-			// .when("/user/:uid/website/:wid/page/new", {
-			// 	templateUrl: "views/page/page-new.view.client.html",
-			// 	controller: "NewPageController",
-			// 	controllerAs: "model"
-			// })
-			// .when("/user/:uid/website/:wid/page/:pid", {
-			// 	templateUrl: "views/page/page-edit.view.client.html",
-			// 	controller: "EditPageController",
-			// 	controllerAs: "model"
-			// })
-			// .when("/user/:uid/website/:wid/page/:pid/widget", {
-			// 	templateUrl: "views/widget/widget-list.view.client.html",
-			// 	controller: "WidgetListController",
-			// 	controllerAs: "model"
-			// })
-			// .when("/user/:uid/website/:wid/page/:pid/widget/new", {
-			// 	templateUrl: "views/widget/widget-chooser.view.client.html",
-			// 	controller: "NewWidgetController",
-			// 	controllerAs: "model"
-			// })
-			// .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
-			// 	templateUrl: "views/widget/widget-edit.view.client.html",
-			// 	controller: "EditWidgetController",
-			// 	controllerAs: "model"
-			// })
 			.otherwise({
-				// redirectTo: "/views/user/login.view.client.html",
 				redirectTo: "/login",
 				controller: "LoginController",
 				controllerAs: "model"
 			});
-
-
-		function checkLoggedIn(UserService, $location, $q, $rootScope) {
-
-			// First create a deferred object that defers the promise
-			var deferred = $q.defer();
-
-			UserService
-				.loggedIn()
-				.then(
-					function (res) {
-						var user = res.data;
-						if (user == '0') {
-							$rootScope.currentUser = null;
-							deferred.reject();
-							$location.url("/login");
-						} else {
-							$rootScope.currentUser = user;
-							deferred.resolve();
-						}
-					},
-					function (err) {
-						$location.url("/login");
-					});
-
-			return deferred.promise;
-		}
 	}
+
+	function checkLoggedIn(UserService, $location, $q, $rootScope) {
+
+		// First create a deferred object that defers the promise
+		var deferred = $q.defer();
+
+		UserService
+			.loggedIn()
+			.then(
+				function (res) {
+					var user = res.data;
+					if (user == '0') {
+						$rootScope.currentUser = null;
+						deferred.reject();
+						$location.url("/login");
+					} else {
+						$rootScope.currentUser = user;
+						deferred.resolve();
+					}
+				},
+				function (err) {
+					$location.url("/login");
+				});
+
+		return deferred.promise;
+	}
+
+	var checkCurrentUser = function($q, $timeout, $http, $location, $rootScope, UserService)
+	{
+		var deferred = $q.defer();
+
+		UserService
+			.loggedIn()
+			.success(function(user){
+				$rootScope.errorMessage = null;
+				// User is Authenticated
+				if (user !== '0') {
+					UserService.setCurrentUser(user);
+				}
+				deferred.resolve();
+			});
+
+		return deferred.promise;
+	};
 })();

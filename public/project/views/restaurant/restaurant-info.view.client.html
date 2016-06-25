@@ -7,11 +7,20 @@
 					<div class="container-fluid">
 						<div class="navbar-header">
 							<a href="#/" class="navbar-brand active">Yummy Booklet</a>
-							<p class="navbar-text pull-right">
-								<a href="#/login" class="login">Log in</a>
-								<span>|</span>
-								<a href="#/register" class="register">Register</a>
-							</p>
+							<div ng-show="!currentUser">
+								<p class="navbar-text pull-right">
+									<a href="#/login" class="login">Log in</a>
+									<span>|</span>
+									<a href="#/register" class="register">Register</a>
+								</p>
+							</div>
+							<div ng-show="currentUser">
+								<p class="navbar-text pull-right">
+									<a href="#/user" class="login">{{model.currentUser.username}}</a>
+									<span>|</span>
+									<a ng-click="model.logout()" class="login">Log out</a>
+								</p>
+							</div>
 						</div>
 					</div>
 				</nav>
@@ -75,7 +84,6 @@
 				</div>
 				<!--<div class="abt-2">-->
 
-				// Error for comments
 				<div ng-if="model.error" class="alert alert-danger">
 					{{model.error}}
 				</div>
@@ -106,7 +114,7 @@
 						<!--iterate comments-->
 						<div ng-repeat="comment in model.comments">
 							<div class="commentDiv">
-								<a href="#/{{comment.commenterId}}/favors">
+								<a href="#/user/{{comment.commenterId}}">
 									<span class="text-info">{{comment.commenter}}</span>
 								</a>&nbsp;
 								<span>posted at {{model.getLongDateTime(comment.date)}}</span>&nbsp;

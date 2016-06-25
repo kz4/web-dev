@@ -7,11 +7,20 @@
 					<div class="container-fluid">
 						<div class="navbar-header">
 							<a href="#/" class="navbar-brand active">Yummy Booklet</a>
-							<p class="navbar-text pull-right">
-								<a href="#/login" class="login">Log in</a>
-								<span>|</span>
-								<a href="#/register" class="register">Register</a>
-							</p>
+							<div ng-show="!currentUser">
+								<p class="navbar-text pull-right">
+									<a href="#/login" class="login">Log in</a>
+									<span>|</span>
+									<a href="#/register" class="register">Register</a>
+								</p>
+							</div>
+							<div ng-show="currentUser">
+								<p class="navbar-text pull-right">
+									<a href="#/user" class="login">{{model.currentUser.username}}</a>
+									<span>|</span>
+									<a ng-click="model.logout()" class="login">Log out</a>
+								</p>
+							</div>
 						</div>
 					</div>
 				</nav>
@@ -148,3 +157,4 @@
 			</div>
 		</div>
 	</div>
+</div>

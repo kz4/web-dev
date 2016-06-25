@@ -7,11 +7,20 @@
 					<div class="container-fluid">
 						<div class="navbar-header">
 							<a href="#/" class="navbar-brand active">Yummy Booklet</a>
-							<p class="navbar-text pull-right">
-								<a href="#/login" class="login">Log in</a>
-								<span>|</span>
-								<a href="#/register" class="register">Register</a>
-							</p>
+							<div ng-show="!currentUser">
+								<p class="navbar-text pull-right">
+									<a href="#/login" class="login">Log in</a>
+									<span>|</span>
+									<a href="#/register" class="register">Register</a>
+								</p>
+							</div>
+							<div ng-show="currentUser">
+								<p class="navbar-text pull-right">
+									<a href="#/user" class="login">{{model.currentUser.username}}</a>
+									<span>|</span>
+									<a ng-click="model.logout()" class="login">Log out</a>
+								</p>
+							</div>
 						</div>
 					</div>
 				</nav>
@@ -39,16 +48,16 @@
 
 <!-- script that when click submitting button in the zip code, the pages scrolls down to category list -->
 <!--<script>-->
-	<!--$("span.menu").click(function () {-->
-		<!--$(" ul.navig").slideToggle("slow", function () {-->
-		<!--});-->
-	<!--});-->
-	<!--$("div.banner-btn").click(function () {-->
+<!--$("span.menu").click(function () {-->
+<!--$(" ul.navig").slideToggle("slow", function () {-->
+<!--});-->
+<!--});-->
+<!--$("div.banner-btn").click(function () {-->
 <!--//		$(" ul.navig").slideToggle("slow", function () {-->
 <!--//		});-->
-		<!--document.getElementById("da-thumbs").scrollIntoView();-->
+<!--document.getElementById("da-thumbs").scrollIntoView();-->
 
-	<!--});-->
+<!--});-->
 <!--</script>-->
 
 <!--banner-starts-->
@@ -59,7 +68,8 @@
 				<h2>Please enter a zip code</h2>
 				<form name="zipForm" novalidate>
 					<div ng-class="{ 'has-error': model.invalid && model.submitted}">
-						<input id="zipBox" ng-model="zip" ng-change="model.onChanged()" name="zip" class="form-control zip-input" type="text" placeholder="zip code" required>
+						<input id="zipBox" ng-model="zip" ng-change="model.onChanged()" name="zip" class="form-control zip-input"
+							   type="text" placeholder="zip code" required>
 						<!--<a ng-click="model.login(username, password)" class="btn btn-primary btn-block">Submit</a>-->
 						<span ng-show="model.invalid && model.submitted"
 							  class="help-block">

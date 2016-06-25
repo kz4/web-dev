@@ -1,8 +1,9 @@
 (function () {
     angular
         .module("ProjectMaker")
-        .controller("ProfileController", ProfileController);
-    function ProfileController($location, $rootScope, $routeParams, UserService) {
+        .controller("ProfileEditController", ProfileEditController);
+    
+    function ProfileEditController($location, $rootScope, $routeParams, UserService) {
         var vm = this;
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
