@@ -13,7 +13,7 @@ module.exports = function (app, models) {
 
 
     app.post("/api/user", createUser);
-    // app.get("/api/user", getUsers);
+    app.get("/api/users", getAllUsers);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
@@ -335,17 +335,17 @@ module.exports = function (app, models) {
         }
     }
 
-    function getUsers(req, res) {
-        var username = req.query['username'];
-        var password = req.query['password'];
-
-        if (username && password) {
-            findUserByCredentials(username, password, req, res);
-        } else if (username) {
-            findUserByUsername(username, res);
-        } else {
-            res.send(users);
-        }
+    function getAllUsers(req, res) {
+        userModel
+            .findAllUsers()
+            .then(
+                function (users) {
+                    res.json(users);
+                },
+                function (error) {
+                    res.send(error);
+                }
+            );
     }
 
     function findUserById(req, res) {

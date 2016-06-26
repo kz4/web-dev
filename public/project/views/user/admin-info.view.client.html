@@ -1,0 +1,118 @@
+<!--start-header-->
+<div class="header">
+	<div class="container">
+		<div class="head">
+			<div class="navigation">
+				<nav class="navbar-default navbar-fixed-top navig">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a href="#/" class="navbar-brand active">Yummy Booklet</a>
+							<div ng-show="!currentUser">
+								<p class="navbar-text pull-right">
+									<a href="#/login" class="login">Log in</a>
+									<span>|</span>
+									<a href="#/register" class="register">Register</a>
+								</p>
+							</div>
+							<div ng-show="currentUser">
+								<p class="navbar-text pull-right">
+									<a href="#/user/{{model.currentUser._id}}" class="login">{{model.currentUser.username}}</a>
+									<span>|</span>
+									<a ng-click="model.logout()" class="login">Log out</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</nav>
+				<!--<span class="menu"></span>-->
+				<!--<ul class="navig">-->
+				<!--<li><a href="#/" class="active">Yummy Booklet</a></li>-->
+
+				<!--<li><a href="#/login" class="login">Log in</a></li>-->
+				<!--<li><a href="#/register" class="register">Register</a></li>-->
+				<!--</ul>-->
+				<!--</div>-->
+				<!--<div class="header-right">-->
+				<!--<div class="search-bar">-->
+				<!--<input type="text" value="Search" onfocus="this.value = '';"-->
+				<!--onblur="if (this.value == '') {this.value = 'Search';}">-->
+				<!--<input type="submit" value="">-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="clearfix"></div>-->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- script-for-menu -->
+<!-- script-for-menu -->
+<script>
+	$("span.menu").click(function () {
+		$(" ul.navig").slideToggle("slow", function () {
+		});
+	});
+</script>
+<!-- script-for-menu -->
+<div class="about">
+	<div class="container">
+		<div class="about-main">
+			<div class="col-md-8 about-left">
+				<div class="about-two">
+					<a href="single.html"><img src="images/admin.png" alt="Profile Picture"/></a>
+					<div ng-show="model.isLoggedIn() && model.isCurrentUserSameAsProfile()">
+						<form name="newImageForm" action="/api/profileImageUpload"  method="post" enctype="multipart/form-data">
+							<input name="userId" value="{{model.currentUser._id}}" style="display: none"/>
+							<div class="form-group"
+								 ng-class="{ 'has-error': newImageForm.width.$error.required && model.submitted}">
+								<Label>Width</Label>
+								<input ng-model="model.width" class="form-control" type="text"
+									   placeholder="100%" name="width" required>
+						<span ng-show="newImageForm.width.$error.required && model.submitted"
+							  class="help-block">
+							Image width required
+						</span>
+							</div>
+							<input  name="myFile"   type="file" class="form-control"/>
+							<button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 about-right">
+				<!--<div class="abt-1 pull-right">-->
+					<!--<a href="#/user/{{model.currentUser._id}}/edit">-->
+						<!--<span class="glyphicon glyphicon-edit"></span>&nbsp;Edit profile-->
+					<!--</a>-->
+				<!--</div>-->
+				<div class="about-one">
+					<h3><i class="fa fa-users" aria-hidden="true"></i>All Users</h3>
+				</div>
+				<div class="abt-2">
+					<div class="might-grid" ng-repeat="user in model.users">
+						<div class="grid-might">
+							<div ng-show="user.profilePic">
+								<img ng-src="{{user.profilePic}}" alt="Profile Picture" />
+							</div>
+							<div ng-hide="user.profilePic">
+								<img src="images/profile.png" alt="Profile Picture" />
+							</div>
+							<a href="#/user/{{user._id}}">
+								<span class="">{{user.username}}</span>
+							</a>
+						</div>
+						<div class="might-top">
+							<button class="btn-right" ng-click="">
+								Delete
+							</button>
+							<button class="btn-right" ng-click="">
+								Edit
+							</button>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>

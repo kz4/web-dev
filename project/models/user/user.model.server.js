@@ -8,6 +8,7 @@ module.exports = function () {
 
     var api = {
         createUser: createUser,
+        findAllUsers: findAllUsers,
         findUserById: findUserById,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
@@ -166,6 +167,10 @@ module.exports = function () {
         return ProjectUser.create(user);
     }
 
+    function findAllUsers() {
+        return ProjectUser.find();
+    }
+
     function findUserByUsername(username) {
         return ProjectUser.findOne({username: username});
     }
@@ -175,11 +180,15 @@ module.exports = function () {
         return ProjectUser.findById(userId)
             .populate('following')
             .exec(function (error, doc) {
-                
+
             });
     }
 
     function findUserByCredentials(username, password) {
         return ProjectUser.findOne({username: username, password: password});
+    }
+
+    function findUserByGoogleId(id) {
+        return ProjectUser.findOne({"google.id": id});
     }
 };

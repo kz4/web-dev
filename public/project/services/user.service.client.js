@@ -6,6 +6,7 @@
     function UserService($http, $rootScope) {
         var api = {
             createUser: createUser,
+            findAllUsers: findAllUsers,
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
@@ -77,7 +78,10 @@
         }
 
         function isAdmin() {
-            return (isLoggedIn() && $rootScope.currentUser.roles.indexOf("admin") >= 0);
+            return (isLoggedIn() && $rootScope.currentUser.userType === "ADMIN");
+            // if ((isLoggedIn() && $rootScope.currentUser.userType === "ADMIN")) {
+            //     return
+            // }
         }
 
         function logout() {
@@ -104,6 +108,11 @@
                 }
             }
             return $http.post("/api/user", null);
+        }
+
+        function findAllUsers() {
+            var url = "/api/users/";
+            return $http.get(url);
         }
 
         function findUserById(id) {

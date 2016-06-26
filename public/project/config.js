@@ -52,6 +52,22 @@
 				controller: "RegisterController",
 				controllerAs: "model"
 			})
+			.when("/admin/", {
+				templateUrl: "views/user/admin-info.view.client.html",
+				controller: "AdminInfoController",
+				controllerAs: "model",
+				resolve: {
+					checkAdminLoggedIn: checkAdminLoggedIn
+				}
+			})
+			.when("/admin/:uid", {
+				templateUrl: "views/user/admin-info.view.client.html",
+				controller: "AdminInfoController",
+				controllerAs: "model",
+				resolve: {
+					checkAdminLoggedIn: checkAdminLoggedIn
+				}
+			})
 			.when("/user/", {
 				templateUrl: "views/user/profile-info.view.client.html",
 				controller: "ProfileInfoController",
@@ -82,6 +98,31 @@
 				controllerAs: "model"
 			});
 	}
+
+	var checkAdminLoggedIn = function($q, $timeout, $http, $location, $rootScope, UserService)
+	{
+		var deferred = $q.defer();
+
+		UserService
+			.loggedIn()
+			.then(
+				function(res){
+					$rootScope.errorMessage = null;
+					var user = res.data;
+					if (user !== '0' && user.userType === "ADMIN")
+					{
+						UserService.setCurrentUser(user);
+						deferred.resolve();
+					} else {
+						$location.url("/login");
+					}
+				},
+				function () {
+					$location.url("/login");
+				});
+
+		return deferred.promise;
+	};
 
 	function checkLoggedIn(UserService, $location, $q, $rootScope) {
 
