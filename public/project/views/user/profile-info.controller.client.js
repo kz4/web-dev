@@ -3,7 +3,7 @@
         .module("ProjectMaker")
         .controller("ProfileInfoController", ProfileInfoController);
     
-    function ProfileInfoController($location, $rootScope, UserService, $routeParams) {
+    function ProfileInfoController($location, $rootScope, UserService, $routeParams, $scope) {
         var vm = this;
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
@@ -13,10 +13,89 @@
         vm.hasProfilePicture = hasProfilePicture;
         vm.isLoggedIn = isLoggedIn;
         vm.follow = follow;
+        vm.isCurrentUserSameAsProfile = isCurrentUserSameAsProfile;
+        vm.followUnfollow = followUnfollow;
+        // vm.toggleText = vm.toggle ? 'Toggle!' : 'some text';;
+        // vm.toggle = true;
         var userId = $routeParams.uid;
 
+        function followUnfollow() {
+
+            if (isLoggedIn()) {
+                // vm.currentUser._id is following userId
+                if ($scope.toggle) {
+                    UserService
+                        .followUser(vm.currentUser._id, userId)
+                        .then(
+                            function(){
+                                init();
+                            },
+                            function(err){
+                                vm.error = err;
+                            });
+                    $scope.toggle = !$scope.toggle;
+                    $scope.toggleText = $scope.toggle ? 'Follow' : 'Following';
+                } else {
+                    UserService
+                        .unfollowUser(vm.currentUser._id, userId)
+                        .then(
+                            function(){
+                                init();
+                            },
+                            function(err){
+                                vm.error = err;
+                            });
+                    $scope.toggle = !$scope.toggle;
+                    $scope.toggleText = $scope.toggle ? 'Follow' : 'Following';
+                }
+            }
+        }
+
+        $scope.toggle = true;
+
+        // $scope.$watch('toggle', function(){
+        //     $scope.toggleText = $scope.toggle ? 'Follow' : 'Following';
+        // });
+
+        // $scope.$watch('toggle', function(){
+        //     $scope.toggleText = $scope.toggle ? 'Follow' : 'Following';
+        //
+        //     if (isLoggedIn()) {
+        //         // vm.currentUser._id is following userId
+        //         if (!$scope.toggle) {
+        //             UserService
+        //                 .followUser(vm.currentUser._id, userId)
+        //                 .then(
+        //                     function(){
+        //                         init();
+        //                     },
+        //                     function(err){
+        //                         vm.error = err;
+        //                     });
+        //         } else {
+        //             UserService
+        //                 .unfollowUser(vm.currentUser._id, userId)
+        //                 .then(
+        //                     function(){
+        //                         init();
+        //                     },
+        //                     function(err){
+        //                         vm.error = err;
+        //                     });
+        //         }
+        //     }
+        // });
+
+        
+        
+        function isCurrentUserSameAsProfile() {
+            var res = userId && vm.currentUser._id && (vm.currentUser._id === userId);
+            return res;
+        }
+
         function isLoggedIn() {
-            return ($rootScope.currentUser !== undefined && $rootScope.currentUser !== null);
+            var res = ($rootScope.currentUser !== undefined && $rootScope.currentUser !== null);
+            return res;
         }
 
         // var id = $rootScope.currentUser._id;
@@ -35,7 +114,8 @@
                     function (err) {
                         vm.error = err;
                     }
-                )
+                );
+            $scope.toggleText = $scope.toggle ? 'Follow' : 'Following';
         }
         init();
 

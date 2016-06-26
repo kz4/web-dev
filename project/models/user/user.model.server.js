@@ -1,3 +1,5 @@
+var q = require("q");
+
 module.exports = function () {
 
     var mongoose = require('mongoose');
@@ -11,11 +13,113 @@ module.exports = function () {
         findUserByCredentials: findUserByCredentials,
         updateUser: updateUser,
         deleteUser: deleteUser,
+        followUser: followUser,
+        followByUser: followByUser,
+        unfollowUser: unfollowUser,
+        unfollowByUser: unfollowByUser,
         populateWebsite: populateWebsite,
         spliceWebsite: spliceWebsite,
         findUserByGoogleId: findUserByGoogleId
     };
     return api;
+
+    function followUser(followerId, followedId) {
+        var deferred = q.defer();
+
+        // insert followedId with mongoose user model's findById
+        ProjectUser.findById(followerId, function (err, follower) {
+            if (!err) {
+                if(follower) {
+                    follower.following.push(followedId);
+                    follower.save(function (err) {
+                        if (!err) {
+                            deferred.resolve(follower);
+                        } else {
+                            deferred.reject(err);
+                        }
+                    });
+                } else {
+                    deferred.resolve(follower);
+                }
+            } else {
+                // reject promise if error
+                deferred.reject(err);
+            }
+        });
+
+        return deferred.promise;
+
+    }
+
+    function followByUser(followerId, followedId) {
+        var deferred = q.defer();
+
+        // insert followerId with mongoose user model's findById
+        ProjectUser.findById(followedId, function (err, followed) {
+            if (!err) {
+                if(followed) {
+                    followed.followedBy.push(followerId);
+                    followed.save(function (err) {
+                        if (!err) {
+                            deferred.resolve(followed);
+                        } else {
+                            deferred.reject(err);
+                        }
+                    });
+                } else {
+                    deferred.resolve(followed);
+                }
+            } else {
+                // reject promise if error
+                deferred.reject(err);
+            }
+        });
+
+        return deferred.promise;
+
+    }
+
+    function unfollowUser(followerId, followedId) {
+        var deferred = q.defer();
+
+        // remove followedId with mongoose user model's findById
+        ProjectUser.update(
+            { _id: followerId },
+            { $pull: { following: followedId } },
+            { multi: true },
+            function (err, numAffected) {
+                if (!err) {
+                    deferred.resolve(numAffected)
+                } else {
+                    // reject promise if error
+                    deferred.reject(err);
+                }
+            });
+
+        return deferred.promise;
+
+    }
+
+    function unfollowByUser(followerId, followedId) {
+
+        var deferred = q.defer();
+
+        // remove followerId with mongoose user model's findById
+        ProjectUser.update(
+            { _id: followedId },
+            { $pull: { followedBy: followerId } },
+            { multi: true },
+            function (err, numAffected) {
+                if (!err) {
+                    deferred.resolve(numAffected)
+                } else {
+                    // reject promise if error
+                    deferred.reject(err);
+                }
+            });
+
+        return deferred.promise;
+    }
 
     function findUserByGoogleId(id) {
         return ProjectUser.findOne({"google.id": id});

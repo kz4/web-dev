@@ -58,20 +58,13 @@
 		<div class="about-main">
 			<div class="col-md-8 about-left">
 				<div class="about-two">
-					<!--<a href="single.html"><img src="images/c-1.jpg" alt="" /></a>-->
-					<!--<p>Posted by <a href="#">Johnson</a> on 10 feb, 2015 <a href="#">comments(2)</a></p>-->
-					<!--<div class="about-btn">-->
-					<!--<a href="single.html">Update profile picture</a>-->
-					<!--<input type="file" id="exampleInputFile">-->
-					<!--</div>-->
-					<div ng-if="model.currentUser">
-						<div ng-show="model.hasProfilePicture(model.currentUser.profilePic)">
-							<img ng-src="{{model.currentUser.profilePic}}" alt="Profile Picture" />
+					<div ng-if="model.isLoggedIn()">
+						<div ng-show="model.profilePic">
+							<img ng-src="{{model.profilePic}}" alt="Profile Picture" />
 						</div>
-						<div ng-hide="model.hasProfilePicture(model.currentUser.profilePic)">
+						<div ng-hide="model.hasProfilePicture(model.profilePic)">
 							<img src="images/profile.png" alt="Profile Picture" />
 						</div>
-						<!--<a><img src="images/profile.png" alt="Profile Picture" /></a>-->
 					</div>
 					<div ng-if="!model.isLoggedIn()">
 						<div ng-show="model.profilePic">
@@ -80,23 +73,14 @@
 						<div ng-hide="model.profilePic">
 							<img src="images/profile.png" alt="Profile Picture" />
 						</div>
-						<!--<a><img src="images/profile.png" alt="Profile Picture" /></a>-->
 					</div>
-					<div ng-show="{{model.currentUser}}">
-						<!--<div ng-if="!{{model.currentUser.profilePic}}">-->
-							<!--<a><img src="images/profile.png" alt="Profile Picture" /></a>-->
-						<!--</div>-->
-						<!--<div ng-if="{{model.currentUser.profilePic}}">-->
-							<!--<a><img src="{{model.currentUser.profilePic}}" alt="Profile Picture" /></a>-->
-						<!--</div>-->
+					<div ng-show="model.isLoggedIn() && model.isCurrentUserSameAsProfile()">
 						<form name="newImageForm" action="/api/profileImageUpload"  method="post" enctype="multipart/form-data">
-							<!--<input name="pageId" value="{{model.pageId}}" style="display: none"/>-->
-							<!--<input name="websiteId" value="{{model.websiteId}}" style="display: none"/>-->
 							<input name="userId" value="{{model.currentUser._id}}" style="display: none"/>
 							<div class="form-group"
 								 ng-class="{ 'has-error': newImageForm.width.$error.required && model.submitted}">
 								<Label>Width</Label>
-								<input ng-model="model.widget.width" class="form-control" type="text"
+								<input ng-model="model.width" class="form-control" type="text"
 									   placeholder="100%" name="width" required>
 						<span ng-show="newImageForm.width.$error.required && model.submitted"
 							  class="help-block">
@@ -104,18 +88,20 @@
 						</span>
 							</div>
 							<input  name="myFile"   type="file" class="form-control"/>
-							<!--<input  name="widgetId" value="{{model.widget._id}}"   style="display: none"/>-->
 							<button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
 						</form>
 					</div>
+					<div ng-show="model.isLoggedIn() && !model.isCurrentUserSameAsProfile()">
+						<button ng-click="model.followUnfollow()" class="btn btn-primary">
+						<!--<button ng-click="toggle = !toggle" class="btn btn-primary">-->
+							<!--{{toggle && 'Follow' || 'Following'}}-->
+							{{toggleText}}
+						</button>
+					</div>
 				</div>
-				<!--<div ng-view="currentUser && model.notself">-->
-				<!--<input ng-click="model.follow()" type="submit" value="Follow {{model.user.firstName}}">-->
-				<!--</div>-->
 			</div>
 			<div class="col-md-4 about-right heading">
 				<div class="abt-1 pull-right">
-					<!--<h3>{{model.restaurant.name}}</h3>-->
 					<a href="#/user/{{model.currentUser._id}}/edit">
 						<span class="glyphicon glyphicon-edit"></span>&nbsp;Edit profile
 					</a>

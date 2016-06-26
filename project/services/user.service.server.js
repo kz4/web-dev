@@ -17,6 +17,8 @@ module.exports = function (app, models) {
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
+    app.post  ("/api/project/user/:followerId/user/:followedId", userFollowsUser);
+    app.put   ("/api/project/user/:followerId/user/:followedId", userUnfollowsUser);
     app.post('/api/login', projectPassport.authenticate('local'), login);
     app.get('/auth/google', projectPassport.authenticate('google', { scope : ['profile', 'email'] }));
     app.get('/auth/google/callback',
@@ -40,6 +42,51 @@ module.exports = function (app, models) {
     }
 
     projectPassport.use('google', new GoogleStrategy(googleConfig, googleLogin));
+
+    function userFollowsUser(req, res) {
+
+        var followerId = req.params.followerId;
+        var followedId = req.params.followedId;
+
+        userModel.followByUser(followerId, followedId)
+            .then(
+                function ( docs ) {
+                    return userModel.followUser(followerId, followedId);
+                },
+                function ( err ) {
+                    res.status(400).send(err);
+                })
+            .then(
+                function ( user ) {
+                    res.json(user);
+                },
+                function ( err ) {
+                    res.status(400).send(err);
+                });
+    }
+
+    function userUnfollowsUser(req, res) {
+
+        var followerId = req.params.followerId;
+        var followedId = req.params.followedId;
+
+
+        userModel.unfollowByUser(followerId, followedId)
+            .then(
+                function ( docs ) {
+                    return userModel.unfollowUser(followerId, followedId);
+                },
+                function ( err ) {
+                    res.status(400).send(err);
+                })
+            .then(
+                function ( user ) {
+                    res.json(user);
+                },
+                function ( err ) {
+                    res.status(400).send(err);
+                });
+    }
 
     function register(req, res) {
         var username = req.body.username;

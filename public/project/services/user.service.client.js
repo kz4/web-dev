@@ -15,6 +15,8 @@
             logout: logout,
             loggedIn: loggedIn,
             register: register,
+            followUser: followUser,
+            unfollowUser: unfollowUser,
             getCurrentUser: getCurrentUser,
             getCurrentUsername: getCurrentUsername,
             setCurrentUser: setCurrentUser,
@@ -37,6 +39,14 @@
             } else {
                 return null;
             }
+        }
+
+        function followUser(followerId, followedId) {
+            return $http.post("/api/project/user/"+followerId+"/user/"+followedId);
+        }
+
+        function unfollowUser(followerId, followedId) {
+            return $http.put("/api/project/user/"+followerId+"/user/"+followedId);
         }
 
         function register(username, password, verifyPassword, isAdmin) {
