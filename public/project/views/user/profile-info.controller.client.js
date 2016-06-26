@@ -18,7 +18,7 @@
         function isLoggedIn() {
             return ($rootScope.currentUser !== undefined && $rootScope.currentUser !== null);
         }
-y
+
         // var id = $rootScope.currentUser._id;
         function hasProfilePicture(pic) {
             return !(pic == null || pic == undefined);
@@ -48,7 +48,7 @@ y
             UserService
                 .logout()
                 .then(
-                    function (res) {
+                    function () {
                         $location.url("/login");
                     },
                     function () {
@@ -61,10 +61,10 @@ y
             UserService
                 .updateUser(id, user)
                 .then(
-                    function (inf) {
+                    function () {
                         vm.inf = "Profile updated";
                     },
-                    function (error) {
+                    function () {
                         vm.error = "Profile failed to be updated";
                     }
                 );
@@ -74,7 +74,7 @@ y
             UserService
                 .deleteUser(userId)
                 .then(
-                    function (res) {
+                    function () {
                         $location.url("/");
                     },
                     function (res) {

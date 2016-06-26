@@ -2588,6 +2588,10 @@ fieldset[disabled] .form-control {
 }
 textarea.form-control {
   height: auto;
+  margin: 2% auto 2% auto;
+  border: 1px solid #190608;
+  color: #190608;
+  font-size: 13px;
 }
 input[type="search"] {
   -webkit-appearance: none;

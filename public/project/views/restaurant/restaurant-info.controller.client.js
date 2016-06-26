@@ -2,7 +2,7 @@
     angular
         .module("ProjectMaker")
         .controller("RestaurantInfoController", RestaurantInfoController);
-     
+
     function RestaurantInfoController($sce, $routeParams, RestaurantService, UserService, $location, $rootScope, CommentService, ReplyService) {
         var vm = this;
         var categoryId = $routeParams.categoryId;
@@ -32,7 +32,7 @@
             UserService
                 .logout()
                 .then(
-                    function (res) {
+                    function () {
                         $location.url("/login");
                     },
                     function () {
@@ -42,7 +42,7 @@
         }
 
         function findReplyByReplyId(replyId) {
-            
+
         }
 
         function findRepliesByCommentId(commetId) {
@@ -60,7 +60,7 @@
         // var commentIndex = 0;
 
         var comments = [];
-        
+
         function cancelAReplyToAReply(index, parentIndex) {
             // for (var i in comments) {
             //     comments[i].isThisReplyCommentAreaShown = false;
@@ -80,7 +80,7 @@
                 }
             }
         }
-        
+
         function submitAReplyToAReply(replyToAReply, commentId, replierId, replier, index, parentIndex) {
             if(isUserLoggedIn) {
                 var newReplyToAComment = {
@@ -142,17 +142,17 @@
                             .updateReply(commentId, replyId, reply)
                             .then(function (response) {
 
-                            },
-                            function (err) {
-                                vm.error = err;
-                            })
+                                },
+                                function (err) {
+                                    vm.error = err;
+                                })
                     }
                 )
-                
+
         }
 
         function cancelAReplyToAComment(commentId, replyHostId, replyHost, commentIndex) {
-                CommentService
+            CommentService
                 .findCommentByCommentId(commentId)
                 .then(
                     function (res) {
@@ -178,7 +178,7 @@
             //     }
             // }
         }
-        
+
         function submitAReplyToAComment(replyToAComment, commentId, replyHostId, replyHost, commentIndex) {
             if(isUserLoggedIn) {
                 // $anchorScroll("anchor");
@@ -204,7 +204,7 @@
                         function (res) {
                             var newReplyRes = res.data;
                             var newReplyId = newReplyRes._id;
-                            cancelAReplyToAComment(newReplyRes.commentId, "", "", "");
+                            refreshPage(restaurantId);
                         },
                         function (err) {
                             vm.error = err;
@@ -254,7 +254,7 @@
                         .updateComment(commentId, comment)
                         .then(
                             function () {
-                                refreshPage();
+                                refreshPage(restaurantId);
                             },
                             function (err) {
                                 vm.error = err;
@@ -319,61 +319,61 @@
         function getSafeUrl(url) {
             return $sce.trustAsResourceUrl(url);
         }
-        
-       function init() {
-           var keyUrl = "";
-           RestaurantService
-               .getGoogleMapKey()
-               .then(function (res) {
-                   var googleMapKey = res.data;
-                   keyUrl = "&key=" + googleMapKey;
-               })
-               .then(
-                   RestaurantService
-                       .findRestaurantByYelpRestaurantId(restaurantId)
-                       .then(function (res) {
-                           var restaurant = res.data;
-                           if (restaurant) {
-                               vm.restaurant = restaurant;
-                               var categories = restaurant.categories.map(selectUpperCase).join(", ")
-                               vm.categories = categories;
 
-                               var location = restaurant.location.display_address.join(", ");
-                               vm.location = location;
-                               var imageUrl = restaurant.image_url.substring(0, restaurant.image_url.lastIndexOf("ms"))
-                                   + 'o.jpg';
-                               vm.image = imageUrl;
+        function init() {
+            var keyUrl = "";
+            RestaurantService
+                .getGoogleMapKey()
+                .then(function (res) {
+                    var googleMapKey = res.data;
+                    keyUrl = "&key=" + googleMapKey;
+                })
+                .then(
+                    RestaurantService
+                        .findRestaurantByYelpRestaurantId(restaurantId)
+                        .then(function (res) {
+                            var restaurant = res.data;
+                            if (restaurant) {
+                                vm.restaurant = restaurant;
+                                var categories = restaurant.categories.map(selectUpperCase).join(", ");
+                                vm.categories = categories;
 
-                               var googleMapSrc = "https://www.google.com/maps/embed/v1/place?q="
-                                   + restaurant.location.coordinate.latitude + ","
-                                   + restaurant.location.coordinate.longitude
-                                   + keyUrl;
-                               vm.googleMapSrc = getSafeUrl(googleMapSrc);
-                           }
-                       })
-               );
+                                var location = restaurant.location.display_address.join(", ");
+                                vm.location = location;
+                                var imageUrl = restaurant.image_url.substring(0, restaurant.image_url.lastIndexOf("ms"))
+                                    + 'o.jpg';
+                                vm.image = imageUrl;
 
-           UserService
-               .loggedIn()
-               .then(
-                   function (res) {
-                       var user = res.data;
-                       if (user == '0') {
-                           $rootScope.currentUser = null;
-                           // deferred.reject();
-                           // $location.url("/login");
-                           isUserLoggedIn = false;
-                       } else {
-                           $rootScope.currentUser = user;
-                           isUserLoggedIn = true;
-                       }
-                   },
-                   function () {
-                       $location.url("/login");
-                   });
-           refreshPage(restaurantId);
-       }
-       init();
+                                var googleMapSrc = "https://www.google.com/maps/embed/v1/place?q="
+                                    + restaurant.location.coordinate.latitude + ","
+                                    + restaurant.location.coordinate.longitude
+                                    + keyUrl;
+                                vm.googleMapSrc = getSafeUrl(googleMapSrc);
+                            }
+                        })
+                );
+
+            UserService
+                .loggedIn()
+                .then(
+                    function (res) {
+                        var user = res.data;
+                        if (user == '0') {
+                            $rootScope.currentUser = null;
+                            // deferred.reject();
+                            // $location.url("/login");
+                            isUserLoggedIn = false;
+                        } else {
+                            $rootScope.currentUser = user;
+                            isUserLoggedIn = true;
+                        }
+                    },
+                    function () {
+                        $location.url("/login");
+                    });
+            refreshPage(restaurantId);
+        }
+        init();
 
         function refreshPage(restaurantId){
             CommentService
