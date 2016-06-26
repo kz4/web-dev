@@ -10,10 +10,19 @@
         vm.logout = logout;
         var currentUser = $rootScope.currentUser;
         vm.currentUser = currentUser;
+        vm.hasProfilePicture = hasProfilePicture;
+        vm.isLoggedIn = isLoggedIn;
         vm.follow = follow;
         var userId = $routeParams.uid;
 
+        function isLoggedIn() {
+            return ($rootScope.currentUser !== undefined && $rootScope.currentUser !== null);
+        }
+y
         // var id = $rootScope.currentUser._id;
+        function hasProfilePicture(pic) {
+            return !(pic == null || pic == undefined);
+        }
 
         function init() {
             UserService
@@ -21,6 +30,7 @@
                 .then(
                     function (res) {
                         vm.user = res.data;
+                        vm.profilePic = vm.user.profilePic;
                     },
                     function (err) {
                         vm.error = err;

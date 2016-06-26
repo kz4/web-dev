@@ -52,7 +52,8 @@ module.exports = function () {
             $set: {
                 firstName: user.firstName,
                 lastName: user.lastName,
-                email: user.email
+                email: user.email,
+                profilePic: user.profilePic
             }
         });
     }

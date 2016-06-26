@@ -16,7 +16,7 @@
 							</div>
 							<div ng-show="currentUser">
 								<p class="navbar-text pull-right">
-									<a href="#/user" class="login">{{model.currentUser.username}}</a>
+									<a href="#/user/{{model.currentUser._id}}" class="login">{{model.currentUser.username}}</a>
 									<span>|</span>
 									<a ng-click="model.logout()" class="login">Log out</a>
 								</p>

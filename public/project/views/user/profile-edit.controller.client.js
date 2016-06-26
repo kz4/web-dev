@@ -39,8 +39,9 @@
             UserService
                 .updateUser(id, user)
                 .then(
-                    function (inf) {
-                        vm.inf = "Profile updated";
+                    function () {
+                        // vm.inf = "Profile updated";
+                        $location.url("/user/" + id);
                     },
                     function (error) {
                         vm.error = "Profile failed to be updated";

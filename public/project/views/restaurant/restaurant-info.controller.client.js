@@ -301,7 +301,7 @@
                         .createComment(newComment)
                         .then(function (res) {
                             var returnedComment = res.data;
-                            refreshPage()
+                            refreshPage(restaurantId);
                         })
                 }
             } else {
@@ -368,7 +368,7 @@
                            isUserLoggedIn = true;
                        }
                    },
-                   function (err) {
+                   function () {
                        $location.url("/login");
                    });
            refreshPage(restaurantId);

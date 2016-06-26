@@ -6,6 +6,7 @@ module.exports = function () {
         username: {type: String, required: true},
         password: String,
         firstName: String,
+        profilePic: String,
         google: {
             token: String,
             id: String,
