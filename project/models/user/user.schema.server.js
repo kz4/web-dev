@@ -16,8 +16,8 @@ module.exports = function () {
         email: String,
         phone: String,
         dob: Date,
-        following: [{type: mongoose.Schema.ObjectId, ref: "User"}],
-        followedBy: [{type: mongoose.Schema.ObjectId, ref: "User"}],
+        following: [{type: mongoose.Schema.ObjectId, ref: "ProjectUser"}],
+        followedBy: [{type: mongoose.Schema.ObjectId, ref: "ProjectUser"}],
         userType: {
             type: String,
             enum: ['NORMAL', 'ADMIN']

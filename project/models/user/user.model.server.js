@@ -171,7 +171,12 @@ module.exports = function () {
     }
 
     function findUserById(userId) {
-        return ProjectUser.findById(userId);
+        // return ProjectUser.findById(userId);
+        return ProjectUser.findById(userId)
+            .populate('following')
+            .exec(function (error, doc) {
+                
+            });
     }
 
     function findUserByCredentials(username, password) {

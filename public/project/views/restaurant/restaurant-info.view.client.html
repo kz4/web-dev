@@ -149,10 +149,11 @@
                                     <div ng-repeat="reply in comment.replies">
                                         <!--<div ng-repeat="reply in model.replies">-->
                                         <!--<div ng-repeat="reply in model.replies">-->
-                                        <a href="#/user/{{reply.replier.commenterId}}">
+                                        <a href="#/user/{{reply.replierId}}">
                                             <span class="text-info">{{reply.replier}}</span>
                                         </a>&nbsp;@
-                                        <a href="#/user/{{reply.host.commenterId}}">
+                                        <!--<h1>{{reply.replierId}}</h1>-->
+                                        <a href="#/user/{{reply.hostId}}">
                                             <span class="text-info">{{reply.host}}</span>
                                         </a>
                                         <span>at {{model.getLongDateTime(reply.date)}}:</span>&nbsp;

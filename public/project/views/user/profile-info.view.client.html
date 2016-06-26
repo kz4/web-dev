@@ -91,13 +91,14 @@
 							<button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
 						</form>
 					</div>
-					<div ng-show="model.isLoggedIn() && !model.isCurrentUserSameAsProfile()">
-						<button ng-click="model.followUnfollow()" class="btn btn-primary">
-						<!--<button ng-click="toggle = !toggle" class="btn btn-primary">-->
-							<!--{{toggle && 'Follow' || 'Following'}}-->
-							{{toggleText}}
-						</button>
-					</div>
+					<a ng-hide="model.cannotFollow()"
+					   ng-click="model.followUser()">
+						<i class="follow-icon fa fa-star-o">&nbsp;follow&nbsp;{{model.user.username}}</i>
+					</a>
+					<a ng-show="model.canUnfollow()"
+					   ng-click="model.unfollowUser()">
+						<i class="follow-icon fa fa-star">&nbsp;following&nbsp;{{model.user.username}}</i>
+					</a>
 				</div>
 			</div>
 			<div class="col-md-4 about-right heading">
@@ -116,11 +117,35 @@
 					</ul>
 				</div>
 				<div class="abt-2">
-					<div class="news">
-						<form>
-							<input type="text" value="message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" />
-							<input type="submit" value="Comment">
-						</form>
+					<!--<div class="news">-->
+					<!--<form>-->
+					<!--<input type="text" value="message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" />-->
+					<!--<input type="submit" value="Comment">-->
+					<!--</form>-->
+					<!--</div>-->
+					<h3 class="news">Following</h3>
+					<div ng-repeat="followingUser in model.user.following">
+						<div class="commentDiv">
+							<!--<a href="#/user/{{comment.commenterId}}">-->
+								<!--<span class="text-info">{{comment.commenter}}</span>-->
+							<!--</a>&nbsp;-->
+							<!--<span>posted at {{model.getLongDateTime(comment.date)}}</span>&nbsp;-->
+							<!--&lt;!&ndash;<button ng-click="model.replyAcomment(comment._id, comment.commenterId, comment.commenter, $index)"&ndash;&gt;-->
+							<!--&lt;!&ndash;class="replyBtn">reply&ndash;&gt;-->
+							<!--&lt;!&ndash;</button>&ndash;&gt;-->
+							<!--<button class="btn-right" ng-click="comment.isThisReplyCommentAreaShown = true">-->
+								<!--Reply-->
+							<!--</button>-->
+							<!--<br/>-->
+							<!--<span class="commentText">{{comment.content}}</span>-->
+							<!--<h4>{{followingUser.username}}</h4>-->
+							<img width="20%" ng-src="{{followingUser.profilePic}}" alt="Profile Picture" />
+							<a href="#/user/{{followingUser._id}}">
+								<span class="text-info">{{followingUser.username}}</span>
+								<br>
+								<span class="text-info">{{followingUser.firstName}}&nbsp;{{followingUser.lastName}}</span>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>

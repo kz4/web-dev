@@ -14,80 +14,74 @@
         vm.isLoggedIn = isLoggedIn;
         vm.follow = follow;
         vm.isCurrentUserSameAsProfile = isCurrentUserSameAsProfile;
-        vm.followUnfollow = followUnfollow;
-        // vm.toggleText = vm.toggle ? 'Toggle!' : 'some text';;
-        // vm.toggle = true;
+
+        vm.cannotFollow = cannotFollow;
+        vm.canUnfollow = canUnfollow;
+        vm.followUser = followUser;
+        vm.unfollowUser = unfollowUser;
+
         var userId = $routeParams.uid;
 
-        function followUnfollow() {
-
-            if (isLoggedIn()) {
-                // vm.currentUser._id is following userId
-                if ($scope.toggle) {
-                    UserService
-                        .followUser(vm.currentUser._id, userId)
-                        .then(
-                            function(){
-                                init();
-                            },
-                            function(err){
-                                vm.error = err;
-                            });
-                    $scope.toggle = !$scope.toggle;
-                    $scope.toggleText = $scope.toggle ? 'Follow' : 'Following';
-                } else {
-                    UserService
-                        .unfollowUser(vm.currentUser._id, userId)
-                        .then(
-                            function(){
-                                init();
-                            },
-                            function(err){
-                                vm.error = err;
-                            });
-                    $scope.toggle = !$scope.toggle;
-                    $scope.toggleText = $scope.toggle ? 'Follow' : 'Following';
-                }
-            }
+        function cannotFollow() {
+            var res= (!isLoggedIn() // not loggedIn
+            || isCurrentUserSameAsProfile() // OR is the user self
+            || isLoggedUserFollowingProfileUser()); // OR has followed this user
+            return res;
         }
 
-        $scope.toggle = true;
+        function canUnfollow() {
+            var res = (isLoggedIn() // loggedIn
+            && isLoggedUserFollowingProfileUser()); // AND has followed this user
+            return res;
+        }
 
-        // $scope.$watch('toggle', function(){
-        //     $scope.toggleText = $scope.toggle ? 'Follow' : 'Following';
-        // });
+        function isLoggedUserFollowingProfileUser() {
+            for (var i = 0; i < $rootScope.currentUser.following.length; i++) {
+                // must use $rootScope.currentUser instead of currentUser because currentUser just got updated
+                if ($rootScope.currentUser.following[i]._id === userId) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
-        // $scope.$watch('toggle', function(){
-        //     $scope.toggleText = $scope.toggle ? 'Follow' : 'Following';
-        //
-        //     if (isLoggedIn()) {
-        //         // vm.currentUser._id is following userId
-        //         if (!$scope.toggle) {
-        //             UserService
-        //                 .followUser(vm.currentUser._id, userId)
-        //                 .then(
-        //                     function(){
-        //                         init();
-        //                     },
-        //                     function(err){
-        //                         vm.error = err;
-        //                     });
-        //         } else {
-        //             UserService
-        //                 .unfollowUser(vm.currentUser._id, userId)
-        //                 .then(
-        //                     function(){
-        //                         init();
-        //                     },
-        //                     function(err){
-        //                         vm.error = err;
-        //                     });
-        //         }
-        //     }
-        // });
+        function followUser() {
+            UserService
+                .followUser(vm.currentUser._id, userId)
+                .then(
+                    function(){
+                        setUser(vm.currentUser._id);
+                    },
+                    function(err){
+                        vm.error = err;
+                    });
+        }
 
-        
-        
+        function unfollowUser() {
+            UserService
+                .unfollowUser(vm.currentUser._id, userId)
+                .then(
+                    function(){
+                        setUser(vm.currentUser._id);
+                    },
+                    function(err){
+                        vm.error = err;
+                    });
+        }
+
+        function setUser(userId) {
+            UserService
+                .findUserById(userId)
+                .then(
+                    function(response){
+                        UserService.setCurrentUser(response.data);
+                        init();
+                    },
+                    function(err){
+                        vm.error = err;
+                    });
+        }
+
         function isCurrentUserSameAsProfile() {
             var res = userId && vm.currentUser._id && (vm.currentUser._id === userId);
             return res;
@@ -98,12 +92,17 @@
             return res;
         }
 
-        // var id = $rootScope.currentUser._id;
         function hasProfilePicture(pic) {
             return !(pic == null || pic == undefined);
         }
 
         function init() {
+            if (!userId) {
+                if (isLoggedIn()) {
+                    userId = $rootScope.currentUser._id;
+                }
+            }
+
             UserService
                 .findUserById(userId)
                 .then(
