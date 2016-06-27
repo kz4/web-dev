@@ -8,10 +8,89 @@ var _ = require('lodash');
 module.exports = function (app, models) {
 
     var userModel = models.userModel;
+    var restaurantModel = models.restaurantModel;
 
     app.post("/api/restaurant/:categoryId", getRestaurantByCategoryId);
     app.get("/api/restaurant/:restaurantId", getRestaurantByYelprestaurantId);
+    app.get("/api/alluserfavorthisrestaurant/:restaurantId", findAllUsersThatFavoredThisRestaurant);
     app.get("/api/googleMapKey", getGoogleMapKey);
+    app.post("/api/user/:userId/restaurant/:restaurantId", addRestaurantToFavorite);
+    app.post("/api/user/:userId/restaurantcreate/:restaurantId", createRestaurantToFavorite);
+    app.put("/api/user/:userId/restaurant/:restaurantId", removeRestaurantFromFavorite);
+    app.get("/api/restaurantidindb/:restaurantId", findRestaurantByYelpRestaurantIdInDB);
+    
+    function findRestaurantByYelpRestaurantIdInDB(req, res) {
+        var restaurantId = req.params.restaurantId;
+        restaurantModel
+            .findRestaurantByYelpRestaurantIdInDB(restaurantId)
+            .then(
+                function (restaurant) {
+                    res.json(restaurant);
+                },
+                function (err) {
+                    res.send(err);
+                }
+            )
+    }
+
+    function addRestaurantToFavorite(req, res) {
+        var restaurantId = req.params.restaurantId;
+        var userId = req.params.userId;
+        restaurantModel
+            .addUserIdToRestaurantUsers(restaurantId, userId)
+            .then(
+                function (response) {
+                    
+                },
+                function (err) {
+                    res.send(err);
+                }
+            )
+    }
+    
+    function createRestaurantToFavorite(req, res) {
+        var restaurantId = req.params.restaurantId;
+        var userId = req.params.userId;
+        restaurantModel
+            .createRestaurantToFavorite(restaurantId, userId)
+            .then(
+                function (response) {
+
+                },
+                function (err) {
+                    res.send(err);
+                }
+            )
+    }
+    
+    function removeRestaurantFromFavorite(req, res) {
+        var restaurantId = req.params.restaurantId;
+        var userId = req.params.userId;
+        restaurantModel
+            .removeUserIdFromRestaurantUsers(restaurantId, userId)
+            .then(
+                function (response) {
+
+                },
+                function (err) {
+                    res.send(err);
+                }
+            )
+    }
+    
+    function findAllUsersThatFavoredThisRestaurant(req, res) {
+        var restaurantId = req.params.restaurantId;
+        restaurantModel
+            .findAllUsersThatFavoredThisRestaurant(restaurantId)
+            .then(
+                function (users) {
+                    res.json(users);
+                },
+                function (err) {
+                    res.send(err);
+                }
+            )
+    }
 
     function getGoogleMapKey(req, res) {
         var key = process.env.GOOGLE_MAP_KEY;
@@ -86,7 +165,6 @@ module.exports = function (app, models) {
                 }
             });
     }
-
 
     /* Function for yelp call
      * ------------------------
@@ -181,264 +259,5 @@ module.exports = function (app, models) {
         request(apiURL, function(error, response, body){
             return callback(error, response, body);
         });
-    }
-
-    function loggedIn(req, res) {
-        if (req.isAuthenticated()) {
-            res.json(req.user);
-        } else {
-            res.send('0');
-        }
-    }
-
-    function logout(req, res) {
-        req.logout();
-        res.send(200);
-    }
-
-    function localStrategy(username, password, done) {
-        userModel
-            .findUserByUsername(username)
-            .then(
-                function(user) {
-                    if(user && bcrypt.compareSync(password, user.password)) {
-                        return done(null, user);
-                    } else {
-                        return done(null, false);
-                    }
-                },
-                function(err) {
-                    if (err) { return done(err); }
-                }
-            );
-    }
-
-    function login(req, res) {
-        var user = req.user;
-        res.json(user);
-    }
-
-    function googleLogin(token, refreshToken, profile, done) {
-        userModel
-            .findUserByGoogleId(profile.id)
-            .then(
-                function (googleUser) {
-                    if (googleUser) {
-                        return done(null, googleUser);
-                    } else {
-                        googleUser = {
-                            username: profile.displayName.replace(/ /g, ''),
-                            email: profile.emails[0].value,
-                            firstName: profile.name.givenName,
-                            lastName:  profile.name.familyName,
-                            google: {
-                                token: token,
-                                id: profile.id,
-                                displayname: profile.displayName
-                            }
-                        };
-                        userModel
-                            .createUser(googleUser)
-                            .then(
-                                function (user) {
-                                    done(null, user);
-                                },
-                                function (error) {
-
-                                }
-                            )
-                    }
-                }
-            )
-    }
-
-    function projectSerializeUser(user, done) {
-        done(null, user);
-    }
-
-    function projectDeserializeUser(user, done) {
-        userModel
-            .findUserById(user._id)
-            .then(
-                function(user){
-                    done(null, user);
-                },
-                function(err){
-                    done(err, null);
-                }
-            );
-    }
-
-    function deleteUser(req, res) {
-        // var id = req.params.userId;
-        // userModel
-        //     .deleteUser(id)
-        //     .then(
-        //         function () {
-        //             websiteModel
-        //                 .findAllWebsitesForUser(id)
-        //                 .then(function (websites) {
-        //                     for (var i in websites) {
-        //                         pageModel
-        //                             .findAllPagesForWebsite(websites[i]._id)
-        //                             .then(function (pages) {
-        //                                     for (var j in pages) {
-        //                                         widgetModel
-        //                                             .findAllWidgetsForPage(pages[j]._id)
-        //                                             .then(function (widgets) {
-        //                                                 for (var k in widgets) {
-        //                                                     widgetModel
-        //                                                         .deleteWidget(widgets[k]._id)
-        //                                                         .then(function () {
-        //                                                                 res.sendStatus(200);
-        //                                                             }, function (error) {
-        //                                                                 res.send(error);
-        //                                                             });
-        //                                                 }
-        //                                             }, function (error) {
-        //                                                 res.send(error);
-        //                                             });
-        //                                         pageModel
-        //                                             .deletePage(pages[j]._id)
-        //                                             .then(function () {
-        //                                                     res.sendStatus(200);
-        //                                                 },
-        //                                                 function (error) {
-        //                                                     res.send(error);
-        //                                                 });
-        //                                     }
-        //                                 },
-        //                                 function (error) {
-        //                                     res.send(error);
-        //                                 });
-        //                         websiteModel
-        //                             .deleteWebsite(websites[i]._id)
-        //                             .then(function () {
-        //                                 res.sendStatus(200);
-        //                             }, function (error) {
-        //                                 res.send(error);
-        //                             });
-        //                     }
-        //                 }, function (error) {
-        //                     res.send(error);
-        //                 });
-        //         },
-        //         function (error) {
-        //             // res.statusCode(404).send(error);
-        //             res.send(error);
-        //         }
-        //     );
-
-        var id = req.params.userId;
-        userModel
-            .deleteUser(id)
-            .then(
-                function () {
-                    res.send(200);
-                }, function () {
-                    res.status(400).send("Error deleting a user");
-                }
-            )
-    }
-
-    function updateUser(req, res) {
-        var id = req.params.userId;
-        var newUser = req.body;
-        userModel
-            .updateUser(id, newUser)
-            .then(
-                function () {
-                    res.sendStatus(200);
-                },
-                function (error) {
-                    // res.statusCode(404).send(error);
-                    res.send(error);
-                }
-            );
-    }
-
-    function createUser(req, res) {
-        var user = req.body;
-        if (user.username) {
-            userModel
-            // check if username exists
-                .findUserByUsername(user.username)
-                .then(function (userExists) {
-                    // if user cannot be found
-                    if (!userExists) {
-                        return userModel
-                            .createUser(user)
-                            .then(
-                                function (user) {
-                                    res.json(user);
-                                },
-                                function (error) {
-                                    // res.statusCode(404).send(error);
-                                    res.send(error);
-                                }
-                            )
-                    } else {
-                        // Username already exists
-                        // res.status(400).send("Username already exists");
-                        res.send("Username already exists");
-                    }
-                });
-        }
-    }
-
-    function getUsers(req, res) {
-        var username = req.query['username'];
-        var password = req.query['password'];
-
-        if (username && password) {
-            findUserByCredentials(username, password, req, res);
-        } else if (username) {
-            findUserByUsername(username, res);
-        } else {
-            res.send(users);
-        }
-    }
-
-    function findUserById(req, res) {
-        var id = req.params.userId;
-        userModel
-            .findUserById(id)
-            .then(
-                function (user) {
-                    res.json(user);
-                },
-                function (error) {
-                    // res.statusCode(404).send(error);
-                    res.send(error);
-                }
-            );
-    }
-
-    // function findUserByCredentials(username, password, req, res) {
-    //     userModel
-    //         .findUserByCredentials(username, password)
-    //         .then(
-    //             function (user) {
-    //                 res.json(user);
-    //             },
-    //             function (error) {
-    //                 // res.statusCode(404).send(error);
-    //                 res.send(error);
-    //             }
-    //         );
-    // }
-
-    function findUserByUsername(username, res) {
-        userModel
-            .findUserByUsername(username)
-            .then(
-                function (user) {
-                    res.json(user);
-                },
-                function (error) {
-                    // res.statusCode(404).send(error);
-                    res.send(error);
-                }
-            );
     }
 };

@@ -27,6 +27,97 @@
         vm.currentUser = $rootScope.currentUser;
         vm.logout = logout;
 
+        vm.cannotAddToFavorite = cannotAddToFavorite;
+        vm.canDeleteFromFavorite = canDeleteFromFavorite;
+        vm.addRestaurantToFavorite = addRestaurantToFavorite;
+        vm.removeRestaurantFromFavorite = removeRestaurantFromFavorite;
+
+        function addRestaurantToFavorite() {
+            RestaurantService
+                .findRestaurantByYelpRestaurantIdInDB(restaurantId)
+                .then(
+                    function (res) {
+                        var restaurant = res.data;
+                        if (restaurant && restaurant.length > 0) {
+                            RestaurantService
+                                .addRestaurantToFavorite(restaurantId, vm.currentUser._id)
+                                .then(
+                                    function () {
+                                        setUser(vm.currentUser._id);
+                                    },
+                                    function (err) {
+                                        vm.error = err;
+                                    }
+                                )
+                        } else {
+                            RestaurantService
+                                .createRestaurantToFavorite(restaurantId, vm.currentUser._id)
+                                .then(
+                                    function () {
+                                        setUser(vm.currentUser._id);
+                                    },
+                                    function (err) {
+                                        vm.error = err;
+                                    }
+                                )
+                        }
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                )
+            
+        }
+
+        function removeRestaurantFromFavorite() {
+            RestaurantService
+                .removeRestaurantFromFavorite(restaurantId, vm.currentUser)
+                .then(
+                    function () {
+                        setUser(vm.currentUser._id);
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                )
+        }
+
+        function setUser(userId) {
+            UserService
+                .findUserById(userId)
+                .then(
+                    function(response){
+                        UserService.setCurrentUser(response.data);
+                        init();
+                    },
+                    function(err){
+                        vm.error = err;
+                    });
+        }
+
+        function cannotAddToFavorite() {
+            if (vm.users) {
+                return (!isLoggedIn() // not loggedIn
+                || (vm.users.indexOf($rootScope.currentUser._id) >= 0)); // OR has liked this restaurant
+            } else {
+                return false;
+            }
+        }
+
+        function canDeleteFromFavorite() {
+            if (vm.users) {
+                return (isLoggedIn() // loggedIn
+                && (vm.users.indexOf($rootScope.currentUser._id) >= 0)); // AND has liked this restaurant
+            } else {
+                return false;
+            }
+        }
+
+        function isLoggedIn() {
+            var res = ($rootScope.currentUser !== undefined && $rootScope.currentUser !== null);
+            return res;
+        }
+
         function logout() {
             $rootScope.currentUser = null;
             UserService
@@ -56,8 +147,6 @@
         }
 
         var isUserLoggedIn = false;
-
-        // var commentIndex = 0;
 
         var comments = [];
 
@@ -352,6 +441,17 @@
                             }
                         })
                 );
+
+            RestaurantService
+                .findAllUsersThatFavoredThisRestaurant(restaurantId)
+                .then(
+                    function (res) {
+                        var users = res.data;
+                        vm.users = users;
+                    },
+                    function (err) {
+
+                    });
 
             UserService
                 .loggedIn()

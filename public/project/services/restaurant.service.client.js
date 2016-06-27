@@ -7,18 +7,45 @@
         var api = {
             findRestaurantServicesByCategoryId : findRestaurantServicesByCategoryId,
             findRestaurantByYelpRestaurantId : findRestaurantByYelpRestaurantId,
-            getGoogleMapKey : getGoogleMapKey 
+            getGoogleMapKey : getGoogleMapKey,
+            findRestaurantByYelpRestaurantIdInDB : findRestaurantByYelpRestaurantIdInDB,
+            findAllUsersThatFavoredThisRestaurant : findAllUsersThatFavoredThisRestaurant,
+            addRestaurantToFavorite : addRestaurantToFavorite,
+            removeRestaurantFromFavorite : removeRestaurantFromFavorite,
+            createRestaurantToFavorite : createRestaurantToFavorite
         };
         return api;
-        
+
+        function createRestaurantToFavorite(restaurantId, userId) {
+            return $http.post("/api/user/" + userId + "/restaurantcreate/" + restaurantId);
+        }
+
+        function findRestaurantByYelpRestaurantIdInDB(restaurantId) {
+            var url = "/api/restaurantidindb/" + restaurantId;
+            return $http.get(url);
+        }
+
+        function removeRestaurantFromFavorite(restaurantId, userId) {
+            return $http.put("/api/user/" + userId + "/restaurant/" + restaurantId);
+        }
+
+        function addRestaurantToFavorite(restaurantId, userId) {
+            return $http.post("/api/user/" + userId + "/restaurant/" + restaurantId);
+        }
+
+        function findRestaurantByYelpRestaurantId(restaurantId) {
+            var url = "/api/restaurant/" + restaurantId;
+            return $http.get(url);
+        }
+
         function getGoogleMapKey() {
             var url = "/api/googleMapKey";
             return $http.get(url);
         }
 
-        function findRestaurantByYelpRestaurantId(restaurantId) {
-            var url = "/api/restaurant/" + restaurantId;
-            return $http.get(url); 
+        function findAllUsersThatFavoredThisRestaurant(restaurantId) {
+            var url = "/api/alluserfavorthisrestaurant/" + restaurantId;
+            return $http.get(url);
         }
         
         function findRestaurantServicesByCategoryId(id, locationInfo) {
