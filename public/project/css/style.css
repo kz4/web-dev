@@ -394,6 +394,31 @@ button.btn-right:hover {
 	-ms-transition: 0.5s all ease;
 }
 
+.btn-dark {
+	color: #ffffff;
+	padding: 5px 13px;
+	border: 1px solid #190608;
+	font-size: 13px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-ms-border-radius: 5px;
+	font-family: 'Raleway-Regular';
+	margin-right: 3%;
+	background: #190608;
+}
+
+.btn-dark:hover {
+	background: #ffffff;
+	color: #190608;
+	transition: 0.5s all ease;
+	-webkit-transition: 0.5s all ease;
+	-moz-transition: 0.5s all ease;
+	-o-transition: 0.5s all ease;
+	-ms-transition: 0.5s all ease;
+}
+
 button.btn-left {
 	color: #ffffff;
 	padding: 5px 13px;
@@ -630,6 +655,7 @@ button.btn-left:hover {
 	padding: 0;
 	margin-top: 3%;
 	margin-left: 10%;
+	margin-bottom: 5%;
 }
 
 .news form input[type="text"] {
@@ -773,6 +799,10 @@ button.btn-left:hover {
 
 .about-right {
 	text-align: center;
+}
+
+.about-right .form-group {
+	text-align: left;
 }
 
 .abt-one {
@@ -2861,3 +2891,6 @@ iframe.g-map {
 	margin-bottom: 3%;
 }
 
+.user-list {
+	width: 50%;
+}

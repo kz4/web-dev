@@ -74,23 +74,6 @@
 							<img src="images/profile.png" alt="Profile Picture" />
 						</div>
 					</div>
-					<div ng-show="model.isLoggedIn() && model.isCurrentUserSameAsProfile()">
-						<form name="newImageForm" action="/api/profileImageUpload"  method="post" enctype="multipart/form-data">
-							<input name="userId" value="{{model.currentUser._id}}" style="display: none"/>
-							<div class="form-group"
-								 ng-class="{ 'has-error': newImageForm.width.$error.required && model.submitted}">
-								<Label>Width</Label>
-								<input ng-model="model.width" class="form-control" type="text"
-									   placeholder="100%" name="width" required>
-						<span ng-show="newImageForm.width.$error.required && model.submitted"
-							  class="help-block">
-							Image width required
-						</span>
-							</div>
-							<input  name="myFile"   type="file" class="form-control"/>
-							<button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
-						</form>
-					</div>
 					<a ng-hide="model.cannotFollow()"
 					   ng-click="model.followUser()">
 						<i class="follow-icon fa fa-star-o">&nbsp;follow&nbsp;{{model.user.username}}</i>
@@ -101,7 +84,7 @@
 					</a>
 				</div>
 			</div>
-			<div class="col-md-4 about-right heading">
+			<div class="col-md-4 about-right">
 				<div class="abt-1 pull-right">
 					<a href="#/user/{{model.currentUser._id}}/edit">
 						<span class="glyphicon glyphicon-edit"></span>&nbsp;Edit profile
@@ -123,18 +106,20 @@
 					<!--<input type="submit" value="Comment">-->
 					<!--</form>-->
 					<!--</div>-->
-					<h3 class="news">Following</h3>
+					<div class="about-one">
+						<h4 class="comment-header">Following</h4>
+					</div>
 					<div ng-repeat="followingUser in model.user.following">
 						<div class="commentDiv">
 							<!--<a href="#/user/{{comment.commenterId}}">-->
-								<!--<span class="text-info">{{comment.commenter}}</span>-->
+							<!--<span class="text-info">{{comment.commenter}}</span>-->
 							<!--</a>&nbsp;-->
 							<!--<span>posted at {{model.getLongDateTime(comment.date)}}</span>&nbsp;-->
 							<!--&lt;!&ndash;<button ng-click="model.replyAcomment(comment._id, comment.commenterId, comment.commenter, $index)"&ndash;&gt;-->
 							<!--&lt;!&ndash;class="replyBtn">reply&ndash;&gt;-->
 							<!--&lt;!&ndash;</button>&ndash;&gt;-->
 							<!--<button class="btn-right" ng-click="comment.isThisReplyCommentAreaShown = true">-->
-								<!--Reply-->
+							<!--Reply-->
 							<!--</button>-->
 							<!--<br/>-->
 							<!--<span class="commentText">{{comment.content}}</span>-->

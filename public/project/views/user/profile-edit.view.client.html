@@ -1,62 +1,167 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="">Profile</a>
-            <p class="navbar-text pull-right">
-                <a ng-click="model.updateUser(model.user)" class="navbar-link">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </a>
-            </p>
+<!--start-header-->
+<div class="header">
+    <div class="container">
+        <div class="head">
+            <div class="navigation">
+                <nav class="navbar-default navbar-fixed-top navig">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a href="#/" class="navbar-brand active">Yummy Booklet</a>
+                            <div ng-show="!currentUser">
+                                <p class="navbar-text pull-right">
+                                    <a href="#/login" class="login">Log in</a>
+                                    <span>|</span>
+                                    <a href="#/register" class="register">Register</a>
+                                </p>
+                            </div>
+                            <div ng-show="currentUser">
+                                <p class="navbar-text pull-right">
+                                    <a href="#/user/{{model.currentUser._id}}" class="login">{{model.currentUser.username}}</a>
+                                    <span>|</span>
+                                    <a ng-click="model.logout()" class="login">Log out</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <!--<span class="menu"></span>-->
+                <!--<ul class="navig">-->
+                <!--<li><a href="#/" class="active">Yummy Booklet</a></li>-->
+
+                <!--<li><a href="#/login" class="login">Log in</a></li>-->
+                <!--<li><a href="#/register" class="register">Register</a></li>-->
+                <!--</ul>-->
+                <!--</div>-->
+                <!--<div class="header-right">-->
+                <!--<div class="search-bar">-->
+                <!--<input type="text" value="Search" onfocus="this.value = '';"-->
+                <!--onblur="if (this.value == '') {this.value = 'Search';}">-->
+                <!--<input type="submit" value="">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="clearfix"></div>-->
+            </div>
         </div>
     </div>
-</nav>
+</div>
+<!-- script-for-menu -->
+<!-- script-for-menu -->
+<script>
+    $("span.menu").click(function () {
+        $(" ul.navig").slideToggle("slow", function () {
+        });
+    });
+</script>
+<!-- script-for-menu -->
 
 <div class="container">
 
-    <div ng-if="model.error" class="alert alert-danger">
-        {{model.error}}
-    </div>
-
-    <div ng-if="model.inf" class="alert alert-success">
-        {{model.inf}}
-    </div>
-
-    <div class="form-group">
-        <Label>Username</Label>
-        <input ng-model="model.user.username"
-               class="form-control" type="text" placeholder="alice">
-    </div>
-    <div class="form-group">
-        <Label>Email</Label>
-        <input ng-model="model.user.email"
-               class="form-control" type="email" placeholder="alice@wonderland.com">
-    </div>
-    <div class="form-group">
-        <Label>First Name</Label>
-        <input ng-model="model.user.firstName"
-               class="form-control" type="text" placeholder="Alice">
-    </div>
-    <div class="form-group">
-        <Label>Last Name</Label>
-        <input ng-model="model.user.lastName"
-               class="form-control" type="text" placeholder="Wonderland">
-    </div>
-    <!--<a class="btn btn-primary btn-block" href="#/user/{{model.user._id}}/website">Websites</a>-->
-    <!--<a class="btn btn-danger btn-block" ng-click="model.logout()">Logout</a>-->
-    <a class="btn btn-danger btn-block" ng-click="model.deleteUser(model.user._id)">Unregister</a>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
+<div class="about">
     <div class="container">
-        <div class="row navbar-text">
-            <div class="col-xs-3 text-center">
+        <div class="about-main">
+            <div class="col-md-8 about-left">
+                <div class="about-two">
+                    <div ng-if="model.isLoggedIn()">
+                        <div ng-show="model.profilePic">
+                            <img ng-src="{{model.profilePic}}" alt="Profile Picture" />
+                        </div>
+                        <div ng-hide="model.hasProfilePicture(model.profilePic)">
+                            <img src="images/profile.png" alt="Profile Picture" />
+                        </div>
+                    </div>
+                    <div ng-if="!model.isLoggedIn()">
+                        <div ng-show="model.profilePic">
+                            <img ng-src="{{model.profilePic}}" alt="Profile Picture" />
+                        </div>
+                        <div ng-hide="model.profilePic">
+                            <img src="images/profile.png" alt="Profile Picture" />
+                        </div>
+                    </div>
+                    <div ng-show="model.isLoggedIn() && model.isCurrentUserSameAsProfile()">
+                        <form name="newImageForm" action="/api/profileImageUpload"  method="post" enctype="multipart/form-data">
+                            <input name="userId" value="{{model.currentUser._id}}" style="display: none"/>
+                            <div class="form-group"
+                                 ng-class="{ 'has-error': newImageForm.width.$error.required && model.submitted}">
+                                <Label>Width</Label>
+                                <input ng-model="model.width" class="form-control" type="text"
+                                       placeholder="100%" name="width" required>
+						<span ng-show="newImageForm.width.$error.required && model.submitted"
+                              class="help-block">
+							Image width required
+						</span>
+                            </div>
+                            <input  name="myFile"   type="file" class="form-control"/>
+                            <button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-3 text-center">
+            <div class="col-md-4 about-right">
+                <div class="about-one">
+                    <h3><i class="fa fa-users" aria-hidden="true"></i>Edit Profile</h3>
+                </div>
+                <div class="abt-2">
+                    <div class="form-group">
+                        <Label>Username</Label>
+                        <input ng-model="model.user.username"
+                               class="form-control" type="text" placeholder="alice">
+                    </div>
+                    <div class="form-group">
+                        <Label>Email</Label>
+                        <input ng-model="model.user.email"
+                               class="form-control" type="email" placeholder="alice@wonderland.com">
+                    </div>
+                    <div class="form-group">
+                        <Label>First Name</Label>
+                        <input ng-model="model.user.firstName"
+                               class="form-control" type="text" placeholder="Alice">
+                    </div>
+                    <div class="form-group">
+                        <Label>Last Name</Label>
+                        <input ng-model="model.user.lastName"
+                               class="form-control" type="text" placeholder="Wonderland">
+                    </div>
+                    <!--<a class="btn btn-primary btn-block" href="#/user/{{model.user._id}}/website">Websites</a>-->
+                    <!--<a class="btn btn-danger btn-block" ng-click="model.logout()">Logout</a>-->
+                    <a class="btn-dark btn-block" ng-click="model.updateUser(model.user)">Save</a>
+                    <a class="btn-dark btn-block" ng-click="model.deleteUser(model.user._id)">Unregister</a>
+
+                </div>
+                <div class="abt-2">
+                    <!--<div class="news">-->
+                    <!--<form>-->
+                    <!--<input type="text" value="message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" />-->
+                    <!--<input type="submit" value="Comment">-->
+                    <!--</form>-->
+                    <!--</div>-->
+                    <div ng-repeat="followingUser in model.user.following">
+                        <div class="commentDiv">
+                            <!--<a href="#/user/{{comment.commenterId}}">-->
+                            <!--<span class="text-info">{{comment.commenter}}</span>-->
+                            <!--</a>&nbsp;-->
+                            <!--<span>posted at {{model.getLongDateTime(comment.date)}}</span>&nbsp;-->
+                            <!--&lt;!&ndash;<button ng-click="model.replyAcomment(comment._id, comment.commenterId, comment.commenter, $index)"&ndash;&gt;-->
+                            <!--&lt;!&ndash;class="replyBtn">reply&ndash;&gt;-->
+                            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                            <!--<button class="btn-right" ng-click="comment.isThisReplyCommentAreaShown = true">-->
+                            <!--Reply-->
+                            <!--</button>-->
+                            <!--<br/>-->
+                            <!--<span class="commentText">{{comment.content}}</span>-->
+                            <!--<h4>{{followingUser.username}}</h4>-->
+                            <img width="20%" ng-src="{{followingUser.profilePic}}" alt="Profile Picture" />
+                            <a href="#/user/{{followingUser._id}}">
+                                <span class="text-info">{{followingUser.username}}</span>
+                                <br>
+                                <span class="text-info">{{followingUser.firstName}}&nbsp;{{followingUser.lastName}}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-3 text-center">
-            </div>
-            <div class="col-xs-3 text-center">
-            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
-</nav>
+</div>

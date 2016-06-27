@@ -85,10 +85,10 @@
 				<div class="abt-2">
 					<div class="might-grid" ng-repeat="user in model.users">
 						<div class="grid-might">
-							<div ng-show="user.profilePic">
+							<div class="user-list" ng-show="user.profilePic">
 								<img ng-src="{{user.profilePic}}" alt="Profile Picture" />
 							</div>
-							<div ng-hide="user.profilePic">
+							<div class="user-list" ng-hide="user.profilePic">
 								<img src="images/profile.png" alt="Profile Picture" />
 							</div>
 							<a href="#/user/{{user._id}}">

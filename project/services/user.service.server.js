@@ -363,20 +363,6 @@ module.exports = function (app, models) {
             );
     }
 
-    // function findUserByCredentials(username, password, req, res) {
-    //     userModel
-    //         .findUserByCredentials(username, password)
-    //         .then(
-    //             function (user) {
-    //                 res.json(user);
-    //             },
-    //             function (error) {
-    //                 // res.statusCode(404).send(error);
-    //                 res.send(error);
-    //             }
-    //         );
-    // }
-
     function findUserByUsername(username, res) {
         userModel
             .findUserByUsername(username)
