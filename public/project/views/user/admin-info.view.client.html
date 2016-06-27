@@ -79,11 +79,6 @@
 				</div>
 			</div>
 			<div class="col-md-4 about-right">
-				<!--<div class="abt-1 pull-right">-->
-					<!--<a href="#/user/{{model.currentUser._id}}/edit">-->
-						<!--<span class="glyphicon glyphicon-edit"></span>&nbsp;Edit profile-->
-					<!--</a>-->
-				<!--</div>-->
 				<div class="about-one">
 					<h3><i class="fa fa-users" aria-hidden="true"></i>All Users</h3>
 				</div>
@@ -101,11 +96,12 @@
 							</a>
 						</div>
 						<div class="might-top">
-							<button class="btn-right" ng-click="">
+							<button class="btn-right" ng-click="model.deleteUser(user._id)">
 								Delete
 							</button>
-							<button class="btn-right" ng-click="">
+							<button class="btn-right" ng-click="model.editUser(user)">
 								Edit
+								<!--<a href="#/user/{{user._id}}">Edit</a>-->
 							</button>
 						</div>
 						<div class="clearfix"></div>

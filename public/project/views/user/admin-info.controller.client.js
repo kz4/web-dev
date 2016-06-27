@@ -12,82 +12,18 @@
         vm.currentUser = currentUser;
         vm.hasProfilePicture = hasProfilePicture;
         vm.isLoggedIn = isLoggedIn;
-        vm.follow = follow;
         vm.isCurrentUserSameAsProfile = isCurrentUserSameAsProfile;
-        vm.followUnfollow = followUnfollow;
-        // vm.toggleText = vm.toggle ? 'Toggle!' : 'some text';;
-        // vm.toggle = true;
+
+        vm.editUser = editUser;
+
+
         var userId = $routeParams.uid;
 
-        function followUnfollow() {
-
-            if (isLoggedIn()) {
-                // vm.currentUser._id is following userId
-                if ($scope.toggle) {
-                    UserService
-                        .followUser(vm.currentUser._id, userId)
-                        .then(
-                            function(){
-                                init();
-                            },
-                            function(err){
-                                vm.error = err;
-                            });
-                    $scope.toggle = !$scope.toggle;
-                    $scope.toggleText = $scope.toggle ? 'Follow' : 'Following';
-                } else {
-                    UserService
-                        .unfollowUser(vm.currentUser._id, userId)
-                        .then(
-                            function(){
-                                init();
-                            },
-                            function(err){
-                                vm.error = err;
-                            });
-                    $scope.toggle = !$scope.toggle;
-                    $scope.toggleText = $scope.toggle ? 'Follow' : 'Following';
-                }
-            }
+        function editUser(user) {
+            var id = user._id;
+            $location.url("/user/" + id);
         }
 
-        $scope.toggle = true;
-
-        // $scope.$watch('toggle', function(){
-        //     $scope.toggleText = $scope.toggle ? 'Follow' : 'Following';
-        // });
-
-        // $scope.$watch('toggle', function(){
-        //     $scope.toggleText = $scope.toggle ? 'Follow' : 'Following';
-        //
-        //     if (isLoggedIn()) {
-        //         // vm.currentUser._id is following userId
-        //         if (!$scope.toggle) {
-        //             UserService
-        //                 .followUser(vm.currentUser._id, userId)
-        //                 .then(
-        //                     function(){
-        //                         init();
-        //                     },
-        //                     function(err){
-        //                         vm.error = err;
-        //                     });
-        //         } else {
-        //             UserService
-        //                 .unfollowUser(vm.currentUser._id, userId)
-        //                 .then(
-        //                     function(){
-        //                         init();
-        //                     },
-        //                     function(err){
-        //                         vm.error = err;
-        //                     });
-        //         }
-        //     }
-        // });
-
-        
-        
         function isCurrentUserSameAsProfile() {
             var res = userId && vm.currentUser._id && (vm.currentUser._id === userId);
             return res;
@@ -98,7 +34,6 @@
             return res;
         }
 
-        // var id = $rootScope.currentUser._id;
         function hasProfilePicture(pic) {
             return !(pic == null || pic == undefined);
         }
@@ -114,13 +49,8 @@
                         vm.error = err;
                     }
                 );
-            //$scope.toggleText = $scope.toggle ? 'Follow' : 'Following';
         }
         init();
-
-        function follow() {
-            
-        }
 
         function logout() {
             $rootScope.currentUser = null;
@@ -136,7 +66,7 @@
                 );
         }
 
-        function updateUser(user) {
+        function updateUser(id, user) {
             UserService
                 .updateUser(id, user)
                 .then(
@@ -154,7 +84,7 @@
                 .deleteUser(userId)
                 .then(
                     function () {
-                        $location.url("/");
+                        $location.url("admin");
                     },
                     function (res) {
                         var err = res.data;

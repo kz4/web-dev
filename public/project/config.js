@@ -89,7 +89,8 @@
 				controller: "ProfileEditController",
 				controllerAs: "model",
 				resolve: {
-					loggedIn: checkLoggedIn
+					// loggedIn: checkLoggedIn
+					loggedIn: checkSelfLoggedInOrAdminLoggedIn
 				}
 			})
 			.otherwise({
@@ -144,6 +145,41 @@
 					}
 				},
 				function (err) {
+					$location.url("/login");
+				});
+
+		return deferred.promise;
+	}
+
+	function checkSelfLoggedInOrAdminLoggedIn(UserService, $location, $q, $rootScope, $route) {
+
+		// First create a deferred object that defers the promise
+		var deferred = $q.defer();
+
+		var uid = $route.current.params.uid;
+
+		UserService
+			.loggedIn()
+			.then(
+				function (res) {
+					var user = res.data;
+					if (user == '0') {
+						$rootScope.currentUser = null;
+						deferred.reject();
+						$location.url("/login");
+					} else if (uid === user._id) {
+						$rootScope.currentUser = user;
+						deferred.resolve();
+					} else if (user.userType === "ADMIN") {
+						$rootScope.currentUser = user;
+						deferred.resolve();
+					} else {
+						$rootScope.currentUser = null;
+						deferred.reject();
+						$location.url("/login");
+					}
+				},
+				function () {
 					$location.url("/login");
 				});
 
