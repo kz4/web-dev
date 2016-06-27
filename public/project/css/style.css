@@ -625,8 +625,13 @@ button.btn-left:hover {
 	margin-top: 4%;
 }
 
-.abt-2 {
-	/*margin-top: 12%;*/
+/*.abt-1 {*/
+/**/
+/*}*/
+
+.abt-1 {
+	width: 100%;
+	margin-top: 10%;
 }
 
 .might-grid {
@@ -710,6 +715,13 @@ button.btn-left:hover {
 
 .abt-2 ul li {
 	list-style-image: url(../images/dot.png);
+	margin: 12px 0px 5px 30px;
+	text-align: left;
+}
+
+.abt-2 ul li.list-info {
+	list-style-image: none;
+	list-style-type: none;
 	margin: 12px 0px 5px 30px;
 	text-align: left;
 }
@@ -1678,7 +1690,7 @@ ul.blog-ic {
 	}
 
 	.header {
-		padding: 1.5em 0px;
+		padding: 1.7em 0px;
 		position: relative;
 	}
 
@@ -1801,6 +1813,8 @@ ul.blog-ic {
 
 	.abt-2 {
 		margin-top: 5%;
+		width: 100%;
+		display: block;
 	}
 
 	.grid-might a img {
@@ -2893,4 +2907,54 @@ iframe.g-map {
 
 .user-list {
 	width: 50%;
+}
+
+.info-table {
+	margin-top: 10%;
+	margin-left: 3%;
+	margin-bottom: 10%;
+}
+
+.info-table th {
+	font-size: 18px;
+	color: #3d1a1b;
+	padding-right: 20px;
+	white-space: nowrap;
+	display: table-cell;
+}
+
+.info-table td {
+	font-size: 18px;
+	line-height: 20px;
+	color: #3d1a1b;
+	font-weight: normal;
+	display: table-cell;
+	list-style-type: none;
+}
+
+.info-table tr {
+	line-height: 35px;
+}
+
+.header .navbar-header a{
+	color : #ffffff;
+	text-decoration: none;
+}
+
+.header .navbar-header a:hover{
+	color : #999;
+}
+
+.header .navbar-header span{
+	color : #ffffff;
+	text-decoration: none;
+}
+
+.header .navbar-header span:hover{
+	color : #999;
+}
+
+.header{
+	background-color: #3d1a1b;
+	padding: 1.7em 0px;
 }

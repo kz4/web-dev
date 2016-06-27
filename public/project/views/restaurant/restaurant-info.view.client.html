@@ -3,7 +3,7 @@
     <div class="container">
         <div class="head">
             <div class="navigation">
-                <nav class="navbar-default navbar-fixed-top navig">
+                <nav class="navbar-fixed-top navig">
                     <div class="container-fluid">
                         <div class="navbar-header">
                             <a href="#/" class="navbar-brand active">Yummy Booklet</a>
@@ -24,22 +24,6 @@
                         </div>
                     </div>
                 </nav>
-                <!--<span class="menu"></span>-->
-                <!--<ul class="navig">-->
-                <!--<li><a href="#/" class="active">Yummy Booklet</a></li>-->
-
-                <!--<li><a href="#/login" class="login">Log in</a></li>-->
-                <!--<li><a href="#/register" class="register">Register</a></li>-->
-                <!--</ul>-->
-                <!--</div>-->
-                <!--<div class="header-right">-->
-                <!--<div class="search-bar">-->
-                <!--<input type="text" value="Search" onfocus="this.value = '';"-->
-                <!--onblur="if (this.value == '') {this.value = 'Search';}">-->
-                <!--<input type="submit" value="">-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="clearfix"></div>-->
             </div>
         </div>
     </div>
@@ -65,7 +49,18 @@
             </div>
             <div class="col-md-4 about-right">
                 <div class="about-one">
-                    <h3><i class="fa fa-cutlery" aria-hidden="true"></i>{{model.restaurant.name}}</h3>
+                    <h3><i class="fa fa-cutlery" aria-hidden="true"></i>{{model.restaurant.name}}
+                        <a ng-hide="model.cannotAddToFavorite()"
+                           ng-click="model.addRestaurantToFavorite()">
+                            <span class="favorite-icon glyphicon glyphicon-heart-empty"
+                          aria-hidden="true">{{model.users.length}}</span>
+                        </a>
+                        <a ng-show="model.canDeleteFromFavorite()"
+                           ng-click="model.removeRestaurantFromFavorite()">
+                            <span class="favorite-icon glyphicon glyphicon-heart"
+                          aria-hidden="true">{{model.users.length}}</span>
+                        </a>
+                    </h3>
                 </div>
                 <div class="abt-2">
                     <ul>
