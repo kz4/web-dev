@@ -1429,6 +1429,10 @@ ul.blog-ic {
 /*--single--*/
 /*--media-quaries-starts-here--*/
 @media (max-width: 1440px) {
+
+	.header {
+		padding: 1.7em 0px;
+	}
 }
 
 @media (max-width: 1366px) {
@@ -2999,4 +3003,8 @@ iframe.g-map {
 
 .header .navbar-header span:hover{
 	color : #999;
+}
+
+.header {
+	padding: 1.7em 0px;
 }
