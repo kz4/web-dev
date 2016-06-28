@@ -13,6 +13,35 @@
         vm.selectRestaurant = selectRestaurant;
         vm.currentUser = $rootScope.currentUser;
         vm.logout = logout;
+        vm.getCategory = getCategory;
+        vm.getCategoryArray = getCategoryArray;
+        
+        vm.categoryId = categoryId;
+
+        function getCategory(restaurant) {
+            var category = "";
+            for (var i = 0; i < restaurant.categories.length; ++i) {
+                category = category  + ", " + restaurant.categories[i][0];
+            }
+            return category;
+        }
+
+        function getCategoryArray(restaurants) {
+            if (restaurants) {
+                var categories = [];
+                var category = "";
+                for (var j = 0; j < restaurants.length; ++j){
+                    category = "";
+                    for (var i = 0; i < restaurants[j].categories.length; ++i) {
+                        var oneCategory = restaurants[j].categories[i][0];
+                        category = oneCategory  + ", " + category;
+                    }
+                    category = category.substring(0, category.length - 2);
+                    categories.push(category);
+                }
+                return categories;
+            }
+        }
 
         function logout() {
             $rootScope.currentUser = null;
@@ -44,6 +73,7 @@
                     var restaurants = res.data;
                     if (restaurants.businesses) {
                         vm.restaurants = restaurants.businesses;
+                        // var category =
                     }
                 })
         }

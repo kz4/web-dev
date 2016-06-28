@@ -96,6 +96,10 @@
         }
 
         function cannotAddToFavorite() {
+            if (!vm.users && isLoggedIn()) {
+                return false;
+            }
+            
             if (vm.users && $rootScope.currentUser) {
                 for (var i = 0; i < vm.users.length; i++) {
                     if (vm.users[i]._id === $rootScope.currentUser._id) {
@@ -262,6 +266,8 @@
                             .updateComment(commentId, comment)
                             .then(
                                 function () {
+                                    vm.comment = null;
+                                    vm.commentPlaceholder = "Please leave a comment...";
                                     refreshPage();
                                 }
                             )
@@ -304,6 +310,8 @@
                         function (res) {
                             var newReplyRes = res.data;
                             var newReplyId = newReplyRes._id;
+                            vm.comment = null;
+                            vm.commentPlaceholder = "Please leave a comment...";
                             refreshPage(restaurantId);
                         },
                         function (err) {
@@ -354,6 +362,8 @@
                         .updateComment(commentId, comment)
                         .then(
                             function () {
+                                vm.comment = null;
+                                vm.commentPlaceholder = "Please leave a comment...";
                                 refreshPage(restaurantId);
                             },
                             function (err) {
@@ -395,12 +405,12 @@
                         "isThisReplyCommentAreaShown": false,
                         "replies":[]
                     };
-                    // commentIndex++;
-                    // comments.push(newComment);
                     CommentService
                         .createComment(newComment)
                         .then(function (res) {
                             var returnedComment = res.data;
+                            vm.comment = null;
+                            vm.commentPlaceholder = "Please leave a comment...";
                             refreshPage(restaurantId);
                         })
                 }
@@ -449,6 +459,9 @@
                                     + restaurant.location.coordinate.longitude
                                     + keyUrl;
                                 vm.googleMapSrc = getSafeUrl(googleMapSrc);
+
+                                // vm.comment = null;
+                                vm.commentPlaceholder = "Please leave a comment...";
                             }
                         })
                 );

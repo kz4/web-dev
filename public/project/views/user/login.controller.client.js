@@ -3,10 +3,26 @@
 		.module("ProjectMaker")
 		.controller("LoginController", LoginController);
 
-	function LoginController($location, UserService) {
+	function LoginController($location, UserService, $rootScope) {
 		var vm = this;
 		vm.login = login;
 		vm.submitted = false;
+		vm.currentUser = $rootScope.currentUser;
+		vm.logout = logout;
+
+		function logout() {
+			$rootScope.currentUser = null;
+			UserService
+				.logout()
+				.then(
+					function (res) {
+						$location.url("/login");
+					},
+					function () {
+						$location.url("/login");
+					}
+				);
+		}
 
 		function login(username, password) {
 			vm.submitted = true;
@@ -17,11 +33,7 @@
 						var user = res.data;
 						if (user && user._id) {
 							var id = user._id;
-							if (user.userType === "ADMIN") {
-								$location.url("/admin/" + id);
-							} else {
-								$location.url("/user/" + id);
-							}
+							$location.url("/user/" + id);
 							vm.submitted = false;
 						} else {
 							vm.error = "User not found";

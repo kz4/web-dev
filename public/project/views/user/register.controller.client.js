@@ -8,6 +8,22 @@
         vm.submitted = false;
         vm.badPassword = false;
         vm.isAdmin = false;
+        vm.currentUser = $rootScope.currentUser;
+        vm.logout = logout;
+
+        function logout() {
+            $rootScope.currentUser = null;
+            UserService
+                .logout()
+                .then(
+                    function (res) {
+                        $location.url("/login");
+                    },
+                    function () {
+                        $location.url("/login");
+                    }
+                );
+        }
 
         function register(username, password, verifyPassword) {
             vm.submitted = true;

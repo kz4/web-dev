@@ -43,8 +43,29 @@
             <div class="col-md-8 about-left">
                 <div class="about-two">
                     <!--<a href="single.html"><img src="images/c-1.jpg" alt="" /></a>-->
-                    <a href=""><img src="{{model.image}}" alt="Restaurant Picture"/></a>
-                    <p>Posted by <a href="#">Johnson</a> on 10 feb, 2015 <a href="#">comments(2)</a></p>
+                    <a><img src="{{model.image}}" alt="Restaurant Picture"/></a>
+                    <!--<p>Posted by <a href="#">Johnson</a> on 10 feb, 2015 <a href="#">comments(2)</a></p>-->
+
+                    <div class="abt-2 resta-info" ng-show="model.users.length > 0">
+                        <h4>
+                            Users <span class="favorite-icon glyphicon glyphicon-heart"
+                                        aria-hidden="true"></span> this restaurant:
+                        </h4>
+                        <div class="might-grid" ng-repeat="user in model.users">
+                            <div class="grid-might">
+                                <div class="user-list" ng-show="user.profilePic">
+                                    <img ng-src="{{user.profilePic}}" alt="Profile Picture"/>
+                                </div>
+                                <div class="user-list" ng-hide="user.profilePic">
+                                    <img src="images/profile.png" alt="Profile Picture"/>
+                                </div>
+                                <a href="#/user/{{user._id}}">
+                                    <span class="">{{user.username}}</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="col-md-4 about-right">
@@ -53,22 +74,21 @@
                         <a ng-hide="model.cannotAddToFavorite()"
                            ng-click="model.addRestaurantToFavorite()">
                             <span class="favorite-icon glyphicon glyphicon-heart-empty"
-                          aria-hidden="true">{{model.users.length}}</span>
+                                  aria-hidden="true">{{model.users.length}}</span>
                         </a>
                         <a ng-show="model.canDeleteFromFavorite()"
                            ng-click="model.removeRestaurantFromFavorite()">
                             <span class="favorite-icon glyphicon glyphicon-heart"
-                          aria-hidden="true">{{model.users.length}}</span>
+                                  aria-hidden="true">{{model.users.length}}</span>
                         </a>
                     </h3>
                 </div>
                 <div class="abt-2">
                     <ul>
                         <li><img width="30%" ng-src="{{model.restaurant.rating_img_url_large}}"/></li>
-                        <li><a href="">{{model.categories}}</a></li>
-                        <li><a href="">{{model.restaurant.display_phone}}</a></li>
-                        <li><a href="">{{model.location}}</a></li>
-                        <li><a href="">reservation</a></li>
+                        <li><a>{{model.categories}}</a></li>
+                        <li><a>{{model.restaurant.display_phone}}</a></li>
+                        <li><a>{{model.location}}</a></li>
                     </ul>
                 </div>
                 <!--<div class="abt-2">-->
@@ -86,7 +106,7 @@
                         <form id="anchor">
                             <div class="form-group">
                                 <textarea ng-model="comment" class="form-control" rows="4"
-                                          placeholder="{{commentPlaceholder}}"></textarea>
+                                          placeholder="{{model.commentPlaceholder}}"></textarea>
                             </div>
                             <div class="form-group row">
                                 <button class="text-align-left banner-btn btn-right"
@@ -110,7 +130,7 @@
                                 <span class="commentText">{{comment.content}}</span>
                                 <div ng-if="comment.isThisReplyCommentAreaShown">
 									<textarea ng-model="replyToAComment" class="form-control" rows="4"
-                                              placeholder="This is a reply"></textarea>
+                                              placeholder="Reply a comment here..."></textarea>
                                     <button
                                             ng-click="model.submitAReplyToAComment(replyToAComment, comment._id, comment.commenterId, comment.commenter, $index)"
                                             class="btn btn-primary">Submit
@@ -139,7 +159,7 @@
 
                                         <!--TODO: implement a reply to a reply-->
                                         <!--<button ng-click="reply.isThisReplyReplyAreaShown = true"-->
-                                                <!--class="replyBtn">Reply-->
+                                        <!--class="replyBtn">Reply-->
                                         <!--</button>-->
 
 

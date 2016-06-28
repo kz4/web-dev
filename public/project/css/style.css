@@ -331,8 +331,8 @@ ul.navig li a.active {
 
 .banner-text h2 {
 	font-size: 15px;
-	border-bottom: 1px solid #190608;
-	color: #190608;
+	border-bottom: 1px solid #3d1a1b;
+	color: #3d1a1b;
 	padding-bottom: 2px;
 	width: 40%;
 	margin: 0 auto;
@@ -342,13 +342,13 @@ ul.navig li a.active {
 .banner-text h1 {
 	font-size: 1.5em;
 	margin: 20px 0 0 0;
-	color: #190608;
+	color: #3d1a1b;
 }
 
 .banner-btn a {
-	color: #190608;
+	color: #3d1a1b;
 	padding: 5px 13px;
-	border: 1px solid #190608;
+	border: 1px solid #3d1a1b;
 	font-size: 13px;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -359,7 +359,7 @@ ul.navig li a.active {
 }
 
 .banner-btn a:hover {
-	background: #190608;
+	background: #3d1a1b;
 	color: #fff;
 	transition: 0.5s all ease;
 	-webkit-transition: 0.5s all ease;
@@ -371,7 +371,7 @@ ul.navig li a.active {
 button.btn-right {
 	color: #ffffff;
 	padding: 5px 13px;
-	border: 1px solid #190608;
+	border: 1px solid #3d1a1b;
 	font-size: 13px;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -381,12 +381,12 @@ button.btn-right {
 	font-family: 'Raleway-Regular';
 	float: right;
 	margin-right: 3%;
-	background: #190608;
+	background: #3d1a1b;
 }
 
 button.btn-right:hover {
 	background: #ffffff;
-	color: #190608;
+	color: #3d1a1b;
 	transition: 0.5s all ease;
 	-webkit-transition: 0.5s all ease;
 	-moz-transition: 0.5s all ease;
@@ -397,7 +397,7 @@ button.btn-right:hover {
 .btn-dark {
 	color: #ffffff;
 	padding: 5px 13px;
-	border: 1px solid #190608;
+	border: 1px solid #3d1a1b;
 	font-size: 13px;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -406,12 +406,12 @@ button.btn-right:hover {
 	-ms-border-radius: 5px;
 	font-family: 'Raleway-Regular';
 	margin-right: 3%;
-	background: #190608;
+	background: #3d1a1b;
 }
 
 .btn-dark:hover {
 	background: #ffffff;
-	color: #190608;
+	color: #3d1a1b;
 	transition: 0.5s all ease;
 	-webkit-transition: 0.5s all ease;
 	-moz-transition: 0.5s all ease;
@@ -422,7 +422,7 @@ button.btn-right:hover {
 button.btn-left {
 	color: #ffffff;
 	padding: 5px 13px;
-	border: 1px solid #190608;
+	border: 1px solid #3d1a1b;
 	font-size: 13px;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -433,12 +433,12 @@ button.btn-left {
 	float: left;
 	margin-right: 3%;
 	margin-bottom: auto;
-	background: #190608;
+	background: #3d1a1b;
 }
 
 button.btn-left:hover {
 	background: #ffffff;
-	color: #190608;
+	color: #3d1a1b;
 	transition: 0.5s all ease;
 	-webkit-transition: 0.5s all ease;
 	-moz-transition: 0.5s all ease;
@@ -514,7 +514,7 @@ button.btn-left:hover {
 }
 
 .about-two p a {
-	color: #190608;
+	color: #3d1a1b;
 }
 
 .about-two p a:hover {
@@ -656,6 +656,53 @@ button.btn-left:hover {
 	display: block;
 }
 
+/*.abt-2.resta-info .grid-might img {*/
+	/*border-radius: 5px;*/
+	/*-webkit-border-radius: 5px;*/
+	/*-moz-border-radius: 5px;*/
+	/*-o-border-radius: 5px;*/
+	/*-ms-border-radius: 5px;*/
+	/*width: 100%;*/
+	/*display: block;*/
+/*}*/
+
+
+.abt-2.resta-info .grid-might {
+	padding: 4% 0 7% 0;
+	clear: both;
+	display: -webkit-box;
+	width: 100%;
+}
+
+.abt-2.resta-info .might-grid {
+	padding: 0 0 0 0;
+}
+
+.abt-2.resta-info .might-grid .user-list {
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-ms-border-radius: 5px;
+	width: 20%;
+}
+
+.abt-2.resta-info .might-grid span {
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-ms-border-radius: 5px;
+	width: 70%;
+	padding-right: 20%;
+}
+
+.resta-info h4 {
+	font-size: 20px;
+	margin-top: 10%;
+	color: #3d1a1b;
+}
+
 .abt-2 ul {
 	padding: 0;
 	margin-top: 3%;
@@ -665,11 +712,11 @@ button.btn-left:hover {
 
 .news form input[type="text"] {
 	width: 100%;
-	color: #190608;
+	color: #3d1a1b;
 	outline: none;
 	font-size: 13px;
 	padding: 8px 10px;
-	border: 1px solid #190608;
+	border: 1px solid #3d1a1b;
 	-webkit-appearance: none;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -680,7 +727,7 @@ button.btn-left:hover {
 }
 
 .news form input[type="submit"] {
-	background: #190608;
+	background: #3d1a1b;
 	font-family: 'Raleway-Regular';
 	padding: 8px 1em;
 	color: #fff;
@@ -733,7 +780,7 @@ button.btn-left:hover {
 }
 
 .abt-2 ul li a:hover {
-	color: #190608;
+	color: #3d1a1b;
 }
 
 .grid-might {
@@ -784,9 +831,9 @@ button.btn-left:hover {
 }
 
 .about-btn a:hover, .a-btn a:hover {
-	background: #190608;
+	background: #3d1a1b;
 	color: #fff;
-	border: 1px solid #190608;
+	border: 1px solid #3d1a1b;
 	transition: 0.5s all ease;
 	-webkit-transition: 0.5s all ease;
 	-moz-transition: 0.5s all ease;
@@ -796,9 +843,9 @@ button.btn-left:hover {
 
 .heading h3 {
 	color: #fff;
-	background: #190608;
+	background: #3d1a1b;
 	padding: 9px 0px;
-	border: 1px solid #190608;
+	border: 1px solid #3d1a1b;
 	font-size: 15px;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -973,7 +1020,7 @@ button.btn-left:hover {
 }
 
 .footer-text p a:hover {
-	color: #190608;
+	color: #3d1a1b;
 	transition: 0.5s all ease;
 	-webkit-transition: 0.5s all ease;
 	-moz-transition: 0.5s all ease;
@@ -1036,7 +1083,7 @@ button.btn-left:hover {
 	color: #fff;
 	padding: 9px 42px;
 	font-size: 15px;
-	background: #190608;
+	background: #3d1a1b;
 	cursor: pointer;
 	font-weight: 500;
 	margin: 20px 0 0 0px;
@@ -1111,9 +1158,9 @@ button.btn-left:hover {
 
 h3.ghj {
 	color: #fff;
-	background: #190608;
+	background: #3d1a1b;
 	padding: 9px 0px;
-	border: 1px solid #190608;
+	border: 1px solid #3d1a1b;
 	font-size: 15px;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -1310,7 +1357,7 @@ ul.blog-ic li span {
 }
 
 ul.blog-ic li a:hover {
-	color: #190608;
+	color: #3d1a1b;
 }
 
 .media {
@@ -2952,9 +2999,4 @@ iframe.g-map {
 
 .header .navbar-header span:hover{
 	color : #999;
-}
-
-.header{
-	background-color: #3d1a1b;
-	padding: 1.7em 0px;
 }

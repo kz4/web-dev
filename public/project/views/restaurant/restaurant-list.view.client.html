@@ -42,7 +42,29 @@
 		<div class="about-main">
 			<div class="about-one">
 				<p>Find The Most</p>
-				<h3>Breakfast & Brunch</h3>
+				<!--<h3>Breakfast & Brunch</h3>-->
+				<!--<div ng-repeat="restaurant in model.restaurants">-->
+					<!--<h3>model.getCategory(restaurant)</h3>-->
+				<!--</div>-->
+
+				<!--<div ng-repeat="restaurantCategory in model.getCategoryArray(model.restaurants)">-->
+					<!--<h3>{{restaurantCategory}}</h3>-->
+				<!--</div>-->
+				<!--<div ng-repeat="n in [42, 42, 43, 43]">-->
+					<!--<h3>n</h3>-->
+				<!--</div>-->
+				<!--<h3>{{model.test}}</h3>-->
+				<div ng-switch="model.categoryId">
+					<h3 ng-switch-when="0">Breakfast & Brunch</h3>
+					<h3 ng-switch-when="1">Seafood</h3>
+					<h3 ng-switch-when="2">Salad</h3>
+					<h3 ng-switch-when="3">Sushi</h3>
+					<h3 ng-switch-when="4">Burgers</h3>
+					<h3 ng-switch-when="5">Pizza</h3>
+					<h3 ng-switch-when="6">Soup</h3>
+					<h3 ng-switch-when="7">Ice Cream & Frozen Yogurt</h3>
+					<h3 ng-switch-when="8">Coffee & Tea</h3>
+				</div>
 			</div>
 			<div class="about-tre">
 				<div class="might-grid col-sm-6" ng-repeat="restaurant in model.restaurants">
@@ -59,85 +81,6 @@
 					</div>
 					<div class="clearfix"></div>
 				</div>
-
-
-
-				<!--<div class="col-sm-3" ng-repeat="restaurant in model.restaurants">-->
-				<!--<h3>{{restaurant.name}}</h3>-->
-				<!--<img width="100%" ng-click="model.selectRestaurant(restaurant)"-->
-				<!--ng-src="{{restaurant.image_url}}"/>-->
-				<!--<h6>{{restaurant.rating}}</h6>-->
-				<!--<img width="100%"-->
-				<!--ng-src="{{restaurant.rating_img_url_large}}"/>-->
-				<!--<p>{{restaurant.location.coordinate.latitude}}</p>-->
-				<!--<p>{{restaurant.location.coordinate.longitude}}</p>-->
-				<!--</div>-->
-
-				<!--</div>-->
-				<!--<div class="about-tre">-->
-				<!--<div class="col-sm-3" ng-repeat="restaurant in model.restaurants">-->
-				<!--<h3>{{restaurant.name}}</h3>-->
-				<!--<img width="100%" ng-click="model.selectRestaurant(restaurant)"-->
-				<!--ng-src="{{restaurant.image_url}}"/>-->
-				<!--<h6>{{restaurant.rating}}</h6>-->
-				<!--<img width="100%"-->
-				<!--ng-src="{{restaurant.rating_img_url_large}}"/>-->
-				<!--<p>{{restaurant.location.coordinate.latitude}}</p>-->
-				<!--<p>{{restaurant.location.coordinate.longitude}}</p>-->
-				<!--</div>-->
-
-				<!--</div>-->
-
-				<div class="about-tre">
-					<!--<div class="a-1">-->
-					<!--<div class="col-md-6 abt-left">-->
-					<!--<a href="#/category/{{model.categoryId}}/restaurant/0"><img src="images/c-3.jpg" alt="" /></a>-->
-					<!--<h3><a href="single.html">Restaurant Name</a></h3>-->
-					<!--<p>Vivamus interdum diam diam, non faucibus tortor consequat vitae. Proin sit amet augue sed massa pellentesque viverra. Suspendisse iaculis purus eget est pretium aliquam ut sed diam.</p>-->
-					<!--</div>-->
-					<!--<div class="col-md-6 abt-left">-->
-					<!--<a href="single.html"><img src="images/c-4.jpg" alt="" /></a>-->
-					<!--<h3><a href="single.html">Tasty Coffee</a></h3>-->
-					<!--<p>Vivamus interdum diam diam, non faucibus tortor consequat vitae. Proin sit amet augue sed massa pellentesque viverra. Suspendisse iaculis purus eget est pretium aliquam ut sed diam.</p>-->
-					<!--</div>-->
-					<!--<div class="clearfix"></div>-->
-					<!--</div>-->
-					<!--<div class="a-1">-->
-					<!--<div class="col-md-6 abt-left">-->
-					<!--<a href="single.html"><img src="images/c-5.jpg" alt="" /></a>-->
-					<!--<h6>Find The Most</h6>-->
-					<!--<h3><a href="single.html">Tasty Coffee</a></h3>-->
-					<!--<p>Vivamus interdum diam diam, non faucibus tortor consequat vitae. Proin sit amet augue sed massa pellentesque viverra. Suspendisse iaculis purus eget est pretium aliquam ut sed diam.</p>-->
-					<!--<label>May 29, 2015</label>-->
-					<!--</div>-->
-					<!--<div class="col-md-6 abt-left">-->
-					<!--<a href="single.html"><img src="images/c-6.jpg" alt="" /></a>-->
-					<!--<h6>Find The Most</h6>-->
-					<!--<h3><a href="single.html">Tasty Coffee</a></h3>-->
-					<!--<p>Vivamus interdum diam diam, non faucibus tortor consequat vitae. Proin sit amet augue sed massa pellentesque viverra. Suspendisse iaculis purus eget est pretium aliquam ut sed diam.</p>-->
-					<!--<label>May 29, 2015</label>-->
-					<!--</div>-->
-					<!--<div class="clearfix"></div>-->
-					<!--</div>-->
-					<!--<div class="a-1">-->
-					<!--<div class="col-md-6 abt-left">-->
-					<!--<a href="single.html"><img src="images/c-7.jpg" alt="" /></a>-->
-					<!--<h6>Find The Most</h6>-->
-					<!--<h3><a href="single.html">Tasty Coffee</a></h3>-->
-					<!--<p>Vivamus interdum diam diam, non faucibus tortor consequat vitae. Proin sit amet augue sed massa pellentesque viverra. Suspendisse iaculis purus eget est pretium aliquam ut sed diam.</p>-->
-					<!--<label>May 29, 2015</label>-->
-					<!--</div>-->
-					<!--<div class="col-md-6 abt-left">-->
-					<!--<a href="single.html"><img src="images/c-8.jpg" alt="" /></a>-->
-					<!--<h6>Find The Most</h6>-->
-					<!--<h3><a href="single.html">Tasty Coffee</a></h3>-->
-					<!--<p>Vivamus interdum diam diam, non faucibus tortor consequat vitae. Proin sit amet augue sed massa pellentesque viverra. Suspendisse iaculis purus eget est pretium aliquam ut sed diam.</p>-->
-					<!--<label>May 29, 2015</label>-->
-					<!--</div>-->
-					<!--<div class="clearfix"></div>-->
-					<!--</div>-->
-				</div>
-				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>
