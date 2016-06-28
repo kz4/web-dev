@@ -39,8 +39,8 @@ module.exports = function (app, models) {
         restaurantModel
             .addUserIdToRestaurantUsers(restaurantId, userId)
             .then(
-                function (response) {
-                    
+                function (restaurant) {
+                    res.json(restaurant);
                 },
                 function (err) {
                     res.send(err);
@@ -54,8 +54,8 @@ module.exports = function (app, models) {
         restaurantModel
             .createRestaurantToFavorite(restaurantId, userId)
             .then(
-                function (response) {
-
+                function (restaurant) {
+                    res.json(restaurant);
                 },
                 function (err) {
                     res.send(err);
@@ -69,8 +69,8 @@ module.exports = function (app, models) {
         restaurantModel
             .removeUserIdFromRestaurantUsers(restaurantId, userId)
             .then(
-                function (response) {
-
+                function (restaurant) {
+                    res.json(restaurant);
                 },
                 function (err) {
                     res.send(err);

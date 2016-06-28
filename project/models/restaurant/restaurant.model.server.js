@@ -18,7 +18,7 @@ module.exports = function () {
     }
 
     function addUserIdToRestaurantUsers(restaurantId, userId) {
-        return Restaurant.find({restaurantId: restaurantId},
+        return Restaurant.findOne({restaurantId: restaurantId},
             function (err, doc) {
                 doc.users.push(userId);
                 doc.save();
@@ -31,12 +31,11 @@ module.exports = function () {
             users: [userId],
             restaurantId: restaurantId
         };
-
         return Restaurant.create(restaurant);
     }
 
     function removeUserIdFromRestaurantUsers(restaurantId, userId) {
-        return Restaurant.find({restaurantId: restaurantId},
+        return Restaurant.findOne({restaurantId: restaurantId},
             function (err, doc) {
                 doc.users.pull(userId);
                 doc.save();
@@ -44,7 +43,7 @@ module.exports = function () {
     }
 
     function findAllUsersThatFavoredThisRestaurant(restaurantId) {
-        return Restaurant.find({restaurantId: restaurantId})
+        return Restaurant.findOne({restaurantId: restaurantId})
             .populate('users')
             .exec(function(error, doc) {
                 // doc.connections[0].item is a User doc

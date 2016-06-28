@@ -17,7 +17,11 @@
 						var user = res.data;
 						if (user && user._id) {
 							var id = user._id;
-							$location.url("/user/" + id);
+							if (user.userType === "ADMIN") {
+								$location.url("/admin/" + id);
+							} else {
+								$location.url("/user/" + id);
+							}
 							vm.submitted = false;
 						} else {
 							vm.error = "User not found";

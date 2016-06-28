@@ -66,12 +66,12 @@
                         vm.error = err;
                     }
                 )
-            
+
         }
 
         function removeRestaurantFromFavorite() {
             RestaurantService
-                .removeRestaurantFromFavorite(restaurantId, vm.currentUser)
+                .removeRestaurantFromFavorite(restaurantId, vm.currentUser._id)
                 .then(
                     function () {
                         setUser(vm.currentUser._id);
@@ -96,18 +96,29 @@
         }
 
         function cannotAddToFavorite() {
-            if (vm.users) {
-                return (!isLoggedIn() // not loggedIn
-                || (vm.users.indexOf($rootScope.currentUser._id) >= 0)); // OR has liked this restaurant
+            if (vm.users && $rootScope.currentUser) {
+                for (var i = 0; i < vm.users.length; i++) {
+                    if (vm.users[i]._id === $rootScope.currentUser._id) {
+                        return true;
+                    }
+                }
+                return !isLoggedIn();
+                // return (!isLoggedIn() // not loggedIn
+                // || (vm.users.users.indexOf($rootScope.currentUser._id) >= 0)); // OR has liked this restaurant
             } else {
-                return false;
+                return true;
             }
         }
 
         function canDeleteFromFavorite() {
-            if (vm.users) {
-                return (isLoggedIn() // loggedIn
-                && (vm.users.indexOf($rootScope.currentUser._id) >= 0)); // AND has liked this restaurant
+            if (vm.users && $rootScope.currentUser) {
+                for (var i = 0; i < vm.users.length; i++) {
+                    if (vm.users[i]._id === $rootScope.currentUser._id) {
+                        return isLoggedIn();
+                    }
+                }
+                // return (isLoggedIn() // loggedIn
+                // && (vm.users.users.indexOf($rootScope.currentUser._id) >= 0)); // AND has liked this restaurant
             } else {
                 return false;
             }
@@ -446,8 +457,9 @@
                 .findAllUsersThatFavoredThisRestaurant(restaurantId)
                 .then(
                     function (res) {
-                        var users = res.data;
-                        vm.users = users;
+                        var restaurant = res.data;
+                        vm.restaurant = restaurant;
+                        vm.users = vm.restaurant.users;
                     },
                     function (err) {
 
