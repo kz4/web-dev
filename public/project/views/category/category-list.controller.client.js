@@ -17,16 +17,17 @@
         function init() {
             window.navigator.geolocation.getCurrentPosition(function(pos){
                 $http.get('http://maps.googleapis.com/maps/api/geocode/json?latlng='+pos.coords.latitude
-                    +','+pos.coords.longitude+'&sensor=true').then(function(res){
-                    if (res.data && res.data.results) {
-                        var results = res.data.results;
-                        var zip = extractFromAdress(results[0].address_components, "postal_code");
-                        console.log(zip);
-                        if (isValidUSZip(zip)) {
-                            vm.zip = zip;
+                    +','+pos.coords.longitude+'&sensor=true')
+                    .then(function(res){
+                        if (res.data && res.data.results) {
+                            var results = res.data.results;
+                            var zip = extractFromAdress(results[0].address_components, "postal_code");
+                            console.log(zip);
+                            if (isValidUSZip(zip)) {
+                                vm.zip = zip;
+                            }
                         }
-                    }
-                });
+                    });
             })
         }
         init();
@@ -39,7 +40,7 @@
                     }
                 }
             }
-                return "";
+            return "";
         }
 
         function logout() {

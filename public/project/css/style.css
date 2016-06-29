@@ -657,13 +657,13 @@ button.btn-left:hover {
 }
 
 /*.abt-2.resta-info .grid-might img {*/
-	/*border-radius: 5px;*/
-	/*-webkit-border-radius: 5px;*/
-	/*-moz-border-radius: 5px;*/
-	/*-o-border-radius: 5px;*/
-	/*-ms-border-radius: 5px;*/
-	/*width: 100%;*/
-	/*display: block;*/
+/*border-radius: 5px;*/
+/*-webkit-border-radius: 5px;*/
+/*-moz-border-radius: 5px;*/
+/*-o-border-radius: 5px;*/
+/*-ms-border-radius: 5px;*/
+/*width: 100%;*/
+/*display: block;*/
 /*}*/
 
 
@@ -3007,4 +3007,8 @@ iframe.g-map {
 
 .header {
 	padding: 1.7em 0px;
+}
+
+.white {
+	color: #ffffff;
 }

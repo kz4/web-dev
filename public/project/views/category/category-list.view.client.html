@@ -49,7 +49,7 @@
 	<div class="container">
 		<div class="banner-top">
 			<div class="banner-text">
-				<h2>Please enter a zip code</h2>
+				<h2>Please enter a zip code or let browser detect your current zip code</h2>
 				<form name="zipForm" novalidate>
 					<div ng-class="{ 'has-error': model.invalid && model.submitted}">
 						<input id="zipBox" ng-model="model.zip" ng-change="model.onChanged()" name="zip" class="form-control zip-input"
@@ -80,7 +80,7 @@
 			<ul id="da-thumbs" class="da-thumbs">
 				<li>
 					<!--<a href="#/category/0/zip/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">-->
-					<a ng-click="model.selectCategory(0, zip)" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a ng-click="model.selectCategory(0, model.zip)" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/brunch.png" alt="Breakfast & Brunch"/>
 						<div>
 							<h5>Breakfast & Brunch</h5>
@@ -88,7 +88,7 @@
 					</a>
 				</li>
 				<li>
-					<a ng-click="model.selectCategory(1, zip)" rel="title" class="b-link-stripe b-animate-go  thickbox">
+					<a ng-click="model.selectCategory(1, model.zip)" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/seafood.jpg" alt="Seafood"/>
 						<div>
 							<h5>Seafood</h5>

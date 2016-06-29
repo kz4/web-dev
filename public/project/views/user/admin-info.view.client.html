@@ -42,24 +42,9 @@
 		<div class="about-main">
 			<div class="col-md-8 about-left">
 				<div class="about-two">
-					<a href="single.html"><img src="images/admin.png" alt="Profile Picture"/></a>
-					<div ng-show="model.isLoggedIn() && model.isCurrentUserSameAsProfile()">
-						<form name="newImageForm" action="/api/profileImageUpload"  method="post" enctype="multipart/form-data">
-							<input name="userId" value="{{model.currentUser._id}}" style="display: none"/>
-							<div class="form-group"
-								 ng-class="{ 'has-error': newImageForm.width.$error.required && model.submitted}">
-								<Label>Width</Label>
-								<input ng-model="model.width" class="form-control" type="text"
-									   placeholder="100%" name="width" required>
-						<span ng-show="newImageForm.width.$error.required && model.submitted"
-							  class="help-block">
-							Image width required
-						</span>
-							</div>
-							<input  name="myFile"   type="file" class="form-control"/>
-							<button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
-						</form>
-					</div>
+					<a>
+						<img src="images/admin.png" alt="Profile Picture"/>
+					</a>
 				</div>
 			</div>
 			<div class="col-md-4 about-right">

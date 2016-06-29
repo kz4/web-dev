@@ -471,8 +471,10 @@
                 .then(
                     function (res) {
                         var restaurant = res.data;
-                        vm.restaurant = restaurant;
-                        vm.users = vm.restaurant.users;
+                        if (restaurant) {
+                            vm.restaurant = restaurant;
+                            vm.users = vm.restaurant.users;
+                        }
                     },
                     function (err) {
 

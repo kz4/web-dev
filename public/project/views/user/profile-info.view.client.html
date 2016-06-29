@@ -106,35 +106,16 @@
 					</table>
 				</div>
 				<div class="abt-2">
-					<!--<div class="news">-->
-					<!--<form>-->
-					<!--<input type="text" value="message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" />-->
-					<!--<input type="submit" value="Comment">-->
-					<!--</form>-->
-					<!--</div>-->
 					<div class="about-one">
 						<h4 class="comment-header">Following</h4>
 					</div>
 					<div ng-repeat="followingUser in model.user.following">
 						<div class="commentDiv">
-							<!--<a href="#/user/{{comment.commenterId}}">-->
-							<!--<span class="text-info">{{comment.commenter}}</span>-->
-							<!--</a>&nbsp;-->
-							<!--<span>posted at {{model.getLongDateTime(comment.date)}}</span>&nbsp;-->
-							<!--&lt;!&ndash;<button ng-click="model.replyAcomment(comment._id, comment.commenterId, comment.commenter, $index)"&ndash;&gt;-->
-							<!--&lt;!&ndash;class="replyBtn">reply&ndash;&gt;-->
-							<!--&lt;!&ndash;</button>&ndash;&gt;-->
-							<!--<button class="btn-right" ng-click="comment.isThisReplyCommentAreaShown = true">-->
-							<!--Reply-->
-							<!--</button>-->
-							<!--<br/>-->
-							<!--<span class="commentText">{{comment.content}}</span>-->
-							<!--<h4>{{followingUser.username}}</h4>-->
 							<img width="20%" ng-src="{{followingUser.profilePic}}" alt="Profile Picture" />
 							<a href="#/user/{{followingUser._id}}">
 								<span class="text-info">{{followingUser.username}}</span>
-								<br>
-								<span class="text-info">{{followingUser.firstName}}&nbsp;{{followingUser.lastName}}</span>
+								<!--<br>-->
+								<!--<span class="text-info">{{followingUser.firstName}}&nbsp;{{followingUser.lastName}}</span>-->
 							</a>
 						</div>
 					</div>
