@@ -52,7 +52,7 @@
 				<h2>Please enter a zip code</h2>
 				<form name="zipForm" novalidate>
 					<div ng-class="{ 'has-error': model.invalid && model.submitted}">
-						<input id="zipBox" ng-model="zip" ng-change="model.onChanged()" name="zip" class="form-control zip-input"
+						<input id="zipBox" ng-model="model.zip" ng-change="model.onChanged()" name="zip" class="form-control zip-input"
 							   type="text" placeholder="zip code" required>
 						<!--<a ng-click="model.login(username, password)" class="btn btn-primary btn-block">Submit</a>-->
 						<span ng-show="model.invalid && model.submitted"
@@ -61,7 +61,7 @@
 						</span>
 						<div class="banner-btn">
 							<!--<a href="#da-thumbs" target="_self">Submit</a>-->
-							<a ng-click="model.setZipCode(zip)">Submit</a>
+							<a ng-click="model.setZipCode(model.zip)">Submit</a>
 						</div>
 					</div>
 				</form>
