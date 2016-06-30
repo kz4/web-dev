@@ -43,7 +43,16 @@
                 .findAllUsers()
                 .then(
                     function (res) {
-                        vm.users = res.data;
+                        var users = res.data;
+                        var usersExceptSelf = [];
+                        for (var i = 0; i < users.length; i++) {
+                            if (users[i]._id === currentUser._id) {
+                                continue;
+                            } else {
+                                usersExceptSelf.push(users[i]);
+                            }
+                        }
+                        vm.users = usersExceptSelf;
                     },
                     function (err) {
                         vm.error = err;

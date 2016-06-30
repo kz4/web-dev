@@ -3017,6 +3017,14 @@ iframe.g-map {
 	padding-bottom: 50px;
 }
 
+.padding-top-50 {
+	padding-top: 50px;
+}
+
 .padding-bottom-70 {
 	padding-bottom: 50px;
+}
+
+.margin-bottom-5 {
+	margin-bottom: 5px;
 }

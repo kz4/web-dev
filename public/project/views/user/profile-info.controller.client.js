@@ -21,6 +21,7 @@
         vm.unfollowUser = unfollowUser;
 
         var userId = $routeParams.uid;
+        vm.userId = userId;
 
         function cannotFollow() {
             var res= (!isLoggedIn() // not loggedIn

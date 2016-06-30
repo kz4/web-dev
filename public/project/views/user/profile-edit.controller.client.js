@@ -11,12 +11,12 @@
         var currentUser = $rootScope.currentUser;
         vm.currentUser = currentUser;
         vm.isLoggedIn = isLoggedIn;
-        vm.isCurrentUserSameAsProfile = isCurrentUserSameAsProfile;
+        vm.isCurrentUserSameAsProfileOrAdmin = isCurrentUserSameAsProfileOrAdmin;
         vm.hasProfilePicture = hasProfilePicture;
+        vm.deleteProfilePic = deleteProfilePic;
 
         var userId = $routeParams.uid;
-
-        // var id = $routeParams['uid'];
+        vm.userId = userId;
         var id = $rootScope.currentUser._id;
 
         function init() {
@@ -39,10 +39,40 @@
                 );
         }
         init();
+        
+        function deleteProfilePic() {
+            if (vm.profilePic.startsWith("/uploads/")) {
+                var parts = vm.user.profilePic.split("/");
+                var pathWithoutUploads = parts[parts.length - 1];   // We only want the filename of the picture
+                UserService
+                    .deleteUserProfilePic(userId, pathWithoutUploads)
+                    .then(
+                        function (res) {
+                            var result = res.data;
+                            if (result === "OK") {
+                                vm.user.profilePic = null;
+                                var user = vm.user;
+                                updateUser(user);
+                            } else {
+                                vm.error = "Failed to delete the profile picture";
+                            }
+                        },
+                        function (err) {
+                            vm.error = err;
+                        }
+                    );
+            } else {
+                vm.user.profilePic = null;
+                var user = vm.user;
+                updateUser(user);
+            }
+            $location.url("/user/" + id);
+        }
 
-        function isCurrentUserSameAsProfile() {
-            var res = userId && vm.currentUser._id && (vm.currentUser._id === userId);
-            return res;
+        function isCurrentUserSameAsProfileOrAdmin() {
+            var isCurrentUserSameAsProfile = userId && vm.currentUser._id && (vm.currentUser._id === userId);
+            var isAdmin = vm.currentUser.userType === "ADMIN";
+            return isCurrentUserSameAsProfile || isAdmin;
         }
 
 
@@ -71,11 +101,11 @@
 
         function updateUser(user) {
             UserService
-                .updateUser(id, user)
+                .updateUser(userId, user)
                 .then(
                     function () {
                         // vm.inf = "Profile updated";
-                        $location.url("/user/" + id);
+                        $location.url("/user/" + userId);
                     },
                     function (error) {
                         vm.error = "Profile failed to be updated";

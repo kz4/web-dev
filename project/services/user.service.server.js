@@ -3,20 +3,19 @@ var projectPassport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var bcrypt = require("bcrypt-nodejs");
+var fs = require("fs");
+var path = require("path");
 
 module.exports = function (app, models) {
 
     var userModel = models.userModel;
-    // var websiteModel = models.websiteModel;
-    // var pageModel = models.pageModel;
-    // var widgetModel = models.widgetModel;
-
 
     app.post("/api/user", createUser);
     app.get("/api/users", getAllUsers);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
+    app.put("/api/user/:userId/profilePic/:profilePic", deleteUserProfilePic);
     app.post  ("/api/project/user/:followerId/user/:followedId", userFollowsUser);
     app.put   ("/api/project/user/:followerId/user/:followedId", userUnfollowsUser);
     app.post('/api/login', projectPassport.authenticate('local'), login);
@@ -218,66 +217,21 @@ module.exports = function (app, models) {
             );
     }
 
-    function deleteUser(req, res) {
-        // var id = req.params.userId;
-        // userModel
-        //     .deleteUser(id)
-        //     .then(
-        //         function () {
-        //             websiteModel
-        //                 .findAllWebsitesForUser(id)
-        //                 .then(function (websites) {
-        //                     for (var i in websites) {
-        //                         pageModel
-        //                             .findAllPagesForWebsite(websites[i]._id)
-        //                             .then(function (pages) {
-        //                                     for (var j in pages) {
-        //                                         widgetModel
-        //                                             .findAllWidgetsForPage(pages[j]._id)
-        //                                             .then(function (widgets) {
-        //                                                 for (var k in widgets) {
-        //                                                     widgetModel
-        //                                                         .deleteWidget(widgets[k]._id)
-        //                                                         .then(function () {
-        //                                                                 res.sendStatus(200);
-        //                                                             }, function (error) {
-        //                                                                 res.send(error);
-        //                                                             });
-        //                                                 }
-        //                                             }, function (error) {
-        //                                                 res.send(error);
-        //                                             });
-        //                                         pageModel
-        //                                             .deletePage(pages[j]._id)
-        //                                             .then(function () {
-        //                                                     res.sendStatus(200);
-        //                                                 },
-        //                                                 function (error) {
-        //                                                     res.send(error);
-        //                                                 });
-        //                                     }
-        //                                 },
-        //                                 function (error) {
-        //                                     res.send(error);
-        //                                 });
-        //                         websiteModel
-        //                             .deleteWebsite(websites[i]._id)
-        //                             .then(function () {
-        //                                 res.sendStatus(200);
-        //                             }, function (error) {
-        //                                 res.send(error);
-        //                             });
-        //                     }
-        //                 }, function (error) {
-        //                     res.send(error);
-        //                 });
-        //         },
-        //         function (error) {
-        //             // res.statusCode(404).send(error);
-        //             res.send(error);
-        //         }
-        //     );
+    function deleteUserProfilePic(req, res) {
+        var userId = req.params.userId;
+        // var profilePicFullPath = __dirname + "/public/uploads/" + req.params.profilePic;
+        var profilePicFullPath = path.resolve(__dirname + "/../../public/uploads/" + req.params.profilePic);
 
+        fs.unlink(profilePicFullPath, function (err) {
+            if (!err) {
+                res.send(200);
+            } else {
+                res.status(400).send(err);
+            }
+        });
+    }
+
+    function deleteUser(req, res) {
         var id = req.params.userId;
         userModel
             .deleteUser(id)

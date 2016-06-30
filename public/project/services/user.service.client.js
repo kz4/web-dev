@@ -12,6 +12,7 @@
             findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
             deleteUser: deleteUser,
+            deleteUserProfilePic: deleteUserProfilePic,
             login: login,
             logout: logout,
             loggedIn: loggedIn,
@@ -138,6 +139,11 @@
         function deleteUser(userId) {
             var url = "/api/user/" + userId;
             return $http.delete(url, userId);
+        }
+        
+        function deleteUserProfilePic(userId, profilePicPath) {
+            var url = "/api/user/" + userId + "/profilePic/" + profilePicPath;
+            return $http.put(url);
         }
     }
 })();
