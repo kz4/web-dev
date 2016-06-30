@@ -12,6 +12,7 @@ module.exports = function () {
         findUserById: findUserById,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
+        addACommentToUser: addACommentToUser,
         updateUser: updateUser,
         deleteUser: deleteUser,
         followUser: followUser,
@@ -161,6 +162,21 @@ module.exports = function () {
                 profilePic: user.profilePic
             }
         });
+    }
+
+    function addACommentToUser(userId, comment) {
+        return ProjectUser.update({_id: userId}, {
+            $push: {
+                comments: comment
+            }
+        });
+
+        // This works just as well
+        // return ProjectUser.findById(userId,
+        //     function (err, doc) {
+        //         doc.comments.push(comment);
+        //         doc.save();
+        //     });
     }
 
     function createUser(user) {

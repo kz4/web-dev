@@ -10,6 +10,7 @@
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
+            addACommentToUser: addACommentToUser,
             updateUser: updateUser,
             deleteUser: deleteUser,
             deleteUserProfilePic: deleteUserProfilePic,
@@ -134,6 +135,11 @@
         function updateUser(userId, user) {
             var url = "/api/user/" + userId;
             return $http.put(url, user);
+        }
+
+        function addACommentToUser(userId, comment) {
+            var url = "/api/user/" + userId;
+            return $http.put(url, comment);
         }
 
         function deleteUser(userId) {

@@ -18,6 +18,7 @@ module.exports = function () {
         dob: Date,
         following: [{type: mongoose.Schema.ObjectId, ref: "ProjectUser"}],
         followedBy: [{type: mongoose.Schema.ObjectId, ref: "ProjectUser"}],
+        comments: [{type: mongoose.Schema.ObjectId, ref: "Comment"}],
         userType: {
             type: String,
             enum: ['NORMAL', 'ADMIN']

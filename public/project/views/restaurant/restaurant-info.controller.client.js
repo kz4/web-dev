@@ -412,6 +412,15 @@
                             vm.comment = null;
                             vm.commentPlaceholder = "Please leave a comment...";
                             refreshPage(restaurantId);
+                            UserService
+                                .addACommentToUser($rootScope.currentUser._id, returnedComment)
+                                .then(
+                                    function (res) {
+                                        var updatedUser = res.data;
+                                    },
+                                    function (err) {
+                                        vm.error = err;
+                                    });
                         })
                 }
             } else {
