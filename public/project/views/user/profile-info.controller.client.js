@@ -23,6 +23,12 @@
         var userId = $routeParams.uid;
         vm.userId = userId;
 
+        vm.isAdmin = isAdmin;
+
+        function isAdmin() {
+            return (isLoggedIn() && $rootScope.currentUser.userType === "ADMIN");
+        }
+
         function cannotFollow() {
             var res= (!isLoggedIn() // not loggedIn
             || isCurrentUserSameAsProfile() // OR is the user self

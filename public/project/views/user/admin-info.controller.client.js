@@ -2,11 +2,11 @@
     angular
         .module("ProjectMaker")
         .controller("AdminInfoController", AdminInfoController);
-    
+
     function AdminInfoController($location, $rootScope, UserService, $routeParams, $scope) {
         var vm = this;
         vm.updateUser = updateUser;
-        vm.deleteUser = deleteUser;
+        vm.deleteUserAndAllInfo = deleteUserAndAllInfo;
         vm.logout = logout;
         var currentUser = $rootScope.currentUser;
         vm.currentUser = currentUser;
@@ -15,9 +15,27 @@
         vm.isCurrentUserSameAsProfile = isCurrentUserSameAsProfile;
 
         vm.editUser = editUser;
+        vm.getLongDateTime = getLongDateTime;
 
 
         var userId = $routeParams.uid;
+
+        function getLongDateTime(timeString) {
+            var date = new Date(timeString);
+            var dateOri = date.toDateString();
+            var dateLiteral = dateOri.substring(4, 7) + " " + date.getDate() + ", " + dateOri.slice(-2);
+            var time = new Date(timeString);
+            var hours = time.getHours();
+            var minutes = time.getMinutes();
+            if(hours < 10) {
+                hours = "0" + hours;
+            }
+            if(minutes < 10) {
+                minutes = "0" + minutes;
+            }
+            var timeLiteral = hours + ":" + minutes + " ";
+            return timeLiteral + dateLiteral;
+        }
 
         function editUser(user) {
             var id = user._id;
@@ -40,7 +58,7 @@
 
         function init() {
             UserService
-                .findAllUsers()
+                .findAllUsersWithPopulation()
                 .then(
                     function (res) {
                         var users = res.data;
@@ -88,7 +106,7 @@
                 );
         }
 
-        function deleteUser(userId) {
+        function deleteUserAndAllInfo(userId) {
             UserService
                 .deleteUser(userId)
                 .then(
@@ -100,6 +118,44 @@
                         vm.error = err;
                     }
                 )
+            // var user = null;
+            // UserService
+            //     .findUserById(userId)
+            //     .then(
+            //         function (res) {
+            //             var user = res.data;
+            //             for (var i = 0; i < user.comments.length; i++) {
+            //                 var replies = user.comments[i].replies;
+            //                 for (var j = 0; j < replies.length; i++) {
+            //                     ReplyService
+            //                         .deleteReplyById(replies[j])
+            //                         .then(
+            //                             function (res) {
+            //
+            //                             }
+            //                         )
+            //                 }
+            //                 CommentService
+            //                     .deletCommentById(user.comments[i])
+            //                     .then(
+            //                         function (res) {
+            //
+            //                         }
+            //                     )
+            //             }
+            //             UserService
+            //                 .deleteUser(userId)
+            //                 .then(
+            //                     function () {
+            //                         $location.url("admin");
+            //                     },
+            //                     function (res) {
+            //                         var err = res.data;
+            //                         vm.error = err;
+            //                     }
+            //                 )
+            //         }
+            //     )
         }
     }
 })();

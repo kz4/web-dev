@@ -656,6 +656,16 @@ button.btn-left:hover {
 	display: block;
 }
 
+.abt-2 .grid-might img {
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-ms-border-radius: 5px;
+	width: 50%;
+	display: block;
+}
+
 /*.abt-2.resta-info .grid-might img {*/
 /*border-radius: 5px;*/
 /*-webkit-border-radius: 5px;*/
@@ -708,6 +718,12 @@ button.btn-left:hover {
 	margin-top: 3%;
 	margin-left: 10%;
 	margin-bottom: 5%;
+}
+
+.abt-2 ul.admin-comment-lst{
+	padding: 0;
+	margin: 3% 0 3% 0;
+	text-align: left;
 }
 
 .news form input[type="text"] {
@@ -766,6 +782,13 @@ button.btn-left:hover {
 	text-align: left;
 }
 
+.abt-2 ul.admin-comment-lst li {
+	list-style-image: none;
+	list-style-type: none;
+	margin: 12px 0px 5px 0px;
+	text-align: left;
+}
+
 .abt-2 ul li.list-info {
 	list-style-image: none;
 	list-style-type: none;
@@ -789,9 +812,21 @@ button.btn-left:hover {
 	display: flex;
 }
 
+.grid-might-admin {
+	float: left;
+	width: 70%;
+	display: flex;
+}
+
 .might-top {
 	float: right;
 	width: 67%;
+	text-align: left;
+}
+
+.might-top.admin-btn {
+	float: right;
+	width: inherit;
 	text-align: left;
 }
 
@@ -2153,6 +2188,12 @@ ul.blog-ic {
 		padding-left: 0px;
 		width: 100%;
 	}
+
+	.might-top.admin-btn {
+		float: right;
+		width: 15%;
+		text-align: left;
+	}
 }
 
 @media (max-width: 480px) {
@@ -2373,6 +2414,12 @@ ul.blog-ic {
 		padding-left: 0px;
 		width: 100%;
 	}
+
+	.might-top.admin-btn {
+		float: right;
+		width: 15%;
+		text-align: left;
+	}
 }
 
 @media (max-width: 414px) {
@@ -2393,6 +2440,12 @@ ul.blog-ic {
 		padding-right: 0px;
 		padding-left: 0px;
 		width: 100%;
+	}
+
+	.might-top.admin-btn {
+		float: right;
+		width: 15%;
+		text-align: left;
 	}
 }
 
@@ -2419,6 +2472,12 @@ ul.blog-ic {
 		padding-left: 0px;
 		width: 100%;
 	}
+
+	.might-top.admin-btn {
+		float: right;
+		width: 15%;
+		text-align: left;
+	}
 }
 
 @media (max-width: 375px) {
@@ -2438,6 +2497,12 @@ ul.blog-ic {
 		padding-right: 0px;
 		padding-left: 0px;
 		width: 100%;
+	}
+
+	.might-top.admin-btn {
+		float: right;
+		width: 15%;
+		text-align: left;
 	}
 }
 
@@ -2834,6 +2899,12 @@ ul.blog-ic {
 		padding-left: 0px;
 		width: 100%;
 	}
+
+	.might-top.admin-btn {
+		float: right;
+		width: 15%;
+		text-align: left;
+	}
 }
 
 /*--media-quaries-end-here--*/
@@ -2960,6 +3031,10 @@ iframe.g-map {
 	width: 50%;
 }
 
+.grid-might-admin .user-list {
+	width: 15%;
+}
+
 .info-table {
 	margin-top: 10%;
 	margin-left: 3%;
@@ -3027,4 +3102,14 @@ iframe.g-map {
 
 .margin-bottom-5 {
 	margin-bottom: 5px;
+}
+
+.admin-right {
+	text-align: right;
+}
+
+.max-height-50 {
+	max-height: 50px;
+	max-width: 50px;
+	width: 100%;
 }

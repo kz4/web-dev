@@ -7,6 +7,7 @@
         var api = {
             createUser: createUser,
             findAllUsers: findAllUsers,
+            findAllUsersWithPopulation: findAllUsersWithPopulation,
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
@@ -117,6 +118,11 @@
             return $http.get(url);
         }
 
+        function findAllUsersWithPopulation() {
+            var url = "/api/users/population";
+            return $http.get(url);
+        }
+
         function findUserById(id) {
             var url = "/api/user/" + id;
             return $http.get(url);
@@ -138,7 +144,7 @@
         }
 
         function addACommentToUser(userId, comment) {
-            var url = "/api/user/" + userId;
+            var url = "/api/user/" + userId +"/comment";
             return $http.put(url, comment);
         }
 

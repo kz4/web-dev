@@ -9,6 +9,7 @@ module.exports = function () {
     var api = {
         createUser: createUser,
         findAllUsers: findAllUsers,
+        getAllUsersWithPopulation: getAllUsersWithPopulation,
         findUserById: findUserById,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
@@ -185,6 +186,14 @@ module.exports = function () {
 
     function findAllUsers() {
         return ProjectUser.find();
+    }
+
+    function getAllUsersWithPopulation() {
+        return ProjectUser.find()
+            .populate('comments')
+            .exec(function (error, doc) {
+
+            });
     }
 
     function findUserByUsername(username) {

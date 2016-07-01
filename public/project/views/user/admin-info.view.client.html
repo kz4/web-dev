@@ -53,87 +53,76 @@
 				</div>
 				<div class="abt-2">
 					<div class="might-grid" ng-repeat="user in model.users">
-						<div class="grid-might">
+						<div class="grid-might-admin">
 							<div class="user-list" ng-show="user.profilePic">
-								<img ng-src="{{user.profilePic}}" alt="Profile Picture" />
+								<img class="max-height-50" ng-src="{{user.profilePic}}" alt="Profile Picture" />
 							</div>
 							<div class="user-list" ng-hide="user.profilePic">
-								<img src="images/profile.png" alt="Profile Picture" />
+								<img class="max-height-50" src="images/profile.png" alt="Profile Picture" />
 							</div>
-							<a href="#/user/{{user._id}}">
+							<p><a href="#/user/{{user._id}}">
 								<span class="">{{user.username}}</span>
 							</a>
-
-
-
-							<div ng-repeat="comment in user.comments">
-								<div class="commentDiv">
-									<a href="#/user/{{comment.commenterId}}">
-										<span class="text-info">{{comment.commenter}}</span>
-									</a>&nbsp;
-									<span>posted at {{model.getLongDateTime(comment.date)}}</span>&nbsp;
-									<button class="btn-right" ng-click="comment.isThisReplyCommentAreaShown = true">
-										Reply
-									</button>
-									<br/>
-									<span class="commentText">{{comment.content}}</span>
-									<div ng-if="comment.isThisReplyCommentAreaShown">
-									<textarea ng-model="replyToAComment" class="form-control" rows="4"
-											  placeholder="Reply a comment here..."></textarea>
-										<button
-												ng-click="model.submitAReplyToAComment(replyToAComment, comment._id, comment.commenterId, comment.commenter, $index)"
-												class="btn btn-primary">Submit
-										</button>
-										<button ng-click="comment.isThisReplyCommentAreaShown = false"
-												class="btn btn-danger">Cancel
-										</button>
-									</div>
-								</div>
-
-								<!--iterate replies in each comment-->
-								<div ng-show="comment.replies.length > 0" class="replyDiv">
-									<div class="replyDiv1">
-										<span class="glyphicon glyphicon-triangle-top"></span>
-									</div>
-									<div class="replyDiv2">
-										<div ng-repeat="reply in comment.replies">
-											<a href="#/user/{{reply.replierId}}">
-												<span class="text-info">{{reply.replier}}</span>
-											</a>&nbsp;@
-											<a href="#/user/{{reply.hostId}}">
-												<span class="text-info">{{reply.host}}</span>
+							</p>
+							<ul class="admin-comment-lst">
+								<div ng-repeat="comment in user.comments">
+									<li>
+										<div class="commentDiv">
+											<a href="#/user/{{comment.commenterId}}">
+												<span class="text-info">{{comment.commenter}}</span>
+											</a>&nbsp;
+											<span>posted at {{model.getLongDateTime(comment.date)}}</span>&nbsp;
+											<!--<br/>-->
+											<a href="#/category/{{comment.categoryId}}/zip/{{comment.zip}}/restaurant/{{comment.restaurantId}}">
+												<span class="text-info">{{comment.content}}</span>
 											</a>
-											<span>at {{model.getLongDateTime(reply.date)}}:</span>&nbsp;
-											<span class="commentText">{{reply.content}}</span>&nbsp;
-
-											<!--TODO: implement a reply to a reply-->
-											<!--<button ng-click="reply.isThisReplyReplyAreaShown = true"-->
-											<!--class="replyBtn">Reply-->
-											<!--</button>-->
-
-
-											<div ng-if="reply.isThisReplyReplyAreaShown">
-											<textarea ng-model="replyToAReply" class="form-control" rows="4"
-													  placeholder="This is a reply to a reply"></textarea>
-												<button ng-click="model.submitAReplyToAReply(replyToAReply, comment._id, reply.replierId, reply.replier, $index, $parent.$parent.$index)"
-														class="btn btn-primary">Submit
-												</button>
-												<button ng-click="reply.isThisReplyReplyAreaShown = false"
-														class="btn btn-danger">Cancel
-												</button>
-											</div>
-
 										</div>
-									</div>
+									</li>
+									<!--&lt;!&ndash;iterate replies in each comment&ndash;&gt;-->
+									<!--<div ng-show="comment.replies.length > 0" class="replyDiv">-->
+									<!--<div class="replyDiv1">-->
+									<!--<span class="glyphicon glyphicon-triangle-top"></span>-->
+									<!--</div>-->
+									<!--<div class="replyDiv2">-->
+									<!--<div ng-repeat="reply in comment.replies">-->
+									<!--<a href="#/user/{{reply.replierId}}">-->
+									<!--<span class="text-info">{{reply.replier}}</span>-->
+									<!--</a>&nbsp;@-->
+									<!--<a href="#/user/{{reply.hostId}}">-->
+									<!--<span class="text-info">{{reply.host}}</span>-->
+									<!--</a>-->
+									<!--<span>at {{model.getLongDateTime(reply.date)}}:</span>&nbsp;-->
+									<!--<span class="commentText">{{reply.content}}</span>&nbsp;-->
+
+									<!--&lt;!&ndash;TODO: implement a reply to a reply&ndash;&gt;-->
+									<!--&lt;!&ndash;<button ng-click="reply.isThisReplyReplyAreaShown = true"&ndash;&gt;-->
+									<!--&lt;!&ndash;class="replyBtn">Reply&ndash;&gt;-->
+									<!--&lt;!&ndash;</button>&ndash;&gt;-->
+
+
+									<!--<div ng-if="reply.isThisReplyReplyAreaShown">-->
+									<!--<textarea ng-model="replyToAReply" class="form-control" rows="4"-->
+									<!--placeholder="This is a reply to a reply"></textarea>-->
+									<!--<button ng-click="model.submitAReplyToAReply(replyToAReply, comment._id, reply.replierId, reply.replier, $index, $parent.$parent.$index)"-->
+									<!--class="btn btn-primary">Submit-->
+									<!--</button>-->
+									<!--<button ng-click="reply.isThisReplyReplyAreaShown = false"-->
+									<!--class="btn btn-danger">Cancel-->
+									<!--</button>-->
+									<!--</div>-->
+
+									<!--</div>-->
+									<!--</div>-->
+									<!--</div>-->
 								</div>
-							</div>
 
 
-
+							</ul>
 
 						</div>
-						<div class="might-top">
-							<button class="btn-right" ng-click="model.deleteUser(user._id)">
+
+						<div class="might-top admin-btn">
+							<button class="btn-right" ng-click="model.deleteUserAndAllInfo(user._id)">
 								Delete
 							</button>
 							<button class="btn-right" ng-click="model.editUser(user)">
@@ -144,7 +133,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="clearfix"></div>
+			<!--<div class="clearfix"></div>-->
 		</div>
 	</div>
 </div>

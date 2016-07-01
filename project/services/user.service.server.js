@@ -12,8 +12,9 @@ module.exports = function (app, models) {
 
     app.post("/api/user", createUser);
     app.get("/api/users", getAllUsers);
+    app.get("/api/users/population", getAllUsersWithPopulation);
     app.get("/api/user/:userId", findUserById);
-    app.put("/api/user/:userId", addACommentToUser);
+    app.put("/api/user/:userId/comment", addACommentToUser);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
     app.put("/api/user/:userId/profilePic/:profilePic", deleteUserProfilePic);
@@ -309,6 +310,19 @@ module.exports = function (app, models) {
     function getAllUsers(req, res) {
         userModel
             .findAllUsers()
+            .then(
+                function (users) {
+                    res.json(users);
+                },
+                function (error) {
+                    res.send(error);
+                }
+            );
+    }
+
+    function getAllUsersWithPopulation(req, res) {
+        userModel
+            .getAllUsersWithPopulation()
             .then(
                 function (users) {
                     res.json(users);
