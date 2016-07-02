@@ -74,56 +74,71 @@
 						</a>
 					</div>
 					<div class="col-xs-12 padding-top-10" ng-if="model.isAdmin()">
-							<a href="#/admin/{{model.currentUser._id}}">
-								<span class="glyphicon glyphicon-user"></span>&nbsp;Admin
-							</a>
+						<a href="#/admin/{{model.currentUser._id}}">
+							<span class="glyphicon glyphicon-user"></span>&nbsp;Admin
+						</a>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4 about-right">
+			<div class="col-md-4">
 				<div class="abt-2">
-					<table class="info-table">
-						<tbody>
-						<tr>
-							<th>Username</th>
-							<td>
-								<li class="list-info">{{model.user.username}}</li>
-							</td>
-						</tr>
-						<tr>
-							<th>First Name</th>
-							<td>
-								<li class="list-info">{{model.user.firstName}}</li>
-							</td>
-						</tr>
-						<tr>
-							<th>Last Name</th>
-							<td>
-								<li class="list-info">{{model.user.lastName}}</li>
-							</td>
-						</tr>
-						<tr>
-							<th>Email</th>
-							<td>
-								<li class="list-info">{{model.user.email}}</li>
-							</td>
-						</tr>
-						</tbody>
-
-					</table>
-				</div>
-				<div class="abt-2">
-					<div class="about-one">
-						<h4 class="comment-header">Following</h4>
+					<div class="row profile-info-text">
+						<div class="col-xs-4">
+							Username
+						</div>
+						<div class="col-xs-8">
+							{{model.user.username}}
+						</div>
 					</div>
-					<div ng-repeat="followingUser in model.user.following">
-						<div class="commentDiv">
-							<img width="20%" ng-src="{{followingUser.profilePic}}" alt="Profile Picture" />
-							<a href="#/user/{{followingUser._id}}">
-								<span class="text-info">{{followingUser.username}}</span>
-								<!--<br>-->
-								<!--<span class="text-info">{{followingUser.firstName}}&nbsp;{{followingUser.lastName}}</span>-->
-							</a>
+					<div class="row profile-info-text">
+						<div class="col-xs-4">
+							First Name
+						</div>
+						<div class="col-xs-8">
+							{{model.user.firstName}}
+						</div>
+					</div>
+					<div class="row profile-info-text">
+						<div class="col-xs-4">
+							Last Name
+						</div>
+						<div class="col-xs-8">
+							{{model.user.lastName}}
+						</div>
+					</div>
+					<div class="row profile-info-text">
+						<div class="col-xs-4">
+							Email
+						</div>
+						<div class="col-xs-8">
+							{{model.user.email}}
+						</div>
+					</div>
+				</div>
+				<div ng-if="model.user.following.length > 0">
+					<div class="abt-2 padding-top-40">
+						<div class="about-one">
+							<h4 class="comment-header">Following</h4>
+						</div>
+						<div ng-repeat="followingUser in model.user.following">
+							<div class="row">
+								<!--<img width="20%" ng-src="{{followingUser.profilePic}}" alt="Profile Picture" />-->
+								<div class="col-xs-4">
+									<div ng-show="followingUser.profilePic">
+										<img width="20%" ng-src="{{followingUser.profilePic}}" alt="Profile Picture" />
+									</div>
+									<div ng-hide="followingUser.profilePic">
+										<img width="20%" src="images/profile.png" alt="Profile Picture" />
+									</div>
+								</div>
+								<div class="col-xs-8">
+									<a href="#/user/{{followingUser._id}}">
+										<span class="text-info">{{followingUser.username}}</span>
+										<!--<br>-->
+										<!--<span class="text-info">{{followingUser.firstName}}&nbsp;{{followingUser.lastName}}</span>-->
+									</a>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
