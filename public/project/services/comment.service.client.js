@@ -11,8 +11,14 @@
             // updateReply : updateReply
             getAllComments : getAllComments,
             findCommentByCommentId : findCommentByCommentId,
+            deleteCommentByCommentId : deleteCommentByCommentId
         };
         return api;
+
+        function deleteCommentByCommentId(commentId) {
+            var url = "/api/comment/" + commentId;
+            return $http.delete(url);
+        }
 
         function findCommentByCommentId(commentId) {
             return $http.get("/api/comment/" + commentId);

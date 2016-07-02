@@ -4,6 +4,7 @@ module.exports = function (app, models) {
 
     app.post("/api/comment/:commentId", createReply);
     app.put("/api/comment/:commentId/reply/:replyId", updateReply);
+    app.delete("/api/reply/:replyId", deleteReplyByReplyId);
     app.get("/api/comment/:commentId/reply", getAllReplies);
     app.get("/api/comment/:commentId/reply", getAllReplies);
     app.get("/api/comment/:commentId/reply/:replyId", findReplyById);
@@ -36,6 +37,20 @@ module.exports = function (app, models) {
             );
     }
 
+    function deleteReplyByReplyId(req, res) {
+        var replyId = req.params.replyId;
+        replyModel
+            .deleteReplyByReplyId(replyId)
+            .then(
+                function () {
+                    res.send(200);
+                },
+                function (err) {
+                    res.send(err);
+                }
+            )
+    }
+
     function updateReply(req, res) {
         var commentId = req.params.commentId;
         var replyId = req.params.replyId;
@@ -60,7 +75,7 @@ module.exports = function (app, models) {
                 .createReply(commentId, reply)
                 .then(
                     function (newReply) {
-                        res.json(newReply);
+                        // res.json(newReply);
                         commentModel
                             .populateReply(commentId, newReply)
                             .then(function (response) {

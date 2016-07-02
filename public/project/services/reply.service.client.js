@@ -7,6 +7,7 @@
         var api = {
             createReply: createReply,
             updateReply: updateReply,
+            deleteReplyByReplyId : deleteReplyByReplyId,
             getAllRepliesForCommentId: getAllRepliesForCommentId,
             getReplyByReplyId: getReplyByReplyId
         };
@@ -18,6 +19,11 @@
         
         function getAllRepliesForCommentId(commentId) {
             return $http.get("/api/comment/" + commentId + "/reply");
+        }
+
+        function deleteReplyByReplyId(replyId) {
+            var url = "/api/reply/" + replyId;
+            return $http.delete(url);
         }
 
         function updateReply(commentId, replyId, reply) {

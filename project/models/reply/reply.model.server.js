@@ -7,6 +7,7 @@ module.exports = function () {
     var api = {
         createReply : createReply,
         updateReply : updateReply,
+        deleteReplyByReplyId : deleteReplyByReplyId,
         getAllRepliesForCommentId : getAllRepliesForCommentId,
         findReplyById : findReplyById
     };
@@ -18,6 +19,10 @@ module.exports = function () {
     
     function getAllRepliesForCommentId(commentId) {
         return Reply.find({commentId: commentId});
+    }
+
+    function deleteReplyByReplyId(replyId){
+        return Reply.remove({_id: replyId});
     }
     
     function updateReply(replyId, reply) {

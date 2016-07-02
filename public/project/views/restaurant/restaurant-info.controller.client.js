@@ -15,8 +15,10 @@
         vm.leaveAComment = leaveAComment;
         vm.getLongDateTime = getLongDateTime;
         vm.replyAcomment = replyAcomment;
+        vm.deleteAcomment = deleteAcomment;
         vm.submitAReplyToAComment = submitAReplyToAComment;
         vm.cancelAReplyToAComment = cancelAReplyToAComment;
+        vm.deleteAreply = deleteAreply;
         vm.replyAReply = replyAReply;
         vm.submitAReplyToAReply = submitAReplyToAReply;
         vm.cancelAReplyToAReply = cancelAReplyToAReply;
@@ -31,6 +33,11 @@
         vm.canDeleteFromFavorite = canDeleteFromFavorite;
         vm.addRestaurantToFavorite = addRestaurantToFavorite;
         vm.removeRestaurantFromFavorite = removeRestaurantFromFavorite;
+        vm.isAdmin = isAdmin;
+
+        function isAdmin() {
+            return UserService.isAdmin();
+        }
 
         function addRestaurantToFavorite() {
             RestaurantService
@@ -99,7 +106,7 @@
             if (!vm.users && isLoggedIn()) {
                 return false;
             }
-            
+
             if (vm.users && $rootScope.currentUser) {
                 for (var i = 0; i < vm.users.length; i++) {
                     if (vm.users[i]._id === $rootScope.currentUser._id) {
@@ -255,6 +262,22 @@
 
         }
 
+        function deleteAreply(replyId) {
+            ReplyService
+                .deleteReplyByReplyId(replyId)
+                .then(
+                    function (res) {
+                        var result = res.data;
+                        if (result === "OK") {
+                            refreshPage(restaurantId);
+                        }
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                )
+        }
+
         function cancelAReplyToAComment(commentId, replyHostId, replyHost, commentIndex) {
             CommentService
                 .findCommentByCommentId(commentId)
@@ -275,7 +298,7 @@
                     function (err) {
                         vm.error = err;
                     }
-                )
+                );
 
 
             // for (var i = 0; i < comments.length; i++) {
@@ -335,24 +358,23 @@
             }
         }
 
-        function replyAcomment(commentId, replyHostId, replyHost, commentIndex) {
+        function deleteAcomment(commentId) {
+            CommentService
+                .deleteCommentByCommentId(commentId)
+                .then(
+                    function (res) {
+                        var result = res.data;
+                        if (result === "OK") {
+                            refreshPage(restaurantId);
+                        }
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                )
+        }
 
-            // for (var i = 0; i < comments.length; i++) {
-            //     if (i === commentIndex) {
-            //         comments[i].isThisReplyCommentAreaShown = true;
-            //         CommentService
-            //             .updateComment(commentId, comments[i])
-            //             .then(
-            //                 function (res) {
-            //
-            //                 },
-            //                 function (err) {
-            //                     vm.error = err;
-            //                 }
-            //             )
-            //     }
-            // }
-            // var comment = null;
+        function replyAcomment(commentId, replyHostId, replyHost, commentIndex) {
             CommentService
                 .findCommentByCommentId(commentId)
                 .then(function (res) {

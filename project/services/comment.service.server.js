@@ -6,7 +6,24 @@ module.exports = function(app, models) {
     app.put("/api/comment/:commentId", updateComment);
     app.get("/api/comment/restaurant/:restaurantId", getAllComments);
     app.get("/api/comment/:commentId", findCommentByCommentId);
+    app.delete("/api/comment/:commentId", deleteCommentByCommentId);
+
     // post("/api/reply", createReply);
+
+    function deleteCommentByCommentId(req, res) {
+        var commentId = req.params.commentId;
+        
+        commentModel
+            .deleteCommentByCommentId(commentId)
+            .then(
+                function () {
+                    res.send(200);
+                },
+                function (err) {
+                    res.send(err);
+                }
+            )
+    }
 
     function findCommentByCommentId(req, res) {
         var commentId = req.params.commentId;

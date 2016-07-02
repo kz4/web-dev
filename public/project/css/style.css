@@ -3113,3 +3113,7 @@ iframe.g-map {
 	max-width: 50px;
 	width: 100%;
 }
+
+.replyDiv2 .row .col-xs-3, .commentDiv .row .col-xs-3{
+	margin-bottom: 2px;
+}

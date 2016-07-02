@@ -119,15 +119,29 @@
                         <!--iterate comments-->
                         <div ng-repeat="comment in model.comments">
                             <div class="commentDiv">
-                                <a href="#/user/{{comment.commenterId}}">
-                                    <span class="text-info">{{comment.commenter}}</span>
-                                </a>&nbsp;
-                                <span>posted at {{model.getLongDateTime(comment.date)}}</span>&nbsp;
-                                <button class="btn-right" ng-click="comment.isThisReplyCommentAreaShown = true">
-                                    Reply
-                                </button>
-                                <br/>
-                                <span class="commentText">{{comment.content}}</span>
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <a href="#/user/{{comment.commenterId}}">
+                                            <span class="text-info">{{comment.commenter}}</span></a>&nbsp;
+                                        <span>posted at {{model.getLongDateTime(comment.date)}}</span>&nbsp;
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <button class="btn-right" ng-click="comment.isThisReplyCommentAreaShown = true">
+                                            Reply
+                                        </button>
+                                    </div>
+                                    <br>
+                                    <div class="col-xs-9">
+                                        <span class="commentText">{{comment.content}}</span>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <div ng-if="model.isAdmin()">
+                                            <button class="btn-right" ng-click="model.deleteAcomment(comment._id)">
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div ng-if="comment.isThisReplyCommentAreaShown">
 									<textarea ng-model="replyToAComment" class="form-control" rows="4"
                                               placeholder="Reply a comment here..."></textarea>
@@ -148,15 +162,26 @@
                                 </div>
                                 <div class="replyDiv2">
                                     <div ng-repeat="reply in comment.replies">
-                                        <a href="#/user/{{reply.replierId}}">
-                                            <span class="text-info">{{reply.replier}}</span>
-                                        </a>&nbsp;@
-                                        <a href="#/user/{{reply.hostId}}">
-                                            <span class="text-info">{{reply.host}}</span>
-                                        </a>
-                                        <span>at {{model.getLongDateTime(reply.date)}}:</span>&nbsp;
-                                        <span class="commentText">{{reply.content}}</span>&nbsp;
+                                        <div class="row">
+                                            <div class="col-xs-9">
+                                                <a href="#/user/{{reply.replierId}}">
+                                                    <span class="text-info">{{reply.replier}}</span>
+                                                </a>&nbsp;@
+                                                <a href="#/user/{{reply.hostId}}">
+                                                    <span class="text-info">{{reply.host}}</span>
+                                                </a>
+                                                <span>at {{model.getLongDateTime(reply.date)}}:</span>&nbsp;
+                                                <span class="commentText">{{reply.content}}</span>&nbsp;
+                                            </div>
 
+                                            <div class="col-xs-3">
+                                                <div ng-if="model.isAdmin()">
+                                                    <button class="btn-right" ng-click="model.deleteAreply(reply._id)">
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <!--TODO: implement a reply to a reply-->
                                         <!--<button ng-click="reply.isThisReplyReplyAreaShown = true"-->
                                         <!--class="replyBtn">Reply-->

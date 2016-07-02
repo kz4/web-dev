@@ -9,6 +9,7 @@ module.exports = function () {
         updateComment : updateComment,
         getAllComments : getAllComments,
         findCommentByCommentId : findCommentByCommentId,
+        deleteCommentByCommentId : deleteCommentByCommentId,
         // populateReply : populateReply
         populateReply : populateReply
     };
@@ -21,6 +22,10 @@ module.exports = function () {
                 doc.save();
             }
         );
+    }
+    
+    function deleteCommentByCommentId(commentId){
+        return Comment.remove({_id: commentId});
     }
 
     function findCommentByCommentId(commentId) {
