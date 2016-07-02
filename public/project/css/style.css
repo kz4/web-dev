@@ -3131,3 +3131,9 @@ iframe.g-map {
 	color: #3d1a1b;
 	margin: 10px 0 0 10px;
 }
+
+.row.following-row {
+	height: 70px;
+	margin-right: -15px;
+	margin-left: -15px;
+}

@@ -58,20 +58,22 @@
 							<img src="images/profile.png" alt="Profile Picture" />
 						</div>
 					</div>
-					<div class="col-xs-6 padding-top-10">
-						<a href="#/user/{{model.userId}}/edit">
-							<span class="fa fa-pencil-square-o"></span>&nbsp;Edit
-						</a>
-					</div>
-					<div class="col-xs-6 padding-top-10">
-						<a ng-hide="model.cannotFollow()"
-						   ng-click="model.followUser()">
-							<i class="fa fa-star-o">&nbsp;Follow&nbsp;{{model.user.username}}</i>
-						</a>
-						<a ng-show="model.canUnfollow()"
-						   ng-click="model.unfollowUser()">
-							<i class="fa fa-star">&nbsp;Following&nbsp;{{model.user.username}}</i>
-						</a>
+					<div class="row">
+						<div class="col-xs-6 padding-top-10">
+							<a href="#/user/{{model.userId}}/edit">
+								<span class="fa fa-pencil-square-o"></span>&nbsp;Edit
+							</a>
+						</div>
+						<div class="col-xs-6 padding-top-10">
+							<a ng-hide="model.cannotFollow()"
+							   ng-click="model.followUser()">
+								<i class="fa fa-star-o">&nbsp;Follow&nbsp;{{model.user.username}}</i>
+							</a>
+							<a ng-show="model.canUnfollow()"
+							   ng-click="model.unfollowUser()">
+								<i class="fa fa-star">&nbsp;Following&nbsp;{{model.user.username}}</i>
+							</a>
+						</div>
 					</div>
 					<div class="col-xs-12 padding-top-10" ng-if="model.isAdmin()">
 						<a href="#/admin/{{model.currentUser._id}}">
@@ -121,14 +123,14 @@
 							<h4 class="comment-header">Following</h4>
 						</div>
 						<div ng-repeat="followingUser in model.user.following">
-							<div class="row">
+							<div class="row following-row">
 								<!--<img width="20%" ng-src="{{followingUser.profilePic}}" alt="Profile Picture" />-->
 								<div class="col-xs-4">
 									<div ng-show="followingUser.profilePic">
-										<img width="20%" ng-src="{{followingUser.profilePic}}" alt="Profile Picture" />
+										<img width="30%" ng-src="{{followingUser.profilePic}}" alt="Profile Picture" />
 									</div>
 									<div ng-hide="followingUser.profilePic">
-										<img width="20%" src="images/profile.png" alt="Profile Picture" />
+										<img width="30%" src="images/profile.png" alt="Profile Picture" />
 									</div>
 								</div>
 								<div class="col-xs-8">
