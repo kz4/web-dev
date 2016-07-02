@@ -78,7 +78,7 @@ module.exports = function (app, models) {
                         // res.json(newReply);
                         commentModel
                             .populateReply(commentId, newReply)
-                            .then(function (response) {
+                            .then(function () {
                                 res.json(newReply);
                             },
                             function (error) {

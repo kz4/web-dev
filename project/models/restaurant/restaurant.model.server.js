@@ -14,7 +14,7 @@ module.exports = function () {
     return api;
 
     function findRestaurantByYelpRestaurantIdInDB(restaurantId) {
-        return Restaurant.find({restaurantId: restaurantId});
+        return Restaurant.findOne({restaurantId: restaurantId});
     }
 
     function addUserIdToRestaurantUsers(restaurantId, userId) {
@@ -26,10 +26,13 @@ module.exports = function () {
         );
     }
 
-    function createRestaurantToFavorite(restaurantId, userId) {
+    function createRestaurantToFavorite(restaurantObject, userId) {
         var restaurant = {
             users: [userId],
-            restaurantId: restaurantId
+            restaurantId: restaurantObject.restaurantId,
+            zip: restaurantObject.zip,
+            restaurantPic: restaurantObject.restaurantPic,
+            categoryId: restaurantObject.categoryId
         };
         return Restaurant.create(restaurant);
     }

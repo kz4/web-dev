@@ -1,3 +1,3 @@
 (function () {
-	var module = angular.module('ProjectMaker', ["ngRoute"]);
+	var module = angular.module('ProjectMaker', ["ngRoute", "tabDirectives"]);
 })();

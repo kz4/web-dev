@@ -16,8 +16,8 @@
         };
         return api;
 
-        function createRestaurantToFavorite(restaurantId, userId) {
-            return $http.post("/api/user/" + userId + "/restaurantcreate/" + restaurantId);
+        function createRestaurantToFavorite(restaurantObject, userId) {
+            return $http.post("/api/user/" + userId + "/restaurantcreate/" + restaurantObject.restaurantId, restaurantObject);
         }
 
         function findRestaurantByYelpRestaurantIdInDB(restaurantId) {
@@ -26,11 +26,11 @@
         }
 
         function removeRestaurantFromFavorite(restaurantId, userId) {
-            return $http.put("/api/user/" + userId + "/restaurant/" + restaurantId);
+            return $http.put("/api/user/" + userId + "/restaurantYelpId/" + restaurantId);
         }
 
         function addRestaurantToFavorite(restaurantId, userId) {
-            return $http.post("/api/user/" + userId + "/restaurant/" + restaurantId);
+            return $http.post("/api/user/" + userId + "/restaurantYelpId/" + restaurantId);
         }
 
         function findRestaurantByYelpRestaurantId(restaurantId) {

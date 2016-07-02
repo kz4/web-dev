@@ -20,6 +20,8 @@ module.exports = function (app, models) {
     app.put("/api/user/:userId/profilePic/:profilePic", deleteUserProfilePic);
     app.post  ("/api/project/user/:followerId/user/:followedId", userFollowsUser);
     app.put   ("/api/project/user/:followerId/user/:followedId", userUnfollowsUser);
+    app.post("/api/user/:userId/restaurant/:restaurantId", addRestaurantToFavorite);
+    app.delete("/api/user/:userId/restaurant/:restaurantId", removeRestaurantFromFavorite);
     app.post('/api/login', projectPassport.authenticate('local'), login);
     app.get('/auth/google', projectPassport.authenticate('google', { scope : ['profile', 'email'] }));
     app.get('/auth/google/callback',
@@ -43,6 +45,36 @@ module.exports = function (app, models) {
     }
 
     projectPassport.use('google', new GoogleStrategy(googleConfig, googleLogin));
+
+    function addRestaurantToFavorite(req, res) {
+        var userId = req.params.userId;
+        var restaurantId = req.params.restaurantId;
+        userModel
+            .addRestaurantToFavoriteForUser(userId, restaurantId)
+            .then(
+                function (restaurant) {
+                    res.send(200);
+                },
+                function (err) {
+                    res.send(err);
+                }
+            )
+    }
+
+    function removeRestaurantFromFavorite(req, res) {
+        var userId = req.params.userId;
+        var restaurantId = req.params.restaurantId;
+        userModel
+            .removeRestaurantFromFavoriteForUser(userId, restaurantId)
+            .then(
+                function (restaurant) {
+                    res.send(200);
+                },
+                function (err) {
+                    res.send(err);
+                }
+            )
+    }
 
     function userFollowsUser(req, res) {
 

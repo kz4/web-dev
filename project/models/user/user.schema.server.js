@@ -19,6 +19,7 @@ module.exports = function () {
         following: [{type: mongoose.Schema.ObjectId, ref: "ProjectUser"}],
         followedBy: [{type: mongoose.Schema.ObjectId, ref: "ProjectUser"}],
         comments: [{type: mongoose.Schema.ObjectId, ref: "Comment"}],
+        restaurants: [{type: mongoose.Schema.ObjectId, ref: "Restaurant"}],
         userType: {
             type: String,
             enum: ['NORMAL', 'ADMIN']

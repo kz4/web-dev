@@ -14,9 +14,9 @@ module.exports = function (app, models) {
     app.get("/api/restaurant/:restaurantId", getRestaurantByYelprestaurantId);
     app.get("/api/alluserfavorthisrestaurant/:restaurantId", findAllUsersThatFavoredThisRestaurant);
     app.get("/api/googleMapKey", getGoogleMapKey);
-    app.post("/api/user/:userId/restaurant/:restaurantId", addRestaurantToFavorite);
+    app.post("/api/user/:userId/restaurantYelpId/:restaurantId", addRestaurantToFavorite);
     app.post("/api/user/:userId/restaurantcreate/:restaurantId", createRestaurantToFavorite);
-    app.put("/api/user/:userId/restaurant/:restaurantId", removeRestaurantFromFavorite);
+    app.put("/api/user/:userId/restaurantYelpId/:restaurantId", removeRestaurantFromFavorite);
     app.get("/api/restaurantidindb/:restaurantId", findRestaurantByYelpRestaurantIdInDB);
     
     function findRestaurantByYelpRestaurantIdInDB(req, res) {
@@ -51,8 +51,9 @@ module.exports = function (app, models) {
     function createRestaurantToFavorite(req, res) {
         var restaurantId = req.params.restaurantId;
         var userId = req.params.userId;
+        var restaurantObject = req.body;
         restaurantModel
-            .createRestaurantToFavorite(restaurantId, userId)
+            .createRestaurantToFavorite(restaurantObject, userId)
             .then(
                 function (restaurant) {
                     res.json(restaurant);

@@ -120,35 +120,59 @@
 						</div>
 					</div>
 				</div>
-				<div ng-if="model.user.following.length > 0">
-					<div class="abt-2 padding-top-40">
-						<div class="about-one">
-							<h4 class="comment-header">Following</h4>
-						</div>
-						<div ng-repeat="followingUser in model.user.following">
-							<div class="row following-row">
-								<!--<img width="20%" ng-src="{{followingUser.profilePic}}" alt="Profile Picture" />-->
-								<div class="col-xs-4">
-									<div ng-show="followingUser.profilePic">
-										<img width="30%" ng-src="{{followingUser.profilePic}}" alt="Profile Picture" />
+
+
+				<tabs class="padding-top-40 padding-bottom-70">
+					<pane title="Following">
+						<div ng-if="model.user.following.length > 0">
+							<div class="abt-2">
+								<div ng-repeat="followingUser in model.user.following">
+									<div class="row following-row">
+										<!--<img width="20%" ng-src="{{followingUser.profilePic}}" alt="Profile Picture" />-->
+										<div class="col-xs-4">
+											<div ng-show="followingUser.profilePic">
+												<img width="30%" ng-src="{{followingUser.profilePic}}" alt="Profile Picture" />
+											</div>
+											<div ng-hide="followingUser.profilePic">
+												<img width="30%" src="images/profile.png" alt="Profile Picture" />
+											</div>
+										</div>
+										<div class="col-xs-8">
+											<a href="#/user/{{followingUser._id}}">
+												<span class="text-info">{{followingUser.username}}</span>
+											</a>
+										</div>
 									</div>
-									<div ng-hide="followingUser.profilePic">
-										<img width="30%" src="images/profile.png" alt="Profile Picture" />
-									</div>
-								</div>
-								<div class="col-xs-8">
-									<a href="#/user/{{followingUser._id}}">
-										<span class="text-info">{{followingUser.username}}</span>
-										<!--<br>-->
-										<!--<span class="text-info">{{followingUser.firstName}}&nbsp;{{followingUser.lastName}}</span>-->
-									</a>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
+					</pane>
+					<pane title="Second Tab">
+						<div ng-if="model.user.restaurants.length > 0">
+							<div class="abt-2">
+								<div ng-repeat="restaurant in model.user.restaurants">
+									<div class="row following-row">
+										<div class="col-xs-4">
+											<div ng-show="restaurant.restaurantPic">
+												<img width="30%" ng-src="{{restaurant.restaurantPic}}" alt="Profile Picture" />
+											</div>
+											<div ng-hide="restaurant.restaurantPic">
+												<img width="30%" src="images/profile.png" alt="Profile Picture" />
+											</div>
+										</div>
+										<div class="col-xs-8">
+											<a href="#/category/{{restaurant.categoryId}}/zip/{{restaurant.zip}}/restaurant/{{restaurant.restaurantId}}">
+												<span class="text-info">{{restaurant.restaurantId}}</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</pane>
+				</tabs>
+
 			</div>
-			<div class="clearfix"></div>
 		</div>
 	</div>
 </div>

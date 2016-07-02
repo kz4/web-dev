@@ -40,34 +40,66 @@
         }
 
         function addRestaurantToFavorite() {
+            var restaurantUniqueId = "";
             RestaurantService
                 .findRestaurantByYelpRestaurantIdInDB(restaurantId)
                 .then(
                     function (res) {
                         var restaurant = res.data;
-                        if (restaurant && restaurant.length > 0) {
+                        if (restaurant) {
+                            restaurantUniqueId = restaurant._id;
                             RestaurantService
                                 .addRestaurantToFavorite(restaurantId, vm.currentUser._id)
                                 .then(
                                     function () {
                                         setUser(vm.currentUser._id);
+                                        UserService
+                                            .addRestaurantToFavorite(vm.currentUser._id, restaurantUniqueId)
+                                            .then(
+                                                function (res) {
+                                                    var result = res.data;
+                                                },
+                                                function (err) {
+                                                    vm.error = err;
+                                                }
+                                            );
                                     },
                                     function (err) {
                                         vm.error = err;
                                     }
                                 )
                         } else {
+                            var restaurantObject = {
+                                restaurantId: restaurantId,
+                                categoryId: categoryId,
+                                zip: zip,
+                                restaurantPic: vm.image
+                            }
                             RestaurantService
-                                .createRestaurantToFavorite(restaurantId, vm.currentUser._id)
+                                .createRestaurantToFavorite(restaurantObject, vm.currentUser._id)
                                 .then(
-                                    function () {
+                                    function (res) {
+                                        var restaurant = res.data;
+                                        restaurantUniqueId = restaurant._id;
                                         setUser(vm.currentUser._id);
+                                        UserService
+                                            .addRestaurantToFavorite(vm.currentUser._id, restaurantUniqueId)
+                                            .then(
+                                                function (res) {
+                                                    var result = res.data;
+                                                },
+                                                function (err) {
+                                                    vm.error = err;
+                                                }
+                                            );
                                     },
                                     function (err) {
                                         vm.error = err;
                                     }
-                                )
+                                );
                         }
+                        
+
                     },
                     function (err) {
                         vm.error = err;
@@ -77,16 +109,30 @@
         }
 
         function removeRestaurantFromFavorite() {
+            var restaurantUniqueId = "";
             RestaurantService
                 .removeRestaurantFromFavorite(restaurantId, vm.currentUser._id)
                 .then(
-                    function () {
+                    function (res) {
+                        var restaurant = res.data;
+                        restaurantUniqueId = restaurant._id;
                         setUser(vm.currentUser._id);
+                        UserService
+                            .removeRestaurantFromFavorite(vm.currentUser._id, restaurantUniqueId)
+                            .then(
+                                function (res) {
+                                    var result = res.data;
+                                },
+                                function (err) {
+                                    vm.error = err;
+                                }
+                            );
                     },
                     function (err) {
                         vm.error = err;
                     }
-                )
+                );
+
         }
 
         function setUser(userId) {

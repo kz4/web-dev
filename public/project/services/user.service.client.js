@@ -25,9 +25,21 @@
             getCurrentUsername: getCurrentUsername,
             setCurrentUser: setCurrentUser,
             isLoggedIn: isLoggedIn,
-            isAdmin: isAdmin
+            isAdmin: isAdmin,
+            addRestaurantToFavorite: addRestaurantToFavorite,
+            removeRestaurantFromFavorite: removeRestaurantFromFavorite
         };
         return api;
+
+        function addRestaurantToFavorite(userId, restaurantId) {
+            var url = "/api/user/" + userId + "/restaurant/" + restaurantId;
+            return $http.post(url);
+        }
+
+        function removeRestaurantFromFavorite(userId, restaurantId) {
+            var url = "/api/user/" + userId + "/restaurant/" + restaurantId;
+            return $http.delete(url);
+        }
 
         function setCurrentUser(user) {
             $rootScope.currentUser = user;
@@ -82,9 +94,6 @@
 
         function isAdmin() {
             return (isLoggedIn() && $rootScope.currentUser.userType === "ADMIN");
-            // if ((isLoggedIn() && $rootScope.currentUser.userType === "ADMIN")) {
-            //     return
-            // }
         }
 
         function logout() {

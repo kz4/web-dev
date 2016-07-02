@@ -19,12 +19,59 @@ module.exports = function () {
         followUser: followUser,
         followByUser: followByUser,
         unfollowUser: unfollowUser,
+        addRestaurantToFavoriteForUser: addRestaurantToFavoriteForUser,
+        removeRestaurantFromFavoriteForUser: removeRestaurantFromFavoriteForUser,
         unfollowByUser: unfollowByUser,
         populateWebsite: populateWebsite,
         spliceWebsite: spliceWebsite,
         findUserByGoogleId: findUserByGoogleId
     };
     return api;
+
+    function addRestaurantToFavoriteForUser(userId, restaurantId) {
+        var deferred = q.defer();
+
+        ProjectUser.findById(userId, function (err, user) {
+            if (!err) {
+                if(user) {
+                    user.restaurants.push(restaurantId);
+                    user.save(function (err) {
+                        if (!err) {
+                            deferred.resolve(user);
+                        } else {
+                            deferred.reject(err);
+                        }
+                    });
+                } else {
+                    deferred.resolve(user);
+                }
+            } else {
+                // reject promise if error
+                deferred.reject(err);
+            }
+        });
+
+        return deferred.promise;
+    }
+
+    function removeRestaurantFromFavoriteForUser(userId, restaurantId) {
+        var deferred = q.defer();
+
+        ProjectUser.update(
+            { _id: userId },
+            { $pull: { restaurants: restaurantId } },
+            { multi: true },
+            function (err, numAffected) {
+                if (!err) {
+                    deferred.resolve(numAffected)
+                } else {
+                    // reject promise if error
+                    deferred.reject(err);
+                }
+            });
+
+        return deferred.promise;
+    }
 
     function followUser(followerId, followedId) {
         var deferred = q.defer();
@@ -204,6 +251,7 @@ module.exports = function () {
         // return ProjectUser.findById(userId);
         return ProjectUser.findById(userId)
             .populate('following')
+            .populate('restaurants')
             .exec(function (error, doc) {
 
             });

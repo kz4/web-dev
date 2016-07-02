@@ -5,6 +5,7 @@ module.exports = function () {
         restaurantId: String,
         categoryId: String,
         zip: String,
+        restaurantPic: String,
         users: [{type: mongoose.Schema.ObjectId, ref: "ProjectUser"}]
     }, {collection: "project.restaurant"});
 
