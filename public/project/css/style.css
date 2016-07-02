@@ -3134,6 +3134,6 @@ iframe.g-map {
 
 .row.following-row {
 	height: 70px;
-	margin-right: -15px;
-	margin-left: -15px;
+	margin-right: 15px;
+	margin-left: 15px;
 }
