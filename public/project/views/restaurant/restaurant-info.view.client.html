@@ -51,17 +51,19 @@
                             Users <span class="favorite-icon glyphicon glyphicon-heart"
                                         aria-hidden="true"></span> this restaurant:
                         </h4>
-                        <div class="might-grid" ng-repeat="user in model.users">
-                            <div class="grid-might">
-                                <div class="user-list" ng-show="user.profilePic">
+                        <div ng-repeat="user in model.users">
+                            <div class="row row-eq-height">
+                                <div class="col-xs-2" ng-show="user.profilePic">
                                     <img ng-src="{{user.profilePic}}" alt="Profile Picture"/>
                                 </div>
-                                <div class="user-list" ng-hide="user.profilePic">
+                                <div class="col-xs-2" ng-hide="user.profilePic">
                                     <img src="images/profile.png" alt="Profile Picture"/>
                                 </div>
-                                <a href="#/user/{{user._id}}">
-                                    <span class="">{{user.username}}</span>
-                                </a>
+                                <div class="col-xs-10">
+                                    <a href="#/user/{{user._id}}">
+                                        <span class="col-xs-10">{{user.username}}</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
