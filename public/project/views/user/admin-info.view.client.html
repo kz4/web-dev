@@ -28,15 +28,7 @@
 		</div>
 	</div>
 </div>
-<!-- script-for-menu -->
-<!-- script-for-menu -->
-<script>
-	$("span.menu").click(function () {
-		$(" ul.navig").slideToggle("slow", function () {
-		});
-	});
-</script>
-<!-- script-for-menu -->
+
 <div class="about">
 	<div class="container">
 		<div class="about-main">
@@ -47,93 +39,53 @@
 					</a>
 				</div>
 			</div>
-			<div class="col-md-4 about-right">
+
+			<div class="col-md-4">
 				<div class="about-one">
-					<h3><i class="fa fa-users padding-top-50" aria-hidden="true"></i>All Users</h3>
+					<h3><i class="fa fa-users padding-top-50 padding-bottom-20" aria-hidden="true"></i>All Users</h3>
 				</div>
 				<div class="abt-2">
-					<div class="might-grid" ng-repeat="user in model.users">
-						<div class="grid-might-admin">
-							<div class="user-list" ng-show="user.profilePic">
-								<img class="max-height-50" ng-src="{{user.profilePic}}" alt="Profile Picture" />
-							</div>
-							<div class="user-list" ng-hide="user.profilePic">
-								<img class="max-height-50" src="images/profile.png" alt="Profile Picture" />
-							</div>
-							<p><a href="#/user/{{user._id}}">
-								<span class="">{{user.username}}</span>
-							</a>
-							</p>
-							<ul class="admin-comment-lst">
-								<div ng-repeat="comment in user.comments">
-									<li>
-										<div class="commentDiv">
-											<a href="#/user/{{comment.commenterId}}">
-												<span class="text-info">{{comment.commenter}}</span>
-											</a>&nbsp;
-											<span>posted at {{model.getLongDateTime(comment.date)}}</span>&nbsp;
-											<!--<br/>-->
-											<a href="#/category/{{comment.categoryId}}/zip/{{comment.zip}}/restaurant/{{comment.restaurantId}}">
-												<span class="text-info">{{comment.content}}</span>
-											</a>
-										</div>
-									</li>
-									<!--&lt;!&ndash;iterate replies in each comment&ndash;&gt;-->
-									<!--<div ng-show="comment.replies.length > 0" class="replyDiv">-->
-									<!--<div class="replyDiv1">-->
-									<!--<span class="glyphicon glyphicon-triangle-top"></span>-->
-									<!--</div>-->
-									<!--<div class="replyDiv2">-->
-									<!--<div ng-repeat="reply in comment.replies">-->
-									<!--<a href="#/user/{{reply.replierId}}">-->
-									<!--<span class="text-info">{{reply.replier}}</span>-->
-									<!--</a>&nbsp;@-->
-									<!--<a href="#/user/{{reply.hostId}}">-->
-									<!--<span class="text-info">{{reply.host}}</span>-->
-									<!--</a>-->
-									<!--<span>at {{model.getLongDateTime(reply.date)}}:</span>&nbsp;-->
-									<!--<span class="commentText">{{reply.content}}</span>&nbsp;-->
-
-									<!--&lt;!&ndash;TODO: implement a reply to a reply&ndash;&gt;-->
-									<!--&lt;!&ndash;<button ng-click="reply.isThisReplyReplyAreaShown = true"&ndash;&gt;-->
-									<!--&lt;!&ndash;class="replyBtn">Reply&ndash;&gt;-->
-									<!--&lt;!&ndash;</button>&ndash;&gt;-->
-
-
-									<!--<div ng-if="reply.isThisReplyReplyAreaShown">-->
-									<!--<textarea ng-model="replyToAReply" class="form-control" rows="4"-->
-									<!--placeholder="This is a reply to a reply"></textarea>-->
-									<!--<button ng-click="model.submitAReplyToAReply(replyToAReply, comment._id, reply.replierId, reply.replier, $index, $parent.$parent.$index)"-->
-									<!--class="btn btn-primary">Submit-->
-									<!--</button>-->
-									<!--<button ng-click="reply.isThisReplyReplyAreaShown = false"-->
-									<!--class="btn btn-danger">Cancel-->
-									<!--</button>-->
-									<!--</div>-->
-
-									<!--</div>-->
-									<!--</div>-->
-									<!--</div>-->
+					<div class="" ng-repeat="user in model.users">
+						<div class="padding-bottom-20">
+							<div class="row">
+								<div class="col-xs-2" ng-show="user.profilePic">
+									<img class="max-height-50" ng-src="{{user.profilePic}}" alt="Profile Picture" />
 								</div>
-
-
-							</ul>
-
+								<div class="col-xs-2" ng-hide="user.profilePic">
+									<img class="max-height-50" src="images/profile.png" alt="Profile Picture" />
+								</div>
+								<div class="col-xs-8 pull-left">
+									<a href="#/user/{{user._id}}">
+										<span class="">{{user.username}}</span>
+									</a>
+								</div>
+								<div class="col-xs-2 admin-btn">
+									<a class="fa fa-trash-o btn-right margin-bottom-5" ng-click="model.deleteUserAndAllInfo(user._id)">
+									</a>
+									<a class="fa fa-pencil-square-o btn-right margin-bottom-5" ng-click="model.editUser(user)">
+									</a>
+								</div>
+							</div>
+							<div ng-repeat="comment in user.comments">
+								<div class="row">
+									<div class="col-xs-2">
+									</div>
+									<div class="col-xs-10">
+										<a href="#/user/{{comment.commenterId}}">
+											<span class="text-info">{{comment.commenter}}</span>
+										</a>&nbsp;
+										<span>posted at {{model.getLongDateTime(comment.date)}}</span>&nbsp;
+										<a href="#/category/{{comment.categoryId}}/zip/{{comment.zip}}/restaurant/{{comment.restaurantId}}">
+											<span class="text-info">{{comment.content}}</span>
+										</a>
+									</div>
+								</div>
+							</div>
 						</div>
 
-						<div class="might-top admin-btn">
-							<button class="btn-right" ng-click="model.deleteUserAndAllInfo(user._id)">
-								Delete
-							</button>
-							<button class="btn-right" ng-click="model.editUser(user)">
-								Edit
-								<!--<a href="#/user/{{user._id}}">Edit</a>-->
-							</button>
-						</div>
 					</div>
 				</div>
 			</div>
-			<!--<div class="clearfix"></div>-->
 		</div>
 	</div>
 </div>
