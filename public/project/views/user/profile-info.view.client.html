@@ -51,15 +51,15 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-xs-6 padding-top-10">
+						<div class="col-xs-4 padding-top-10">
 							<a href="#/user/{{model.userId}}/edit">
 								<span class="fa fa-pencil-square-o"></span>&nbsp;Edit
 							</a>
 						</div>
-						<div class="col-xs-6 padding-top-10">
+						<div class="col-xs-8 padding-top-10 pull-right">
 							<a ng-hide="model.cannotFollow()"
 							   ng-click="model.followUser()">
-								<i class="fa fa-star-o">&nbsp;Follow&nbsp;{{model.user.username}}</i>
+								<span class="fa fa-star-o">&nbsp;Follow&nbsp;{{model.user.username}}</span>
 							</a>
 							<a ng-show="model.canUnfollow()"
 							   ng-click="model.unfollowUser()">
