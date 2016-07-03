@@ -3104,8 +3104,8 @@ iframe.g-map {
 	padding-top: 40px;
 }
 
-.padding-bottom-70 {
-	padding-bottom: 50px;
+.padding-bottom-20 {
+	padding-bottom: 20px;
 }
 
 .margin-bottom-5 {
@@ -3134,6 +3134,12 @@ iframe.g-map {
 
 .row.following-row {
 	height: 70px;
+	margin-right: 15px;
+	margin-left: 15px;
+}
+
+.row.favorite-restaurant-row {
+	height: 90px;
 	margin-right: 15px;
 	margin-left: 15px;
 }
