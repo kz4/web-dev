@@ -10,10 +10,17 @@ module.exports = function () {
         getAllComments : getAllComments,
         findCommentByCommentId : findCommentByCommentId,
         deleteCommentByCommentId : deleteCommentByCommentId,
-        // populateReply : populateReply
-        populateReply : populateReply
+        populateReply : populateReply,
+        deleteReplyFromRepliesArray : deleteReplyFromRepliesArray
     };
     return api;
+
+    function deleteReplyFromRepliesArray(commentId, replyId) {
+        return Comment.update(
+            {_id: commentId},
+            { $pull: {'replies': replyId}
+        });
+    }
 
     function populateReply(commentId, reply) {
         return Comment.findOne({_id: commentId},
@@ -23,7 +30,7 @@ module.exports = function () {
             }
         );
     }
-    
+
     function deleteCommentByCommentId(commentId){
         return Comment.remove({_id: commentId});
     }

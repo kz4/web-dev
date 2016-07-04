@@ -308,9 +308,9 @@
 
         }
 
-        function deleteAreply(replyId) {
+        function deleteAreply(replyId, commentId) {
             ReplyService
-                .deleteReplyByReplyId(replyId)
+                .deleteReplyByReplyId(replyId, commentId)
                 .then(
                     function (res) {
                         var result = res.data;

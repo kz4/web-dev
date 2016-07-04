@@ -4,7 +4,7 @@ module.exports = function (app, models) {
 
     app.post("/api/comment/:commentId", createReply);
     app.put("/api/comment/:commentId/reply/:replyId", updateReply);
-    app.delete("/api/reply/:replyId", deleteReplyByReplyId);
+    app.delete("/api/reply/:replyId/comment/:commentId", deleteReplyByReplyId);
     app.get("/api/comment/:commentId/reply", getAllReplies);
     app.get("/api/comment/:commentId/reply/:replyId", findReplyById);
 
@@ -37,7 +37,21 @@ module.exports = function (app, models) {
     }
 
     function deleteReplyByReplyId(req, res) {
+        // First remove the replyId from the comment replies array
+        var commentId = req.params.commentId;
         var replyId = req.params.replyId;
+        commentModel
+            .deleteReplyFromRepliesArray(commentId, replyId)
+            .then(
+                function () {
+                    res.sendStatus(200);
+                },
+                function (err) {
+                    res.send(err);
+                }
+            );
+
+        // Then delete the reply from reply database
         replyModel
             .deleteReplyByReplyId(replyId)
             .then(

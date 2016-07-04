@@ -21,8 +21,8 @@
             return $http.get("/api/comment/" + commentId + "/reply");
         }
 
-        function deleteReplyByReplyId(replyId) {
-            var url = "/api/reply/" + replyId;
+        function deleteReplyByReplyId(replyId, commentId) {
+            var url = "/api/reply/" + replyId + "/comment/" + commentId;
             return $http.delete(url);
         }
 
