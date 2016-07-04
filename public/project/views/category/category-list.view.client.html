@@ -28,21 +28,6 @@
 		</div>
 	</div>
 </div>
-<!-- script-for-menu -->
-
-<!-- script that when click submitting button in the zip code, the pages scrolls down to category list -->
-<!--<script>-->
-<!--$("span.menu").click(function () {-->
-<!--$(" ul.navig").slideToggle("slow", function () {-->
-<!--});-->
-<!--});-->
-<!--$("div.banner-btn").click(function () {-->
-<!--//		$(" ul.navig").slideToggle("slow", function () {-->
-<!--//		});-->
-<!--document.getElementById("da-thumbs").scrollIntoView();-->
-
-<!--});-->
-<!--</script>-->
 
 <!--banner-starts-->
 <div class="banner">
@@ -54,13 +39,11 @@
 					<div ng-class="{ 'has-error': model.invalid && model.submitted}">
 						<input id="zipBox" ng-model="model.zip" ng-change="model.onChanged()" name="zip" class="form-control zip-input"
 							   type="text" placeholder="zip code" required>
-						<!--<a ng-click="model.login(username, password)" class="btn btn-primary btn-block">Submit</a>-->
 						<span ng-show="model.invalid && model.submitted"
 							  class="help-block">
 							Valid ZIP code required
 						</span>
 						<div class="banner-btn">
-							<!--<a href="#da-thumbs" target="_self">Submit</a>-->
 							<a ng-click="model.setZipCode(model.zip)">Submit</a>
 						</div>
 					</div>
@@ -79,7 +62,6 @@
 		<section>
 			<ul id="da-thumbs" class="da-thumbs">
 				<li>
-					<!--<a href="#/category/0/zip/{{zip}}/restaurant" rel="title" class="b-link-stripe b-animate-go  thickbox">-->
 					<a ng-click="model.selectCategory(0, model.zip)" rel="title" class="b-link-stripe b-animate-go  thickbox">
 						<img src="images/brunch.png" alt="Breakfast & Brunch"/>
 						<div>

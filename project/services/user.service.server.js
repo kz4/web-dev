@@ -52,8 +52,8 @@ module.exports = function (app, models) {
         userModel
             .addRestaurantToFavoriteForUser(userId, restaurantId)
             .then(
-                function (restaurant) {
-                    res.send(200);
+                function () {
+                    res.sendStatus(200);
                 },
                 function (err) {
                     res.send(err);
@@ -67,8 +67,8 @@ module.exports = function (app, models) {
         userModel
             .removeRestaurantFromFavoriteForUser(userId, restaurantId)
             .then(
-                function (restaurant) {
-                    res.send(200);
+                function () {
+                    res.sendStatus(200);
                 },
                 function (err) {
                     res.send(err);
@@ -252,8 +252,6 @@ module.exports = function (app, models) {
     }
 
     function deleteUserProfilePic(req, res) {
-        var userId = req.params.userId;
-        // var profilePicFullPath = __dirname + "/public/uploads/" + req.params.profilePic;
         var profilePicFullPath = path.resolve(__dirname + "/../../public/uploads/" + req.params.profilePic);
 
         fs.unlink(profilePicFullPath, function (err) {

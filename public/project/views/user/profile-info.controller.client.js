@@ -115,7 +115,9 @@
                 .then(
                     function (res) {
                         vm.user = res.data;
-                        vm.profilePic = vm.user.profilePic;
+                        if (vm.user) {
+                            vm.profilePic = vm.user.profilePic;
+                        }
                     },
                     function (err) {
                         vm.error = err;

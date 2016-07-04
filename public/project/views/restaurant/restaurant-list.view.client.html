@@ -28,32 +28,12 @@
 		</div>
 	</div>
 </div>
-<!-- script-for-menu -->
-<!-- script-for-menu -->
-<script>
-	$("span.menu").click(function () {
-		$(" ul.navig").slideToggle("slow", function () {
-		});
-	});
-</script>
-<!-- script-for-menu -->
+
 <div class="about">
 	<div class="container">
 		<div class="about-main padding-bottom-50">
 			<div class="about-one">
 				<p>Find The Most</p>
-				<!--<h3>Breakfast & Brunch</h3>-->
-				<!--<div ng-repeat="restaurant in model.restaurants">-->
-				<!--<h3>model.getCategory(restaurant)</h3>-->
-				<!--</div>-->
-
-				<!--<div ng-repeat="restaurantCategory in model.getCategoryArray(model.restaurants)">-->
-				<!--<h3>{{restaurantCategory}}</h3>-->
-				<!--</div>-->
-				<!--<div ng-repeat="n in [42, 42, 43, 43]">-->
-				<!--<h3>n</h3>-->
-				<!--</div>-->
-				<!--<h3>{{model.test}}</h3>-->
 				<div ng-switch="model.categoryId">
 					<h3 ng-switch-when="0">Breakfast & Brunch</h3>
 					<h3 ng-switch-when="1">Seafood</h3>

@@ -28,15 +28,6 @@
         </div>
     </div>
 </div>
-<!-- script-for-menu -->
-<!-- script-for-menu -->
-<script>
-    $("span.menu").click(function () {
-        $(" ul.navig").slideToggle("slow", function () {
-        });
-    });
-</script>
-<!-- script-for-menu -->
 
 <div class="container">
 
@@ -114,8 +105,6 @@
                         <input ng-model="model.user.lastName"
                                class="form-control" type="text" placeholder="Wonderland">
                     </div>
-                    <!--<a class="btn btn-primary btn-block" href="#/user/{{model.user._id}}/website">Websites</a>-->
-                    <!--<a class="btn btn-danger btn-block" ng-click="model.logout()">Logout</a>-->
                     <a class="btn-dark btn-block" ng-click="model.updateUser(model.user)">Save</a>
                     <a class="btn-dark btn-block" ng-click="model.deleteUser(model.user._id)">Unregister</a>
 
