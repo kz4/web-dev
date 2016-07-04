@@ -17,7 +17,7 @@ module.exports = function(app, models) {
             .deleteCommentByCommentId(commentId)
             .then(
                 function () {
-                    res.send(200);
+                    res.sendStatus(200);
                 },
                 function (err) {
                     res.send(err);

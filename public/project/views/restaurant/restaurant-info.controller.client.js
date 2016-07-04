@@ -405,6 +405,29 @@
         }
 
         function deleteAcomment(commentId) {
+            ReplyService
+                .getAllRepliesForCommentId(commentId)
+                .then(
+                    function (res) {
+                        var replies = res.data;
+                        for (var i = 0; i < replies.length; i++) {
+                            ReplyService
+                                .deleteReplyByReplyId(replies[i]._id)
+                                .then(
+                                    function () {
+                                    },
+                                    function (err) {
+                                        vm.error = err;
+                                    }
+                                )
+                        }
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                );
+
+
             CommentService
                 .deleteCommentByCommentId(commentId)
                 .then(

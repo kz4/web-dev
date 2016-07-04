@@ -6,7 +6,6 @@ module.exports = function (app, models) {
     app.put("/api/comment/:commentId/reply/:replyId", updateReply);
     app.delete("/api/reply/:replyId", deleteReplyByReplyId);
     app.get("/api/comment/:commentId/reply", getAllReplies);
-    app.get("/api/comment/:commentId/reply", getAllReplies);
     app.get("/api/comment/:commentId/reply/:replyId", findReplyById);
 
     function findReplyById(req, res) {
@@ -43,7 +42,7 @@ module.exports = function (app, models) {
             .deleteReplyByReplyId(replyId)
             .then(
                 function () {
-                    res.send(200);
+                    res.sendStatus(200);
                 },
                 function (err) {
                     res.send(err);
