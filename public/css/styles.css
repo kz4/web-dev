@@ -1190,3 +1190,24 @@ you can use the generic selector below, but it's slower:
 
 .icon-dribbble:before {
   content: "\e063"; }
+
+.skill-box {
+  padding-top: 4rem;
+  font-size: 4rem;
+  color: #f4fff8;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  margin: 2vw;
+}
+
+.skill-box-bigger-font {
+  font-size: 8rem !important;
+}
+
+.skill-text {
+  color: white;
+}
+
+.image-width-100 {
+  width: 100%;
+}
