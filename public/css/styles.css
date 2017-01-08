@@ -88,11 +88,11 @@ h5 {
 .btn-margin-right {
   margin-right: 20px; }
 
-section.intro, section.features-extra, section.sign-up {
-  background: #fff; }
+section.intro, section.features-extra, section.sign-up, section.blog-intro {
+    background: #fff; }
 
-section.features, section.blog-intro, section.blog {
-  background: #F3F4F8; }
+section.features, section.blog-hobby, section.blog {
+    background: #F3F4F8; }
 
 .entry-content {
     /*font-size: .8125em;*/
@@ -141,6 +141,13 @@ ul li {
 
 .section-padding {
   padding: 120px 0; }
+
+.section-padding-small {
+    padding-top: 120px;
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-right: 120px;
+}
 
 .tooltip {
   position: absolute;
@@ -597,6 +604,19 @@ Features-stack
     padding-right: 100px;
     border-right: solid 1px #E6E9EA; }
   .blog-intro .rightcol {
+    padding-left: 100px; }
+
+/* ==========================================================================
+.blog-hobby
+========================================================================== */
+.blog-hobby {
+    padding-top: 160px; }
+.blog-hobby h3 {
+    margin-bottom: 70px; }
+.blog-hobby .leftcol {
+    padding-right: 100px;
+    border-right: solid 1px #E6E9EA; }
+.blog-hobby .rightcol {
     padding-left: 100px; }
 
 /* ==========================================================================
